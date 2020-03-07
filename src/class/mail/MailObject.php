@@ -24,7 +24,7 @@ class MailObject {
 
 
   public function __construct($options) {
-    //$this->hydrate($options);
+    $this->hydrate($options);
     //$this->send($options);
   }
 

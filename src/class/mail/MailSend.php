@@ -13,8 +13,8 @@ use Mail\MailObject;
 class MailSend extends MailObject {
 
   public function __construct($options) {
-    //parent::__construct($options);
-    $this->hydrate($options);
+    parent::__construct($options);
+    //$this->hydrate($options);
     $this->send();
   }
 

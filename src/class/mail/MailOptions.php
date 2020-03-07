@@ -19,9 +19,11 @@ class MailOptions {
   const RECIPIENT_MAIL = 'rinaldobenaccetta@hotmail.com';
   const RECIPIENT_NAME = 'John Doe';
   const DEBUG = 'server'; // off | client | server
+  const SUBJECT = 'un super sujet';
+  const HTML_BODY = '<p style="color: green;">This is the HTML message body with text <b>in bold!</b></p>';
+  const ALT_BODY = 'This is a plain-text message body';
 
   public function __construct() {
-
 
   }
 
@@ -75,6 +77,18 @@ class MailOptions {
 
   public static function getDebug() {
     return self::DEBUG;
+  }
+
+  public static function getSubject() {
+    return self::SUBJECT;
+  }
+
+  public static function getHtmlBody() {
+    return self::HTML_BODY;
+  }
+
+  public static function getAltBody() {
+    return self::ALT_BODY;
   }
 
 }

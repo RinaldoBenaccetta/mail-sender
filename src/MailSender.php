@@ -38,7 +38,9 @@ $options = [
   'recipientMail' => MailOptions::getRecipientMail(),
   'recipientName' => MailOptions::getRecipientMail(),
   'debug' => MailOptions::getDebug(),
-  'subject' => 'un super sujet'
+  'subject' => MailOptions::getSubject(),
+  'htmlBody' => MailOptions::getHtmlBody(),
+  'altBody' => MailOptions::getAltBody(),
 ];
 
 new MailSend($options);

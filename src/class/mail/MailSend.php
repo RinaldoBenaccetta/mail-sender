@@ -51,10 +51,10 @@ class MailSend extends MailObject {
       //$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
 
       // the HTML mail.
-      $mail->Body = 'There is a great disturbance in the Force.';
+      $mail->Body = $this->getHtmlBody();
 
       // Alternative to html mail.
-      $mail->AltBody = 'This is a plain-text message body';
+      $mail->AltBody = $this->getAltBody();
 
       $mail->send();
       echo 'Message sent!';

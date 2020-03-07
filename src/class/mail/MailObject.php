@@ -119,6 +119,21 @@ class MailObject {
    */
   protected $subject;
 
+  /**
+   * The body of the mail in HTML.
+   *
+   * @var
+   */
+  protected $htmlBody;
+
+  /**
+   * The Alternative of the HTML mail in plain text.
+   *
+   * @var
+   */
+  protected $altBody;
+
+
   public function __construct($options) {
     $this->hydrate($options);
   }
@@ -233,6 +248,20 @@ class MailObject {
    */
   public function setSubject($subject): void {
     $this->subject = $subject;
+  }
+
+  /**
+   * @param mixed $htmlBody
+   */
+  public function setHtmlBody($htmlBody): void {
+    $this->htmlBody = $htmlBody;
+  }
+
+  /**
+   * @param mixed $altBody
+   */
+  public function setAltBody($altBody): void {
+    $this->altBody = $altBody;
   }
 
   /**
@@ -363,6 +392,19 @@ class MailObject {
    */
   public function getSubject() {
     return $this->subject;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getHtmlBody() {
+    return $this->htmlBody;
+  }
+  /**
+   * @return mixed
+   */
+  public function getAltBody() {
+    return $this->altBody;
   }
 
 }

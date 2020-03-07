@@ -18,6 +18,7 @@ class MailOptions {
   const REPLY_NAME = 'lui';
   const RECIPIENT_MAIL = 'rinaldobenaccetta@hotmail.com';
   const RECIPIENT_NAME = 'John Doe';
+  const DEBUG = 'server'; // off | client | server
 
   public function __construct() {
 
@@ -72,11 +73,8 @@ class MailOptions {
     return self::RECIPIENT_NAME;
   }
 
-  public function getAuthentication() {
-    if (self::ENCRYPTION === 'STARTTLS') {
-      return PHPMailer::ENCRYPTION_STARTTLS;
-    } elseif (self::ENCRYPTION === 'SMTPS') {
-      return PHPMailer::ENCRYPTION_SMTPS;
-    }
+  public static function getDebug() {
+    return self::DEBUG;
   }
+
 }

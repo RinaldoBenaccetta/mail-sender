@@ -126,7 +126,7 @@ class MailObject {
     $this->recipientName = $recipientName;
   }
 
-  protected function smtpSecure() {
+  protected function getSmtpSecure() {
     if ($this->encryptionMethod === 'STARTTLS') {
       return PHPMailer::ENCRYPTION_STARTTLS;
     } elseif ($this->encryptionMethod === 'SMTPS') {
@@ -134,7 +134,7 @@ class MailObject {
     }
   }
 
-  protected function debug() {
+  protected function getDebug() {
     switch ($this->debug) {
       case 'off' :
         return SMTP::DEBUG_OFF;

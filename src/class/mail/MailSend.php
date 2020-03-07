@@ -28,7 +28,7 @@ class MailSend extends MailObject {
     // SMTP::DEBUG_OFF = off (for production use)
     // SMTP::DEBUG_CLIENT = client messages
     // SMTP::DEBUG_SERVER = client and server messages
-    $mail->SMTPDebug = $this->debug();
+    $mail->SMTPDebug = $this->getDebug();
 
     //Set the hostname of the mail server
     //$mail->Host = 'smtp.gmail.com';
@@ -42,7 +42,7 @@ class MailSend extends MailObject {
 
     //Set the encryption mechanism to use - STARTTLS or SMTPS
     //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->SMTPSecure = $this->smtpSecure();
+    $mail->SMTPSecure = $this->getSmtpSecure();
 
     //Whether to use SMTP authentication
     $mail->SMTPAuth = $this->smtpAuthentication;

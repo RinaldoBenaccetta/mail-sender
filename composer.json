@@ -1,0 +1,20 @@
+{
+    "name": "rinaldo/mail-sender",
+    "authors": [
+        {
+            "name": "rinaldo",
+            "email": "rinaldobenaccetta@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}

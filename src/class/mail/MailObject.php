@@ -8,24 +8,113 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
 class MailObject {
+
+  /**
+   * Debug mode.
+   *
+   * off = for production use
+   * client  = client messages
+   * server = client and server messages
+   *
+   * @var
+   */
   private   $debug;
+
+  /**
+   * Set the encryption mechanism to use - STARTTLS or SMTPS.
+   *
+   * STARTTLS or SMTPS.
+   *
+   * @var
+   */
   private   $encryptionMethod;
+
+  /**
+   * Set the hostname of the mail server.
+   *
+   * use
+   * $mail->Host = gethostbyname('smtp.gmail.com');
+   * if your network does not support SMTP over IPv6.
+   *
+   * @var
+   */
   protected $host;
+
+  /**
+   * Set the SMTP port number - 587 for authenticated TLS,
+   * a.k.a. RFC4409 SMTP submission.
+   *
+   * @var
+   */
   protected $port;
+
+  /**
+   * Whether to use SMTP authentication.
+   *
+   * @var
+   */
   protected $smtpAuthentication;
+
+  /**
+   * Username to use for SMTP authentication.
+   * Use full email address for gmail.
+   *
+   * @var
+   */
   protected $mailLogin;
+
+  /**
+   * Password to use for SMTP authentication.
+   *
+   * @var
+   */
   protected $mailPassword;
+
+  /**
+   * Set E-mail the message is to be sent from.
+   *
+   * @var
+   */
   protected $senderMail;
+
+  /**
+   * Set name the message is to be sent to.
+   *
+   * @var
+   */
   protected $senderName;
+
+  /**
+   * Set an alternative E-mail reply-to address.
+   *
+   * @var
+   */
   protected $replyMail;
+
+  /**
+   * Set an alternative Name reply-to address.
+   *
+   * @var
+   */
   protected $replyName;
+
+  /**
+   * Set E-mail the message is to be sent to.
+   *
+   * @var
+   */
   protected $recipientMail;
+
+  /**
+   * Set Name the message is to be sent to.
+   *
+   * @var
+   */
   protected $recipientName;
 
 
   public function __construct($options) {
     $this->hydrate($options);
-    //$this->send($options);
   }
 
   /**
@@ -203,6 +292,11 @@ class MailObject {
     return $this->recipientName;
   }
 
+  /**
+   * return the corresponding phpmailer encryption method.
+   *
+   * @return string
+   */
   protected function getEncryptionMethod() {
     if ($this->encryptionMethod === 'STARTTLS') {
       return PHPMailer::ENCRYPTION_STARTTLS;
@@ -211,6 +305,11 @@ class MailObject {
     }
   }
 
+  /**
+   * return the corresponding SMTP option.
+   *
+   * @return int
+   */
   protected function getDebug() {
     switch ($this->debug) {
       case 'off' :

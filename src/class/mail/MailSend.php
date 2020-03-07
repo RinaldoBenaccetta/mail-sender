@@ -44,7 +44,7 @@ class MailSend extends MailObject {
     $mail->addAddress($this->getRecipientMail(), $this->getRecipientName());
 
     //Set the subject line
-    $mail->Subject = 'PHPMailer GMail SMTP test';
+    $mail->Subject = $this->getSubject();
 
     //Read an HTML message body from an external file, convert referenced images to embedded,
     //convert HTML into a basic plain-text alternative body

@@ -112,6 +112,12 @@ class MailObject {
    */
   protected $recipientName;
 
+  /**
+   * Set the mail subject.
+   *
+   * @var
+   */
+  protected $subject;
 
   public function __construct($options) {
     $this->hydrate($options);
@@ -213,6 +219,20 @@ class MailObject {
    */
   public function setRecipientName($recipientName): void {
     $this->recipientName = $recipientName;
+  }
+
+  /**
+   * @param mixed $debug
+   */
+  public function setDebug($debug): void {
+    $this->debug = $debug;
+  }
+
+  /**
+   * @param mixed $subject
+   */
+  public function setSubject($subject): void {
+    $this->subject = $subject;
   }
 
   /**
@@ -337,4 +357,12 @@ class MailObject {
         return SMTP::DEBUG_OFF;
     }
   }
+
+  /**
+   * @return mixed
+   */
+  public function getSubject() {
+    return $this->subject;
+  }
+
 }

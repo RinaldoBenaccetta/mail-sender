@@ -5,10 +5,7 @@ namespace Mail;
 
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
-
-use Mail\MailObject;
-
+use PHPMailer\PHPMailer\Exception;
 
 class MailSend extends MailObject {
 
@@ -18,53 +15,67 @@ class MailSend extends MailObject {
   }
 
   private function send() {
-    $mail = new PHPMailer;
+    $mail = new PHPMailer(true);
 
-    //Tell PHPMailer to use SMTP
-    $mail->isSMTP();
+    try {
+      //Tell PHPMailer to use SMTP
+      $mail->isSMTP();
 
-    $mail->SMTPDebug = $this->getDebug();
+      $mail->SMTPDebug = $this->getDebug();
 
-    $mail->Host = $this->getHost();
+      $mail->Host = $this->getHost();
 
-    $mail->Port = $this->getPort();
+      $mail->Port = $this->getPort();
 
-    $mail->SMTPSecure = $this->getEncryptionMethod();
+      $mail->SMTPSecure = $this->getEncryptionMethod();
 
-    $mail->SMTPAuth = $this->getSmtpAuthentication();
+      $mail->SMTPAuth = $this->getSmtpAuthentication();
 
-    $mail->Username = $this->getMailLogin();
+      $mail->Username = $this->getMailLogin();
 
-    $mail->Password = $this->getMailPassword();
+      $mail->Password = $this->getMailPassword();
 
-    $mail->setFrom($this->getSenderMail(), $this->getSenderName());
+      $mail->setFrom($this->getSenderMail(), $this->getSenderName());
 
-    $mail->addReplyTo($this->getReplyMail(), $this->getReplyName());
+      $mail->addReplyTo($this->getReplyMail(), $this->getReplyName());
 
-    $mail->addAddress($this->getRecipientMail(), $this->getRecipientName());
+      $mail->addAddress($this->getRecipientMail(), $this->getRecipientName());
 
-    //Set the subject line
-    $mail->Subject = $this->getSubject();
+      //Set the subject line
+      $mail->Subject = $this->getSubject();
 
-    //Read an HTML message body from an external file, convert referenced images to embedded,
-    //convert HTML into a basic plain-text alternative body
-    //$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-    $mail->Body = 'There is a great disturbance in the Force.';
+      $mail->isHTML(true);
 
-    //Replace the plain text body with one created manually
-    $mail->AltBody = 'This is a plain-text message body';
+      //Read an HTML message body from an external file, convert referenced images to embedded,
+      //convert HTML into a basic plain-text alternative body
+      //$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
 
-    if (!$mail->send()) {
-      echo 'Mailer Error: ' . $mail->ErrorInfo;
-    }
-    else {
+      // the HTML mail.
+      $mail->Body = 'There is a great disturbance in the Force.';
+
+      // Alternative to html mail.
+      $mail->AltBody = 'This is a plain-text message body';
+
+      $mail->send();
       echo 'Message sent!';
-      //Section 2: IMAP
-      //Uncomment these to save your message in the 'Sent Mail' folder.
-      #if (save_mail($mail)) {
-      #    echo "Message saved!";
-      #}
+
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+
+
+
+//    if (!$mail->send()) {
+//      echo 'Mailer Error: ' . $mail->ErrorInfo;
+//    }
+//    else {
+//      echo 'Message sent!';
+//      //Section 2: IMAP
+//      //Uncomment these to save your message in the 'Sent Mail' folder.
+//      #if (save_mail($mail)) {
+//      #    echo "Message saved!";
+//      #}
+//    }
 
   }
 

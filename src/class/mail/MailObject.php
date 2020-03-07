@@ -9,9 +9,9 @@ use PHPMailer\PHPMailer\SMTP;
 
 class MailObject {
   private   $debug;
+  private   $encryptionMethod;
   protected $host;
   protected $port;
-  private   $encryptionMethod;
   protected $smtpAuthentication;
   protected $mailLogin;
   protected $mailPassword;
@@ -126,7 +126,84 @@ class MailObject {
     $this->recipientName = $recipientName;
   }
 
-  protected function getSmtpSecure() {
+  /**
+   * @return mixed
+   */
+  public function getHost() {
+    return $this->host;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getPort() {
+    return $this->port;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSmtpAuthentication() {
+    return $this->smtpAuthentication;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getMailLogin() {
+    return $this->mailLogin;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getMailPassword() {
+    return $this->mailPassword;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSenderMail() {
+    return $this->senderMail;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSenderName() {
+    return $this->senderName;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getReplyMail() {
+    return $this->replyMail;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getReplyName() {
+    return $this->replyName;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getRecipientMail() {
+    return $this->recipientMail;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getRecipientName() {
+    return $this->recipientName;
+  }
+
+  protected function getEncryptionMethod() {
     if ($this->encryptionMethod === 'STARTTLS') {
       return PHPMailer::ENCRYPTION_STARTTLS;
     } elseif ($this->encryptionMethod === 'SMTPS') {

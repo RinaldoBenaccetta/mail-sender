@@ -32,35 +32,35 @@ class MailSend extends MailObject {
 
     //Set the hostname of the mail server
     //$mail->Host = 'smtp.gmail.com';
-    $mail->Host = $this->host;
+    $mail->Host = $this->getHost();
     // use
     // $mail->Host = gethostbyname('smtp.gmail.com');
     // if your network does not support SMTP over IPv6
 
     //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-    $mail->Port = $this->port;
+    $mail->Port = $this->getPort();
 
     //Set the encryption mechanism to use - STARTTLS or SMTPS
     //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->SMTPSecure = $this->getSmtpSecure();
+    $mail->SMTPSecure = $this->getEncryptionMethod();
 
     //Whether to use SMTP authentication
-    $mail->SMTPAuth = $this->smtpAuthentication;
+    $mail->SMTPAuth = $this->getSmtpAuthentication();
 
     //Username to use for SMTP authentication - use full email address for gmail
-    $mail->Username = $this->mailLogin;
+    $mail->Username = $this->getMailLogin();
 
     //Password to use for SMTP authentication
-    $mail->Password = $this->mailPassword;
+    $mail->Password = $this->getMailPassword();
 
     //Set who the message is to be sent from
-    $mail->setFrom($this->senderMail, $this->senderName);
+    $mail->setFrom($this->getSenderMail(), $this->getSenderName());
 
     //Set an alternative reply-to address
-    $mail->addReplyTo($this->replyMail, $this->replyName);
+    $mail->addReplyTo($this->getReplyMail(), $this->getReplyName());
 
     //Set who the message is to be sent to
-    $mail->addAddress($this->recipientMail, $this->recipientName);
+    $mail->addAddress($this->getRecipientMail(), $this->getRecipientName());
 
     //Set the subject line
     $mail->Subject = 'PHPMailer GMail SMTP test';

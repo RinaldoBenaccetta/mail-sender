@@ -265,17 +265,29 @@ class MailObject {
   }
 
   /**
+   * Return the E-mail to reply-to.
+   * If there is no E-mail to reply, this will return the sender E-mail.
+   *
    * @return mixed
    */
   public function getReplyMail() {
-    return $this->replyMail;
+    if (!is_null($this->replyMail)) {
+      return $this->replyMail;
+    }
+    return $this->getSenderMail();
   }
 
   /**
+   * Return the name to reply-to.
+   * If there is no E-mail to reply, this will return the sender name.
+   *
    * @return mixed
    */
   public function getReplyName() {
-    return $this->replyName;
+    if (!is_null($this->replyName)) {
+      return $this->replyName;
+    }
+    return $this->getSenderMail();
   }
 
   /**
@@ -293,7 +305,7 @@ class MailObject {
   }
 
   /**
-   * return the corresponding phpmailer encryption method.
+   * Return the corresponding phpmailer encryption method.
    *
    * @return string
    */
@@ -306,7 +318,7 @@ class MailObject {
   }
 
   /**
-   * return the corresponding SMTP option.
+   * Return the corresponding SMTP option.
    *
    * @return int
    */

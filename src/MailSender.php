@@ -9,12 +9,6 @@ require 'class/Autoloader.php';
 // Call the autoloader
 MailSender\Autoloader::register();
 
-//Create a new PHPMailer instance
-//$mail = new PHPMailer;
-
-//Tell PHPMailer to use SMTP
-//$mail->isSMTP();
-
 $options = [
   'host' => MailOptions::getHost(),
   'port' => MailOptions::getPort(),

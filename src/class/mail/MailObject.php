@@ -9,6 +9,8 @@ use PHPMailer\PHPMailer\SMTP;
 
 class MailObject {
 
+  // todo : dans setAltBody => recuperer body et nettoyer la chaine des balises HTML.
+
   /**
    * Debug mode.
    *
@@ -336,7 +338,7 @@ class MailObject {
     if (!is_null($this->replyName)) {
       return $this->replyName;
     }
-    return $this->getSenderMail();
+    return $this->getSenderName();
   }
 
   /**

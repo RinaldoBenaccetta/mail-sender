@@ -1,22 +1,13 @@
 <?php
 
-
-/**
- * This example shows settings to use when sending via Google's Gmail servers.
- * This uses traditional id & password authentication - look at the gmail_xoauth.phps
- * example to see how to use XOAUTH2.
- * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
- */
-
-//Import PHPMailer classes into the global namespace
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
-use Mail\MailOptions;
-use Mail\MailSend;
+use MailSender\mail\MailOptions;
+use MailSender\mail\MailSend;
 
 require '../vendor/autoload.php';
 require 'class/Autoloader.php';
-Autoloader::register();
+
+// Call the autoloader
+MailSender\Autoloader::register();
 
 //Create a new PHPMailer instance
 //$mail = new PHPMailer;

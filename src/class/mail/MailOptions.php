@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mail;
+namespace MailSender\mail;
 
 
 class MailOptions {

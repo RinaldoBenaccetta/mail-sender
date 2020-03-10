@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mail;
+namespace MailSender\mail;
 
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;

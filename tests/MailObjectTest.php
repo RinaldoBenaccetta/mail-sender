@@ -141,4 +141,11 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
     $mailObject->setEncryptionMethod('bad encryption method');
   }
 
+  public function testGetAltBodyWithoutSpecifiedAltBody() {
+    $given = '<p style="color: green;">This is the HTML message body with text <b>in bold!</b></p>';
+    $expected = 'This is the HTML message body with text in bold!';
+    $mailObject = new MailObject(['htmlBody' => $given]);
+    $this->assertEquals($expected, $mailObject->getAltBody());
+  }
+
 }

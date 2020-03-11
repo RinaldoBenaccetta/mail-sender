@@ -11,7 +11,7 @@ use Exception;
 
 class MailObject {
 
-  // todo : dans setAltBody => recuperer body et nettoyer la chaine des balises HTML.
+  // todo : ajouter exeption pour les trucs importants comme htmlbody, sender, recipient, etc...
 
   /**
    * Debug mode.
@@ -407,15 +407,29 @@ class MailObject {
 
   /**
    * @return mixed
+   * @throws \Exception
    */
   public function getHtmlBody() {
-    return $this->htmlBody;
+    if (!is_null($this->htmlBody)) {
+      return $this->htmlBody;
+    }else {
+      throw new Exception('No HTML Body found.');
+    }
   }
+
   /**
+   * Return the alternative body.
+   *
+   * If no alternative body is found,
+   * return the html body with stripped tags.
+   *
    * @return mixed
    */
   public function getAltBody() {
-    return $this->altBody;
+    if (!is_null($this->altBody)) {
+      return $this->altBody;
+    }
+    return htmlspecialchars(trim(strip_tags($this->htmlBody)));
   }
 
 }

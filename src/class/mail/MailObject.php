@@ -11,7 +11,6 @@ use Exception;
 
 class MailObject {
 
-  // todo : ajouter exeption pour les trucs importants comme htmlbody, sender, recipient, etc...
 
   /**
    * Debug mode.
@@ -410,11 +409,12 @@ class MailObject {
    * @throws \Exception
    */
   public function getHtmlBody() {
-    if (!is_null($this->htmlBody)) {
-      return $this->htmlBody;
-    }else {
-      throw new Exception('No HTML Body found.');
-    }
+    return $this->htmlBody;
+//    if (!is_null($this->htmlBody)) {
+//      return $this->htmlBody;
+//    }else {
+//      throw new Exception('No HTML Body found.');
+//    }
   }
 
   /**

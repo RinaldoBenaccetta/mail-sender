@@ -91,11 +91,14 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
   }
 
   /**
- * Test using data provider.
- * https://phpunit.readthedocs.io/fr/latest/writing-tests-for-phpunit.html#fournisseur-de-donnees
- *
- * @dataProvider getDebugProvider
- */
+   * Test using data provider.
+   * https://phpunit.readthedocs.io/fr/latest/writing-tests-for-phpunit.html#fournisseur-de-donnees
+   *
+   * @dataProvider getDebugProvider
+   *
+   * @param $given
+   * @param $expected
+   */
   public function testGetDebug($given, $expected) {
     $mailObject = new MailObject(['debug' => $given]);
     $this->assertEquals($expected, $mailObject->getDebug());
@@ -115,6 +118,9 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
    * https://phpunit.readthedocs.io/fr/latest/writing-tests-for-phpunit.html#fournisseur-de-donnees
    *
    * @dataProvider getEncryptionMethodProvider
+   *
+   * @param $given
+   * @param $expected
    */
   public function testGetEncryptionMethod($given, $expected) {
     $mailObject = new MailObject(['encryptionMethod' => $given]);

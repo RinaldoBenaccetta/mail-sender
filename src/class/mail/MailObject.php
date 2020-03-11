@@ -4,8 +4,10 @@
 namespace MailSender\mail;
 
 
+//use mysql_xdevapi\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Exception;
 
 class MailObject {
 
@@ -170,9 +172,16 @@ class MailObject {
 
   /**
    * @param mixed $encryptionMethod
+   *
+   * @throws \Exception
    */
   public function setEncryptionMethod($encryptionMethod): void {
-    $this->encryptionMethod = $encryptionMethod;
+    if ($encryptionMethod === 'STARTTLS' || $encryptionMethod === 'SMTPS') {
+      $this->encryptionMethod = $encryptionMethod;
+    } else {
+      throw new Exception('Encryption method should be STARTTLS or SMTPS : '. $encryptionMethod . ' given.');
+    }
+
   }
 
   /**

@@ -91,11 +91,11 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
   }
 
   /**
-   * Test using data provider.
-   * https://phpunit.readthedocs.io/fr/latest/writing-tests-for-phpunit.html#fournisseur-de-donnees
-   *
-   * @dataProvider getDebugProvider
-   */
+ * Test using data provider.
+ * https://phpunit.readthedocs.io/fr/latest/writing-tests-for-phpunit.html#fournisseur-de-donnees
+ *
+ * @dataProvider getDebugProvider
+ */
   public function testGetDebug($given, $expected) {
     $mailObject = new MailObject(['debug' => $given]);
     $this->assertEquals($expected, $mailObject->getDebug());
@@ -106,8 +106,33 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
       ['off', SMTP::DEBUG_OFF],
       ['client', SMTP::DEBUG_CLIENT],
       ['server', SMTP::DEBUG_SERVER],
-      ['', SMTP::DEBUG_OFF]
+      ['', SMTP::DEBUG_OFF],
     ];
+  }
+
+  /**
+   * Test using data provider.
+   * https://phpunit.readthedocs.io/fr/latest/writing-tests-for-phpunit.html#fournisseur-de-donnees
+   *
+   * @dataProvider getEncryptionMethodProvider
+   */
+  public function testGetEncryptionMethod($given, $expected) {
+    $mailObject = new MailObject(['encryptionMethod' => $given]);
+    $this->assertEquals($expected, $mailObject->getEncryptionMethod());
+  }
+
+  public  function getEncryptionMethodProvider() {
+    return [
+      ['STARTTLS', PHPMailer::ENCRYPTION_STARTTLS],
+      ['SMTPS', PHPMailer::ENCRYPTION_SMTPS],
+    ];
+  }
+
+  public function testSetEncryptionMethod() {
+    $this->expectException("Exception");
+
+    $mailObject = new MailObject([]);
+    $mailObject->setEncryptionMethod('bad encryption method');
   }
 
 }

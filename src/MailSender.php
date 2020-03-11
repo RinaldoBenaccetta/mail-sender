@@ -12,7 +12,7 @@ MailSender\Autoloader::register();
 $options = [
   'host' => MailOptions::getHost(),
   'port' => MailOptions::getPort(),
-  'encryption' => MailOptions::getEncryption(),
+  'encryptionMethod' => MailOptions::getEncryption(),
   'smtpAuthentication' => MailOptions::getSmtpAuthentication(),
   'mailLogin' => MailOptions::getMailLogin(),
   'mailPassword' => MailOptions::getMailPassword(),

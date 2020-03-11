@@ -3,6 +3,8 @@
 require __DIR__ . "/../src/class/mail/MailObject.php";
 
 use MailSender\mail\MailObject;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 
 class MailObjectTest extends PHPUnit\Framework\TestCase
@@ -12,7 +14,7 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
     $dataIn = [
       'host' => 'my.host.com',
       'port' => '8012',
-      'encryption' => 'STARTTLS',
+      'encryptionMethod' => 'STARTTLS',
       'smtpAuthentication' => TRUE,
       'mailLogin' => 'myMail@exemple.com',
       'mailPassword' => '1234',
@@ -43,6 +45,8 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
       'subject' => 'Sarah Connor?',
       'htmlBody' => 'bam',
       'altBody' => 'Ill be back',
+      'debug' => SMTP::DEBUG_SERVER,
+      'encryptionMethod' => PHPMailer::ENCRYPTION_STARTTLS
     ];
 
     $mailObject = new MailObject($dataIn);
@@ -61,6 +65,8 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
     $this->assertEquals($dataOut['subject'], $mailObject->getSubject());
     $this->assertEquals($dataOut['htmlBody'], $mailObject->getHtmlBody());
     $this->assertEquals($dataOut['altBody'], $mailObject->getAltBody());
+    $this->assertEquals($dataOut['debug'], $mailObject->getDebug());
+    $this->assertEquals($dataOut['encryptionMethod'], $mailObject->getEncryptionMethod());
   }
 
   public function testHydrateWithoutReply() {
@@ -82,6 +88,26 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
     $this->assertEquals($dataOut['senderName'], $mailObject->getSenderName());
     $this->assertEquals($dataOut['replyMail'], $mailObject->getReplyMail());
     $this->assertEquals($dataOut['replyName'], $mailObject->getReplyName());
+  }
+
+  /**
+   * Test using data provider.
+   * https://phpunit.readthedocs.io/fr/latest/writing-tests-for-phpunit.html#fournisseur-de-donnees
+   *
+   * @dataProvider getDebugProvider
+   */
+  public function testGetDebug($given, $expected) {
+    $mailObject = new MailObject(['debug' => $given]);
+    $this->assertEquals($expected, $mailObject->getDebug());
+  }
+
+  public  function getDebugProvider() {
+    return [
+      ['off', SMTP::DEBUG_OFF],
+      ['client', SMTP::DEBUG_CLIENT],
+      ['server', SMTP::DEBUG_SERVER],
+      ['', SMTP::DEBUG_OFF]
+    ];
   }
 
 }

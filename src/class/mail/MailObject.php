@@ -360,7 +360,7 @@ class MailObject {
    *
    * @return string
    */
-  protected function getEncryptionMethod() {
+  public function getEncryptionMethod() {
     if ($this->encryptionMethod === 'STARTTLS') {
       return PHPMailer::ENCRYPTION_STARTTLS;
     } elseif ($this->encryptionMethod === 'SMTPS') {
@@ -373,7 +373,7 @@ class MailObject {
    *
    * @return int
    */
-  protected function getDebug() {
+  public function getDebug() {
     switch ($this->debug) {
       case 'off' :
         return SMTP::DEBUG_OFF;

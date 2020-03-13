@@ -1,0 +1,20 @@
+{% if contact.name %}
+    Nom : {{ contact.name }} <br>
+{% endif %}
+
+{% if contact.firstName %}
+    Prénom : {{ contact.firstName }} <br>
+{% endif %}
+
+{% if contact.phone %}
+    Télephone : {{ contact.phone }} <br>
+{% endif %}
+
+{% if contact.adress %}
+    Adresse : {{ contact.adress }} <br>
+{% endif %}
+
+{% if message %}
+    Message : <br><br>
+    {{ message }}
+{% endif %}

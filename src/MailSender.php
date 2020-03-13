@@ -9,6 +9,8 @@ require 'class/Autoloader.php';
 // Call the autoloader
 MailSender\Autoloader::register();
 
+//phpinfo();
+
 $options = [
   'host' => MailOptions::getHost(),
   'port' => MailOptions::getPort(),

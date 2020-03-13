@@ -3,6 +3,8 @@
 
 namespace MailSender\mail;
 
+use MailSender\render\Render;
+
 
 class MailOptions {
 
@@ -84,7 +86,16 @@ class MailOptions {
   }
 
   public static function getHtmlBody() {
-    return self::HTML_BODY;
+    return Render::render('contact-default.twig', [
+      'contact' => [
+        'firstName' => 'Toto',
+        'name' => 'Le Héro',
+        'phone' => '123 / 52 63 63'
+      ],
+      'message' => 'Hello!'
+    ]);
+
+    //return self::HTML_BODY;
   }
 
   public static function getAltBody() {

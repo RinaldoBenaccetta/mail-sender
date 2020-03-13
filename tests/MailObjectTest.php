@@ -26,7 +26,7 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
       'recipientName' => 'Sarah Connor',
       'debug' => 'server',
       'subject' => 'Sarah Connor?',
-      'htmlBody' => 'bam',
+      'htmlBody' => 'Hé bam',
       'altBody' => 'Ill be back',
     ];
 
@@ -43,7 +43,7 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
       'recipientMail' => 'sarah@exemple.com',
       'recipientName' => 'Sarah Connor',
       'subject' => 'Sarah Connor?',
-      'htmlBody' => 'bam',
+      'htmlBody' => 'Hé bam',
       'altBody' => 'Ill be back',
       'debug' => SMTP::DEBUG_SERVER,
       'encryptionMethod' => PHPMailer::ENCRYPTION_STARTTLS

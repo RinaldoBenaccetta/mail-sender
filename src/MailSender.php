@@ -2,7 +2,7 @@
 
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
-use MailSender\render\Render;
+//use MailSender\render\Render;
 
 require '../vendor/autoload.php';
 require 'class/Autoloader.php';
@@ -12,14 +12,14 @@ MailSender\Autoloader::register();
 
 //phpinfo();
 
-$message = Render::render('contact-default.twig', [
-  'contact' => [
-    'firstName' => 'Toto',
-    'name' => 'Le Hero',
-    'phone' => '123 / 52 63 63'
-  ],
-  'message' => 'Bonjour!'
-]);
+//$message = Render::render('contact-default.twig', [
+//  'contact' => [
+//    'firstName' => 'Toto',
+//    'name' => 'Le Hero',
+//    'phone' => '123 / 52 63 63'
+//  ],
+//  'message' => 'Bonjour!'
+//]);
 
 $options = [
   'host' => MailOptions::getHost(),
@@ -36,9 +36,8 @@ $options = [
   'recipientName' => MailOptions::getRecipientMail(),
   'debug' => MailOptions::getDebug(),
   'subject' => MailOptions::getSubject(),
-  'htmlBody' => $message,
-//  'htmlBody' => MailOptions::getHtmlBody(),
-  //'altBody' => MailOptions::getAltBody(),
+  'htmlBody' => MailOptions::getHtmlBody(),
+  'altBody' => MailOptions::getAltBody(),
 ];
 
 //echo $message;

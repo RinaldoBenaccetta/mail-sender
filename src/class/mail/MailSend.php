@@ -17,8 +17,12 @@ class MailSend extends MailObject {
   private function send() {
     $mail = new PHPMailer(true);
 
+    // https://stackoverflow.com/questions/2491475/phpmailer-character-encoding-issues
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
+
     try {
-      //Tell PHPMailer to use SMTP
+      // Tell PHPMailer to use SMTP
       $mail->isSMTP();
 
       $mail->SMTPDebug = $this->getDebug();
@@ -41,14 +45,14 @@ class MailSend extends MailObject {
 
       $mail->addAddress($this->getRecipientMail(), $this->getRecipientName());
 
-      //Set the subject line
+      // Set the subject line
       $mail->Subject = $this->getSubject();
 
       $mail->isHTML(true);
 
-      //Read an HTML message body from an external file, convert referenced images to embedded,
-      //convert HTML into a basic plain-text alternative body
-      //$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+      // Read an HTML message body from an external file, convert referenced images to embedded,
+      // convert HTML into a basic plain-text alternative body
+      // $mail->msgHTML(file_get_contents('contents.html'), __DIR__);
 
       // the HTML mail.
       $mail->Body = $this->getHtmlBody();

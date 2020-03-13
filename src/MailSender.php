@@ -12,6 +12,15 @@ MailSender\Autoloader::register();
 
 //phpinfo();
 
+$message = Render::render('contact-default.twig', [
+  'contact' => [
+    'firstName' => 'Toto',
+    'name' => 'Le Hero',
+    'phone' => '123 / 52 63 63'
+  ],
+  'message' => 'Bonjour!'
+]);
+
 $options = [
   'host' => MailOptions::getHost(),
   'port' => MailOptions::getPort(),
@@ -27,23 +36,15 @@ $options = [
   'recipientName' => MailOptions::getRecipientMail(),
   'debug' => MailOptions::getDebug(),
   'subject' => MailOptions::getSubject(),
-  'htmlBody' => MailOptions::getHtmlBody(),
-  'altBody' => MailOptions::getAltBody(),
+  'htmlBody' => $message,
+//  'htmlBody' => MailOptions::getHtmlBody(),
+  //'altBody' => MailOptions::getAltBody(),
 ];
 
-$message = Render::render('contact-default.twig', [
-  'contact' => [
-    'firstName' => 'Toto',
-    'name' => 'Le Hero',
-    'phone' => '123 / 52 63 63'
-  ],
-  'message' => 'Bonjour!'
-]);
-
-echo $message;
+//echo $message;
 
 
-//new MailSend($options);
+new MailSend($options);
 
 ////Enable SMTP debugging
 //// SMTP::DEBUG_OFF = off (for production use)

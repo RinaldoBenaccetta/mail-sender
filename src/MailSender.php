@@ -2,6 +2,7 @@
 
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
+use MailSender\render\Render;
 
 require '../vendor/autoload.php';
 require 'class/Autoloader.php';
@@ -30,7 +31,19 @@ $options = [
   'altBody' => MailOptions::getAltBody(),
 ];
 
-new MailSend($options);
+$message = Render::render('contact-default.twig', [
+  'contact' => [
+    'firstName' => 'Toto',
+    'name' => 'Le Hero',
+    'phone' => '123 / 52 63 63'
+  ],
+  'message' => 'Bonjour!'
+]);
+
+echo $message;
+
+
+//new MailSend($options);
 
 ////Enable SMTP debugging
 //// SMTP::DEBUG_OFF = off (for production use)

@@ -20,6 +20,8 @@ class Render {
   public static function render($template, $data) {
     $loader = new \Twig\Loader\FilesystemLoader('./templates');
 
+    $template = $template . '.twig';
+
     $twig = new \Twig\Environment($loader, [
       'debug' => TRUE,
       'cache' => FALSE, // no need of cache for mails : they are all differents.

@@ -3,103 +3,149 @@
 
 namespace MailSender\mail;
 
-use MailSender\render\Render;
+use MailSender\mail\DefaultContact;
+use MailSender\Tools\Tools;
+use MailSender\settings\Settings;
 
-
+/**
+ * Class MailOptions
+ *
+ * @package MailSender\mail
+ */
 class MailOptions {
 
-  const HOST = 'smtp.gmail.com';
-  const PORT = 587;
-  const ENCRYPTION = 'STARTTLS'; // STARTTLS or SMTPS
-  const SMTP_AUTHENTICATION = TRUE;
-  const MAIL_LOGIN = 'benaccettarinaldo@gmail.com';
-  const MAIL_PASSWORD = 'vivelaneigeDejuin';
-  const SENDER_MAIL = 'from@example.com';
-  const SENDER_NAME = 'moi';
-  const REPLY_MAIL = 'replyto@example.com';
-  const REPLY_NAME = 'lui';
-  const RECIPIENT_MAIL = 'rinaldobenaccetta@hotmail.com';
-  const RECIPIENT_NAME = 'John Doe';
-  const DEBUG = 'server'; // off | client | server
-  const SUBJECT = 'un super sujet';
-  const HTML_BODY = '<p style="color: green;">This is the HTML message body with text <b>in bold!</b></p>';
-  const ALT_BODY = 'This is a plain-text message body';
+  private string $_template;
+  private string $_senderMail;
+  private string $_senderName;
+  private string $_recipientMail;
+  private string $_recipientName;
+  private string $_subject;
+  private object $_post;
 
-  public function __construct() {
-
+  /**
+   * MailOptions constructor.
+   *
+   * @param object $post
+   */
+  public function __construct(object $post) {
+    $this->_post = $post;
+    $this->setOptions();
   }
 
-  public static function getHost() {
-    return self::HOST;
+  /**
+   * Return the options for rendering.
+   *
+   * @return array
+   */
+  public function getOptions(): array {
+    return [
+      'template' => $this->_template,
+      'senderMail' => $this->_senderMail,
+      'senderName' => $this->_senderName,
+      'recipientMail' => $this->_recipientMail,
+      'recipientName' => $this->_recipientName,
+      'subject' => $this->_subject,
+    ];
   }
 
-  public static function getPort() {
-    return self::PORT;
+  /*
+   * Set the options.
+   */
+  private function setOptions(): void {
+    $this->setTemplate();
+    $this->setSenderMail();
+    $this->setSenderName();
+    $this->setRecipientMail();
+    $this->setRecipientName();
+    $this->setSubject();
   }
 
-  public static function getEncryption() {
-    return self::ENCRYPTION;
+
+  /**
+   * Define the template.
+   * If a template is provided, it will be used,
+   * if not, the default template will be used.
+   */
+  private function setTemplate(): void {
+    if (isset($this->_post->template) && !is_null($this->_post->template)) {
+      $this->_template = $this->_post->template;
+    } else {
+      $this->_template = Settings::DEFAULT_TEMPLATE;
+    }
   }
 
-  public static function getSmtpAuthentication() {
-    return self::SMTP_AUTHENTICATION;
+  /**
+   * Define the sender E-mail.
+   * If a sender E-mail is provided, it will be used,
+   * if not, the default sender E-mail will be used.
+   */
+  private function setSenderMail(): void {
+    if (isset($this->_post->senderMail) && !is_null($this->_post->senderMail)) {
+      $this->_senderMail = $this->_post->senderMail;
+    } else {
+      $this->_senderMail = Settings::DEFAULT_SENDER_MAIL;
+    }
   }
 
-  public static function getMailLogin() {
-    return self::MAIL_LOGIN;
+  /**
+   * Define the sender name.
+   * If a sender name is provided, it will be used,
+   * is not, the default sender name will be used.
+   */
+  private function setSenderName(): void {
+    $name = $this->_post->senderName;
+    if ($this->_template === Settings::DEFAULT_TEMPLATE) {
+      $name = DefaultContact::getName($this->_post);
+    }
+    if (!is_null($name)) {
+      $this->_senderName = $name;
+    } else {
+      $this->_senderName = Settings::DEFAULT_SENDER_NAME;
+    }
   }
 
-  public static function getMailPassword() {
-    return self::MAIL_PASSWORD;
+  /**
+   * Define the recipient E-mail.
+   * If a recipient E-mail is provided, it will be used,
+   * is not, the default recipient E-mail will be used.
+   */
+  private function setRecipientMail(): void {
+    if (isset($this->_post->recipientMail) && !is_null($this->_post->recipientMail)) {
+      $this->_recipientMail = $this->_post->recipientMail;
+    } else {
+      $this->_recipientMail = Settings::DEFAULT_RECIPIENT_MAIL;
+    }
   }
 
-  public static function getSenderMAil() {
-    return self::SENDER_MAIL;
+  /**
+   * Define the recipient name.
+   * If a recipient name is provided, it will be used,
+   * is not, the default recipient name will be used.
+   */
+  private function setRecipientName(): void {
+    if (isset($this->_post->recipientName) && !is_null($this->_post->recipientName)) {
+      $this->_recipientName = $this->_post->recipientName;
+    } else {
+      $this->_recipientName = Settings::DEFAULT_RECIPIENT_NAME;
+    }
   }
 
-  public static function getSenderName() {
-    return self::SENDER_NAME;
-  }
-
-  public static function getReplyMail() {
-    return self::REPLY_MAIL;
-  }
-
-  public static function getReplyName() {
-    return self::REPLY_NAME;
-  }
-
-  public static function getRecipientMail() {
-    return self::RECIPIENT_MAIL;
-  }
-
-  public static function getRecipientName() {
-    return self::RECIPIENT_NAME;
-  }
-
-  public static function getDebug() {
-    return self::DEBUG;
-  }
-
-  public static function getSubject() {
-    return self::SUBJECT;
-  }
-
-  public static function getHtmlBody() {
-    return Render::render('contact-default.twig', [
-      'contact' => [
-        'firstName' => 'Toto',
-        'name' => 'Le Héro',
-        'phone' => '123 / 52 63 63'
-      ],
-      'message' => 'Hello!'
-    ]);
-
-    //return self::HTML_BODY;
-  }
-
-  public static function getAltBody() {
-    return self::ALT_BODY;
+  /**
+   * Define the subject.
+   * If a subjectl is provided, it will be used,
+   * is not, the default subject will be used.
+   */
+  private function setSubject(): void {
+    if ($this->_template === Settings::DEFAULT_TEMPLATE) {
+      // if this is default template
+      $this->_subject = DefaultContact::getSubject($this->_post);
+    } elseif ($this->_template != Settings::DEFAULT_TEMPLATE && isset($this->_post->subject) && !is_null($this->_post->subject)) {
+      // if this is not default template and have a post subject
+      $this->_subject = $this->_post->subject;
+    } else {
+      // if this is not default template and have not a post subject
+      $this->_subject = Settings::DEFAULT_SUBJECT;
+    }
   }
 
 }

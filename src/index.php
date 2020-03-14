@@ -1,6 +1,6 @@
 <?php
 
-use MailSender\mail\MailOptions;
+use MailSender\mail\MailSettings;
 use MailSender\mail\MailSend;
 //use MailSender\render\Render;
 
@@ -12,33 +12,47 @@ MailSender\Autoloader::register();
 
 //phpinfo();
 
-//$message = Render::render('contact-default.twig', [
-//  'contact' => [
-//    'firstName' => 'Toto',
-//    'name' => 'Le Hero',
-//    'phone' => '123 / 52 63 63'
-//  ],
-//  'message' => 'Bonjour!'
-//]);
+$errors = "";
+
+if(empty($_POST['name'])  ||
+  empty($_POST['eMail']) ||
+  empty($_POST['message']) ||
+  empty($_POST['test']))
+{
+  $errors .= "\n Error: all fields are required";
+}
+
+//$name = $_POST['name'];
+//$email_address = $_POST['email'];
+//$message = $_POST['message'];
+
+//echo $name;
+//echo $email_address;
+//echo $message;
+//var_dump($_POST);
+
+$mailOptions = new MailSettings($_POST);
 
 $options = [
-  'host' => MailOptions::getHost(),
-  'port' => MailOptions::getPort(),
-  'encryptionMethod' => MailOptions::getEncryption(),
-  'smtpAuthentication' => MailOptions::getSmtpAuthentication(),
-  'mailLogin' => MailOptions::getMailLogin(),
-  'mailPassword' => MailOptions::getMailPassword(),
-  'senderMail' => MailOptions::getSenderMAil(),
-  'senderName' => MailOptions::getSenderName(),
-  'replyMail' => MailOptions::getReplyMAil(),
-  'replyName' => MailOptions::getReplyName(),
-  'recipientMail' => MailOptions::getRecipientMail(),
-  'recipientName' => MailOptions::getRecipientMail(),
-  'debug' => MailOptions::getDebug(),
-  'subject' => MailOptions::getSubject(),
-  'htmlBody' => MailOptions::getHtmlBody(),
-  'altBody' => MailOptions::getAltBody(),
+  'host' => $mailOptions->getHost(),
+  'port' => $mailOptions->getPort(),
+  'encryptionMethod' => $mailOptions->getEncryption(),
+  'smtpAuthentication' => $mailOptions->getSmtpAuthentication(),
+  'mailLogin' => $mailOptions->getMailLogin(),
+  'mailPassword' => $mailOptions->getMailPassword(),
+  'senderMail' => $mailOptions->getSenderMail(),
+  'senderName' => $mailOptions->getSenderName(),
+  'replyMail' => $mailOptions->getReplyMAil(),
+  'replyName' => $mailOptions->getReplyName(),
+  'recipientMail' => $mailOptions->getRecipientMail(),
+  'recipientName' => $mailOptions->getRecipientMail(),
+  'debug' => $mailOptions->getDebug(),
+  'subject' => $mailOptions->getSubject(),
+  'htmlBody' => $mailOptions->getHtmlBody(),
+  'altBody' => $mailOptions->getAltBody(),
 ];
+
+//echo $options['replyName'];
 
 //echo $message;
 

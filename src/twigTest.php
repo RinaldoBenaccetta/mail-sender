@@ -15,7 +15,7 @@ $twig = new \Twig\Environment($loader, [
 ]);
 
 //echo $twig->render('index', ['name' => 'Toto']);
-echo $twig->render('contact-default.twig', [
+echo $twig->render('contact-default', [
   'contact' => [
     'firstName' => 'Toto',
     'name' => 'Le Hero',

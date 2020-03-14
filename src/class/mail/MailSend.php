@@ -61,6 +61,7 @@ class MailSend extends MailObject {
       $mail->AltBody = $this->getAltBody();
 
       $mail->send();
+
       echo 'Message sent!';
 
     } catch (Exception $e) {

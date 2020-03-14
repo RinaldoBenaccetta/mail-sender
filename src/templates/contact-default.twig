@@ -1,20 +1,25 @@
-{% if contact.name %}
-    Nom : {{ contact.name }} <br>
-{% endif %}
-
-{% if contact.firstName %}
-    Prénom : {{ contact.firstName }} <br>
-{% endif %}
-
-{% if contact.phone %}
-    Télephone : {{ contact.phone }} <br>
-{% endif %}
-
-{% if contact.adress %}
-    Adresse : {{ contact.adress }} <br>
-{% endif %}
+{# This is the default template for contact form. #}
 
 {% if message %}
-    Message : <br><br>
-    {{ message }}
+    {{ message }}<br><br>
+{% endif %}
+
+{% if senderMail %}
+    E-mail : {{ senderMail }} <br>
+{% endif %}
+
+{% if senderFirstName %}
+    Prénom : {{ senderFirstName }} <br>
+{% endif %}
+
+{% if senderName %}
+    Nom : {{ senderName }} <br>
+{% endif %}
+
+{% if senderPhone %}
+    Télephone : {{ senderPhone }} <br>
+{% endif %}
+
+{% if senderAdress %}
+    Adresse : {{ senderAdress }} <br>
 {% endif %}

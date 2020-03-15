@@ -2,6 +2,10 @@
 
 use MailSender\mail\MailSettings;
 use MailSender\mail\MailSend;
+use MailSender\settings\Settings;
+use MailSender\settings\GetSettings;
+use MailSender\tools\Debug;
+
 //use MailSender\render\Render;
 
 require '../vendor/autoload.php';
@@ -12,15 +16,31 @@ MailSender\Autoloader::register();
 
 //phpinfo();
 
-$errors = "";
+//$errors = "";
 
-if(empty($_POST['name'])  ||
-  empty($_POST['eMail']) ||
-  empty($_POST['message']) ||
-  empty($_POST['test']))
-{
-  $errors .= "\n Error: all fields are required";
-}
+//if(empty($_POST['name'])  ||
+//  empty($_POST['eMail']) ||
+//  empty($_POST['message']) ||
+//  empty($_POST['test']))
+//{
+//  $errors .= "\n Error: all fields are required";
+//}
+
+
+
+//$settings = GetSettings::getSettings();
+
+//$settings = new GetSettings();
+//$settings->getSettingsTest();
+//$settings = $settings->getSettings();
+//Debug::var_dump($settings);
+
+//$test = GetSettings::getSettings();
+//Debug::var_dump($test->global->debug);
+
+
+
+//var_dump($settings->getSettings()->mailOptions['defaultTemplate']);
 
 //$name = $_POST['name'];
 //$email_address = $_POST['email'];
@@ -56,7 +76,7 @@ $options = [
 
 //echo $message;
 
-
+// send the mail
 new MailSend($options);
 
 ////Enable SMTP debugging

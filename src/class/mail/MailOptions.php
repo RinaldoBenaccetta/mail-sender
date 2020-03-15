@@ -3,9 +3,9 @@
 
 namespace MailSender\mail;
 
-use MailSender\mail\DefaultContact;
-use MailSender\Tools\Tools;
+use MailSender\settings\GetSettings;
 use MailSender\settings\Settings;
+use MailSender\tools\Debug;
 
 /**
  * Class MailOptions
@@ -21,6 +21,7 @@ class MailOptions {
   private string $_recipientName;
   private string $_subject;
   private object $_post;
+  private object $_settings;
 
   /**
    * MailOptions constructor.
@@ -28,6 +29,7 @@ class MailOptions {
    * @param object $post
    */
   public function __construct(object $post) {
+    $this->_settings = GetSettings::getSettings();
     $this->_post = $post;
     $this->setOptions();
   }
@@ -70,7 +72,7 @@ class MailOptions {
     if (isset($this->_post->template) && !is_null($this->_post->template)) {
       $this->_template = $this->_post->template;
     } else {
-      $this->_template = Settings::DEFAULT_TEMPLATE;
+      $this->_template = $this->_settings->defaultMailOptions->template;
     }
   }
 
@@ -83,7 +85,7 @@ class MailOptions {
     if (isset($this->_post->senderMail) && !is_null($this->_post->senderMail)) {
       $this->_senderMail = $this->_post->senderMail;
     } else {
-      $this->_senderMail = Settings::DEFAULT_SENDER_MAIL;
+      $this->_senderMail = $this->_settings->defaultMailOptions->senderMail;
     }
   }
 
@@ -94,13 +96,13 @@ class MailOptions {
    */
   private function setSenderName(): void {
     $name = $this->_post->senderName;
-    if ($this->_template === Settings::DEFAULT_TEMPLATE) {
+    if ($this->_template === $this->_settings->defaultMailOptions->template) {
       $name = DefaultContact::getName($this->_post);
     }
     if (!is_null($name)) {
       $this->_senderName = $name;
     } else {
-      $this->_senderName = Settings::DEFAULT_SENDER_NAME;
+      $this->_senderName = $this->_settings->defaultMailOptions->senderName;
     }
   }
 
@@ -113,7 +115,7 @@ class MailOptions {
     if (isset($this->_post->recipientMail) && !is_null($this->_post->recipientMail)) {
       $this->_recipientMail = $this->_post->recipientMail;
     } else {
-      $this->_recipientMail = Settings::DEFAULT_RECIPIENT_MAIL;
+      $this->_recipientMail = $this->_settings->defaultMailOptions->recipientMail;
     }
   }
 
@@ -126,7 +128,7 @@ class MailOptions {
     if (isset($this->_post->recipientName) && !is_null($this->_post->recipientName)) {
       $this->_recipientName = $this->_post->recipientName;
     } else {
-      $this->_recipientName = Settings::DEFAULT_RECIPIENT_NAME;
+      $this->_recipientName = $this->_settings->defaultMailOptions->recipientName;
     }
   }
 
@@ -136,15 +138,16 @@ class MailOptions {
    * is not, the default subject will be used.
    */
   private function setSubject(): void {
-    if ($this->_template === Settings::DEFAULT_TEMPLATE) {
+    $defaultTemplate = $this->_settings->defaultMailOptions->template;
+    if ($this->_template === $defaultTemplate) {
       // if this is default template
       $this->_subject = DefaultContact::getSubject($this->_post);
-    } elseif ($this->_template != Settings::DEFAULT_TEMPLATE && isset($this->_post->subject) && !is_null($this->_post->subject)) {
+    } elseif ($this->_template != $defaultTemplate && isset($this->_post->subject) && !is_null($this->_post->subject)) {
       // if this is not default template and have a post subject
       $this->_subject = $this->_post->subject;
     } else {
       // if this is not default template and have not a post subject
-      $this->_subject = Settings::DEFAULT_SUBJECT;
+      $this->_subject = $this->_settings->defaultMailOptions->subject;
     }
   }
 

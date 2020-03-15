@@ -7,10 +7,26 @@ use MailSender\tools\Tools;
 class ToolsTest extends PHPUnit\Framework\TestCase
 {
 
-  public function testBuildName() {
-    $this->assertEquals('Sarah Connor', Tools::buildName('Sarah', 'Connor'));
-    $this->assertEquals('Sarah', Tools::buildName('Sarah', null));
-    $this->assertEquals('Connor', Tools::buildName(null, 'Connor'));
-    $this->assertEquals(null, Tools::buildName(null, null));
+  /**
+   * @dataProvider getBuildNameProvider
+   *
+   * @param $firstName
+   * @param $name
+   * @param $expected
+   */
+  public function testBuildName($firstName, $name, $expected) {
+    $this->assertEquals($expected, Tools::buildName($firstName, $name));
+  }
+
+  /**
+   * @return array
+   */
+  public function getBuildNameProvider() {
+    return [
+      ['Sarah', 'Connor', 'Sarah Connor'],
+      ['Sarah', NULL, 'Sarah'],
+      [NULL, 'Connor', 'Connor'],
+      [NULL, NULL, NULL],
+    ];
   }
 }

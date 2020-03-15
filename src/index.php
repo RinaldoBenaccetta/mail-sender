@@ -5,6 +5,7 @@ use MailSender\mail\MailSend;
 use MailSender\settings\Settings;
 use MailSender\settings\GetSettings;
 use MailSender\tools\Debug;
+use MailSender\Directories;
 
 //use MailSender\render\Render;
 
@@ -53,6 +54,8 @@ MailSender\Autoloader::register();
 
 $mailOptions = new MailSettings($_POST);
 
+var_dump(Directories::ROOT_PATH);
+
 $options = [
   'host' => $mailOptions->getHost(),
   'port' => $mailOptions->getPort(),
@@ -77,7 +80,7 @@ $options = [
 //echo $message;
 
 // send the mail
-new MailSend($options);
+//new MailSend($options);
 
 ////Enable SMTP debugging
 //// SMTP::DEBUG_OFF = off (for production use)

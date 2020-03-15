@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MailSender\Tools;
+namespace MailSender\tools;
 
 
 class Tools {

@@ -5,7 +5,7 @@ namespace MailSender\mail;
 
 use MailSender\mail\MailOptions;
 use MailSender\render\Render;
-use MailSender\Tools\Tools;
+use MailSender\tools\Tools;
 
 class MailSettings {
 

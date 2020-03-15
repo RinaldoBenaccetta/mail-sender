@@ -3,6 +3,8 @@
 
 namespace MailSender\render;
 
+use MailSender\Directories;
+
 
 class Render {
 
@@ -18,7 +20,7 @@ class Render {
    * @throws \Twig\Error\SyntaxError
    */
   public static function render($template, $data) {
-    $loader = new \Twig\Loader\FilesystemLoader('./templates');
+    $loader = new \Twig\Loader\FilesystemLoader(Directories::TEMPLATES);
 
     $template = $template . '.twig';
 
@@ -29,9 +31,6 @@ class Render {
 
     return $twig->render($template, $data);
   }
-
-
-
 
 
 }

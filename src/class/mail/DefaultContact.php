@@ -4,7 +4,8 @@
 namespace MailSender\mail;
 
 
-use MailSender\Tools\Tools;
+use MailSender\settings\GetSettings;
+use MailSender\tools\Tools;
 
 /**
  * Class DefaultContact
@@ -15,9 +16,6 @@ use MailSender\Tools\Tools;
  */
 class DefaultContact {
 
-  const SUBJECT_PREFIX = "Demande d'information de la part de";
-  const SUBJECT_SUFFIX = ".";
-
 
   /**
    * Return the subject builded with the subject's prefix and suffix
@@ -27,8 +25,11 @@ class DefaultContact {
    * @return string
    */
   public static function getSubject($post) {
+
+    $prefix = GetSettings::getSettings()->defaultContactTemlate->subjectPrefix;
+    $suffix = GetSettings::getSettings()->defaultContactTemlate->subjectSuffix;
     $name = self::getName($post);
-    return self::SUBJECT_PREFIX . " " . $name . self::SUBJECT_SUFFIX;
+    return $prefix . " " . $name . $suffix;
   }
 
   /**

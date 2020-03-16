@@ -22,7 +22,7 @@ class StringTool {
 
   /**
    * Check if a string end with an other string.
-   * 
+   *
    * @param string $haystack
    * @param string $needle
    *

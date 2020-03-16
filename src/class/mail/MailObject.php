@@ -149,7 +149,7 @@ class MailObject {
   public function hydrate(array $data) {
     foreach ($data as $key => $value) {
       $method = 'set'.ucfirst($key);
-      if (method_exists($this, $method)) {
+      if (method_exists($this, $method) && !empty($value)) {
         $this->$method($value);
       }
     }

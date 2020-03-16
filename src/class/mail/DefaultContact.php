@@ -40,8 +40,21 @@ class DefaultContact {
    * @return string
    */
   public static function getName($post) {
-    return Tools::buildName($post->senderFirstName, $post->senderName);
-  }
+    if (!empty($post->senderFirstName))
+    {
+      $senderFirstName = $post->senderFirstName;
+    } else {
+      $senderFirstName = NULL;
+    }
 
+    if (!empty($post->senderName))
+    {
+      $senderName = $post->senderName;
+    } else {
+      $senderName = NULL;
+    }
+
+    return Tools::buildName($senderFirstName, $senderName);
+  }
 
 }

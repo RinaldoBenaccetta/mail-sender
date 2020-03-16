@@ -54,7 +54,7 @@ MailSender\Autoloader::register();
 
 $mailOptions = new MailSettings($_POST);
 
-var_dump(Directories::ROOT_PATH);
+//var_dump(Directories::ROOT_PATH);
 
 $options = [
   'host' => $mailOptions->getHost(),
@@ -74,6 +74,10 @@ $options = [
   'htmlBody' => $mailOptions->getHtmlBody(),
   'altBody' => $mailOptions->getAltBody(),
 ];
+
+// environment vars :
+//Debug::var_dump(getenv());
+//Debug::var_dump($_SERVER); // best? where to find in Laragon and in jelastic?
 
 //echo $options['replyName'];
 

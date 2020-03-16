@@ -52,28 +52,32 @@ MailSender\Autoloader::register();
 //echo $message;
 //var_dump($_POST);
 
-$mailOptions = new MailSettings($_POST);
+$mailSettings = new MailSettings($_POST);
 
-//var_dump(Directories::ROOT_PATH);
 
-$options = [
-  'host' => $mailOptions->getHost(),
-  'port' => $mailOptions->getPort(),
-  'encryptionMethod' => $mailOptions->getEncryption(),
-  'smtpAuthentication' => $mailOptions->getSmtpAuthentication(),
-  'mailLogin' => $mailOptions->getMailLogin(),
-  'mailPassword' => $mailOptions->getMailPassword(),
-  'senderMail' => $mailOptions->getSenderMail(),
-  'senderName' => $mailOptions->getSenderName(),
-  'replyMail' => $mailOptions->getReplyMAil(),
-  'replyName' => $mailOptions->getReplyName(),
-  'recipientMail' => $mailOptions->getRecipientMail(),
-  'recipientName' => $mailOptions->getRecipientMail(),
-  'debug' => $mailOptions->getDebug(),
-  'subject' => $mailOptions->getSubject(),
-  'htmlBody' => $mailOptions->getHtmlBody(),
-  'altBody' => $mailOptions->getAltBody(),
-];
+
+Debug::var_dump($_POST);
+
+//$options = [
+//  'host' => $mailOptions->getHost(),
+//  'port' => $mailOptions->getPort(),
+//  'encryptionMethod' => $mailOptions->getEncryption(),
+//  'smtpAuthentication' => $mailOptions->getSmtpAuthentication(),
+//  'mailLogin' => $mailOptions->getMailLogin(),
+//  'mailPassword' => $mailOptions->getMailPassword(),
+//  'senderMail' => $mailOptions->getSenderMail(),
+//  'senderName' => $mailOptions->getSenderName(),
+//  'replyMail' => $mailOptions->getReplyMAil(),
+//  'replyName' => $mailOptions->getReplyName(),
+//  'recipientMail' => $mailOptions->getRecipientMail(),
+//  'recipientName' => $mailOptions->getRecipientMail(),
+//  'debug' => $mailOptions->getDebug(),
+//  'subject' => $mailOptions->getSubject(),
+//  'htmlBody' => $mailOptions->getHtmlBody(),
+//  'altBody' => $mailOptions->getAltBody(),
+//];
+
+$options = $mailSettings->getAll();
 
 // environment vars :
 //Debug::var_dump(getenv());

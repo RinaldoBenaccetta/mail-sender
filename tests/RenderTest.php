@@ -1,5 +1,6 @@
 <?php
 
+require __DIR__ . "/../src/class/tools/StringTool.php";
 require __DIR__ . "/../src/class/render/Render.php";
 require __DIR__ . "/../src/class/settings/Settings.php";
 require __DIR__ . "/../src/class/settings/GetSettings.php";
@@ -12,12 +13,15 @@ use MailSender\render\Render;
 class RenderTest extends PHPUnit\Framework\TestCase {
 
   /**
+   * @dataProvider provideTestRender
+   *
+   * @param $template
+   *
    * @throws \Twig\Error\LoaderError
    * @throws \Twig\Error\RuntimeError
    * @throws \Twig\Error\SyntaxError
    */
-  public function testRender() {
-    $template = 'test-template';
+  public function testRender($template) {
     $message = 'Hello';
     $name = 'Sarah Connor';
     $expected = "Hello <strong>Sarah Connor</strong>";
@@ -29,6 +33,13 @@ class RenderTest extends PHPUnit\Framework\TestCase {
         'name' => $name
       ]
     ));
+  }
+
+  public function provideTestRender() {
+    return [
+      ['test-template'], // test without .twig extension
+      ['test-template.twig'], // test with twig extension
+    ];
   }
 
 }

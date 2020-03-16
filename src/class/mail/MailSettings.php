@@ -56,6 +56,35 @@ class MailSettings {
   }
 
   /**
+   * Return an array with all the settings of the e-mail.
+   * 
+   * @return array
+   * @throws \Twig\Error\LoaderError
+   * @throws \Twig\Error\RuntimeError
+   * @throws \Twig\Error\SyntaxError
+   */
+  public function getAll() {
+    return [
+      'host' => $this->getHost(),
+      'port' => $this->getPort(),
+      'encryptionMethod' => $this->getEncryption(),
+      'smtpAuthentication' => $this->getSmtpAuthentication(),
+      'mailLogin' => $this->getMailLogin(),
+      'mailPassword' => $this->getMailPassword(),
+      'senderMail' => $this->getSenderMail(),
+      'senderName' => $this->getSenderName(),
+      'replyMail' => $this->getReplyMAil(),
+      'replyName' => $this->getReplyName(),
+      'recipientMail' => $this->getRecipientMail(),
+      'recipientName' => $this->getRecipientMail(),
+      'debug' => $this->getDebug(),
+      'subject' => $this->getSubject(),
+      'htmlBody' => $this->getHtmlBody(),
+      'altBody' => $this->getAltBody(),
+    ];
+  }
+
+  /**
    * Return host from settings/GetSettings.
    *
    * @return mixed

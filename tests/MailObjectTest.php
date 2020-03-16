@@ -13,7 +13,7 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
   public function testHydrate() {
     $dataIn = [
       'host' => 'my.host.com',
-      'port' => '8012',
+      'port' => 8012,
       'encryptionMethod' => 'STARTTLS',
       'smtpAuthentication' => TRUE,
       'mailLogin' => 'myMail@exemple.com',
@@ -30,9 +30,9 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
       'altBody' => 'Ill be back',
     ];
 
-    $dataOut = [
+    $expected = [
       'host' => 'my.host.com',
-      'port' => '8012',
+      'port' => 8012,
       'smtpAuthentication' => TRUE,
       'mailLogin' => 'myMail@exemple.com',
       'mailPassword' => '1234',
@@ -51,22 +51,22 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
 
     $mailObject = new MailObject($dataIn);
 
-    $this->assertEquals($dataOut['host'], $mailObject->getHost());
-    $this->assertEquals($dataOut['port'], $mailObject->getPort());
-    $this->assertEquals($dataOut['smtpAuthentication'], $mailObject->getSmtpAuthentication());
-    $this->assertEquals($dataOut['mailLogin'], $mailObject->getMailLogin());
-    $this->assertEquals($dataOut['mailPassword'], $mailObject->getMailPassword());
-    $this->assertEquals($dataOut['senderMail'], $mailObject->getSenderMail());
-    $this->assertEquals($dataOut['senderName'], $mailObject->getSenderName());
-    $this->assertEquals($dataOut['replyMail'], $mailObject->getReplyMail());
-    $this->assertEquals($dataOut['replyName'], $mailObject->getReplyName());
-    $this->assertEquals($dataOut['recipientMail'], $mailObject->getRecipientMail());
-    $this->assertEquals($dataOut['recipientName'], $mailObject->getRecipientName());
-    $this->assertEquals($dataOut['subject'], $mailObject->getSubject());
-    $this->assertEquals($dataOut['htmlBody'], $mailObject->getHtmlBody());
-    $this->assertEquals($dataOut['altBody'], $mailObject->getAltBody());
-    $this->assertEquals($dataOut['debug'], $mailObject->getDebug());
-    $this->assertEquals($dataOut['encryptionMethod'], $mailObject->getEncryptionMethod());
+    $this->assertEquals($expected['host'], $mailObject->getHost());
+    $this->assertEquals($expected['port'], $mailObject->getPort());
+    $this->assertEquals($expected['smtpAuthentication'], $mailObject->getSmtpAuthentication());
+    $this->assertEquals($expected['mailLogin'], $mailObject->getMailLogin());
+    $this->assertEquals($expected['mailPassword'], $mailObject->getMailPassword());
+    $this->assertEquals($expected['senderMail'], $mailObject->getSenderMail());
+    $this->assertEquals($expected['senderName'], $mailObject->getSenderName());
+    $this->assertEquals($expected['replyMail'], $mailObject->getReplyMail());
+    $this->assertEquals($expected['replyName'], $mailObject->getReplyName());
+    $this->assertEquals($expected['recipientMail'], $mailObject->getRecipientMail());
+    $this->assertEquals($expected['recipientName'], $mailObject->getRecipientName());
+    $this->assertEquals($expected['subject'], $mailObject->getSubject());
+    $this->assertEquals($expected['htmlBody'], $mailObject->getHtmlBody());
+    $this->assertEquals($expected['altBody'], $mailObject->getAltBody());
+    $this->assertEquals($expected['debug'], $mailObject->getDebug());
+    $this->assertEquals($expected['encryptionMethod'], $mailObject->getEncryptionMethod());
   }
 
   public function testHydrateWithoutReply() {
@@ -75,7 +75,7 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
       'senderName' => 't-800',
     ];
 
-    $dataOut = [
+    $expected = [
       'senderMail' => 't-800@exemple.com',
       'senderName' => 't-800',
       'replyMail' => 't-800@exemple.com',
@@ -84,10 +84,10 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
 
     $mailObject = new MailObject($dataIn);
 
-    $this->assertEquals($dataOut['senderMail'], $mailObject->getSenderMail());
-    $this->assertEquals($dataOut['senderName'], $mailObject->getSenderName());
-    $this->assertEquals($dataOut['replyMail'], $mailObject->getReplyMail());
-    $this->assertEquals($dataOut['replyName'], $mailObject->getReplyName());
+    $this->assertEquals($expected['senderMail'], $mailObject->getSenderMail());
+    $this->assertEquals($expected['senderName'], $mailObject->getSenderName());
+    $this->assertEquals($expected['replyMail'], $mailObject->getReplyMail());
+    $this->assertEquals($expected['replyName'], $mailObject->getReplyName());
   }
 
   /**

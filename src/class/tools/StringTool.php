@@ -6,22 +6,28 @@ namespace MailSender\tools;
 
 class StringTool {
 
-//  /**
-//   * @param string $str
-//   * @param string $sub
-//   *
-//   * @return bool
-//   */
-//  public static function endsWith( string $str, string $sub ) : bool {
-//    return ( substr( $str, strlen( $str ) - strlen( $sub ) ) === $sub );
-//  }
-
+  /**
+   * Check if a string start with an other string.
+   *
+   * @param string $haystack
+   * @param string $needle
+   *
+   * @return bool
+   */
   public static function startsWith(string $haystack, string $needle) : bool
   {
     $length = strlen($needle);
     return (substr($haystack, 0, $length) === $needle);
   }
 
+  /**
+   * Check if a string end with an other string.
+   * 
+   * @param string $haystack
+   * @param string $needle
+   *
+   * @return bool
+   */
   public static function endsWith(string $haystack, string $needle) : bool
   {
     $length = strlen($needle);

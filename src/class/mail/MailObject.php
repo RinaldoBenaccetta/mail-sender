@@ -3,8 +3,8 @@
 
 namespace MailSender\mail;
 
-
-//use mysql_xdevapi\Exception;
+use phpDocumentor\Reflection\Types\Boolean;
+use phpDocumentor\Reflection\Types\Integer;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Exception;
@@ -19,122 +19,122 @@ class MailObject {
    * client  = client messages
    * server = client and server messages
    *
-   * @var
+   * @var string
    */
-  private   $debug;
+  private string $debug;
 
   /**
-   * Set the encryption mechanism to use - STARTTLS or SMTPS.
+   * The encryption mechanism to use - STARTTLS or SMTPS.
    *
    * STARTTLS or SMTPS.
    *
-   * @var
+   * @var string
    */
-  private   $encryptionMethod;
+  private string $encryptionMethod;
 
   /**
-   * Set the hostname of the mail server.
+   * The hostname of the mail server.
    *
    * use
    * $mail->Host = gethostbyname('smtp.gmail.com');
    * if your network does not support SMTP over IPv6.
    *
-   * @var
+   * @var string
    */
-  protected $host;
+  protected string $host;
 
   /**
-   * Set the SMTP port number - 587 for authenticated TLS,
+   * The SMTP port number - 587 for authenticated TLS,
    * a.k.a. RFC4409 SMTP submission.
    *
-   * @var
+   * @var int
    */
-  protected $port;
+  protected int $port;
 
   /**
    * Whether to use SMTP authentication.
    *
-   * @var
+   * @var bool
    */
-  protected $smtpAuthentication;
+  protected bool $smtpAuthentication;
 
   /**
    * Username to use for SMTP authentication.
    * Use full email address for gmail.
    *
-   * @var
+   * @var string
    */
-  protected $mailLogin;
+  protected string $mailLogin;
 
   /**
    * Password to use for SMTP authentication.
    *
-   * @var
+   * @var string
    */
-  protected $mailPassword;
+  protected string $mailPassword;
 
   /**
-   * Set E-mail the message is to be sent from.
+   * E-mail the message is to be sent from.
    *
-   * @var
+   * @var string
    */
-  protected $senderMail;
+  protected string $senderMail;
 
   /**
-   * Set name the message is to be sent to.
+   * Name the message is to be sent to.
    *
-   * @var
+   * @var string
    */
-  protected $senderName;
+  protected string $senderName;
 
   /**
-   * Set an alternative E-mail reply-to address.
+   * An alternative E-mail reply-to address.
    *
-   * @var
+   * @var string
    */
-  protected $replyMail;
+  protected string $replyMail;
 
   /**
-   * Set an alternative Name reply-to address.
+   * An alternative Name reply-to address.
    *
-   * @var
+   * @var string
    */
-  protected $replyName;
+  protected string $replyName;
 
   /**
-   * Set E-mail the message is to be sent to.
+   * E-mail the message is to be sent to.
    *
-   * @var
+   * @var string
    */
-  protected $recipientMail;
+  protected string $recipientMail;
 
   /**
-   * Set Name the message is to be sent to.
+   * Name the message is to be sent to.
    *
-   * @var
+   * @var string
    */
-  protected $recipientName;
+  protected string $recipientName;
 
   /**
-   * Set the mail subject.
+   * The mail subject.
    *
-   * @var
+   * @var string
    */
-  protected $subject;
+  protected string $subject;
 
   /**
    * The body of the mail in HTML.
    *
-   * @var
+   * @var string
    */
-  protected $htmlBody;
+  protected string $htmlBody;
 
   /**
    * The Alternative of the HTML mail in plain text.
    *
-   * @var
+   * @var string
    */
-  protected $altBody;
+  protected string $altBody;
 
 
   public function __construct($options) {
@@ -143,7 +143,7 @@ class MailObject {
 
   /**
    * Hydrate an object.
-   * To use inside the target object.
+   *
    * @param array $data
    */
   public function hydrate(array $data) {
@@ -156,25 +156,25 @@ class MailObject {
   }
 
   /**
-   * @param mixed $host
+   * @param string $host
    */
-  public function setHost($host): void {
+  public function setHost(string $host): void {
     $this->host = $host;
   }
 
   /**
-   * @param mixed $port
+   * @param int $port
    */
-  public function setPort($port): void {
+  public function setPort(int $port): void {
     $this->port = $port;
   }
 
   /**
-   * @param mixed $encryptionMethod
+   * @param string $encryptionMethod
    *
    * @throws \Exception
    */
-  public function setEncryptionMethod($encryptionMethod): void {
+  public function setEncryptionMethod(string $encryptionMethod): void {
     if ($encryptionMethod === 'STARTTLS' || $encryptionMethod === 'SMTPS') {
       $this->encryptionMethod = $encryptionMethod;
     } else {
@@ -184,140 +184,140 @@ class MailObject {
   }
 
   /**
-   * @param mixed $smtpAuthentication
+   * @param bool $smtpAuthentication
    */
-  public function setSmtpAuthentication($smtpAuthentication): void {
+  public function setSmtpAuthentication(bool $smtpAuthentication): void {
     $this->smtpAuthentication = $smtpAuthentication;
   }
 
   /**
-   * @param mixed $mailLogin
+   * @param string $mailLogin
    */
-  public function setMailLogin($mailLogin): void {
+  public function setMailLogin(string $mailLogin): void {
     $this->mailLogin = $mailLogin;
   }
 
   /**
-   * @param mixed $mailPassword
+   * @param string $mailPassword
    */
-  public function setMailPassword($mailPassword): void {
+  public function setMailPassword(string $mailPassword): void {
     $this->mailPassword = $mailPassword;
   }
 
   /**
-   * @param mixed $senderMail
+   * @param string $senderMail
    */
-  public function setSenderMail($senderMail): void {
+  public function setSenderMail(string $senderMail): void {
     $this->senderMail = $senderMail;
   }
 
   /**
-   * @param mixed $senderName
+   * @param string $senderName
    */
-  public function setSenderName($senderName): void {
+  public function setSenderName(string $senderName): void {
     $this->senderName = $senderName;
   }
 
   /**
-   * @param mixed $replyMail
+   * @param string $replyMail
    */
-  public function setReplyMail($replyMail): void {
+  public function setReplyMail(string $replyMail): void {
     $this->replyMail = $replyMail;
   }
 
   /**
-   * @param mixed $replyName
+   * @param string $replyName
    */
-  public function setReplyName($replyName): void {
+  public function setReplyName(string $replyName): void {
     $this->replyName = $replyName;
   }
 
   /**
-   * @param mixed $recipientMail
+   * @param string $recipientMail
    */
-  public function setRecipientMail($recipientMail): void {
+  public function setRecipientMail(string $recipientMail): void {
     $this->recipientMail = $recipientMail;
   }
 
   /**
-   * @param mixed $recipientName
+   * @param string $recipientName
    */
-  public function setRecipientName($recipientName): void {
+  public function setRecipientName(string $recipientName): void {
     $this->recipientName = $recipientName;
   }
 
   /**
-   * @param mixed $debug
+   * @param string $debug
    */
-  public function setDebug($debug): void {
+  public function setDebug(string $debug): void {
     $this->debug = $debug;
   }
 
   /**
-   * @param mixed $subject
+   * @param string $subject
    */
-  public function setSubject($subject): void {
+  public function setSubject(string $subject): void {
     $this->subject = $subject;
   }
 
   /**
-   * @param mixed $htmlBody
+   * @param string $htmlBody
    */
-  public function setHtmlBody($htmlBody): void {
+  public function setHtmlBody(string $htmlBody): void {
     $this->htmlBody = $htmlBody;
   }
 
   /**
-   * @param mixed $altBody
+   * @param string $altBody
    */
-  public function setAltBody($altBody): void {
+  public function setAltBody(string $altBody): void {
     $this->altBody = $altBody;
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getHost() {
     return $this->host;
   }
 
   /**
-   * @return mixed
+   * @return int
    */
   public function getPort() {
     return $this->port;
   }
 
   /**
-   * @return mixed
+   * @return bool
    */
   public function getSmtpAuthentication() {
     return $this->smtpAuthentication;
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getMailLogin() {
     return $this->mailLogin;
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getMailPassword() {
     return $this->mailPassword;
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getSenderMail() {
     return $this->senderMail;
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getSenderName() {
     return $this->senderName;
@@ -327,7 +327,7 @@ class MailObject {
    * Return the E-mail to reply-to.
    * If there is no E-mail to reply, this will return the sender E-mail.
    *
-   * @return mixed
+   * @return string
    */
   public function getReplyMail() {
     if (!empty($this->replyMail)) {
@@ -340,7 +340,7 @@ class MailObject {
    * Return the name to reply-to.
    * If there is no E-mail to reply, this will return the sender name.
    *
-   * @return mixed
+   * @return string
    */
   public function getReplyName() {
     if (!empty($this->replyName)) {
@@ -350,14 +350,14 @@ class MailObject {
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getRecipientMail() {
     return $this->recipientMail;
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getRecipientName() {
     return $this->recipientName;
@@ -365,19 +365,22 @@ class MailObject {
 
   /**
    * Return the corresponding phpmailer encryption method.
+   * Default is NULL when no encryption method or wrong encryption.
    *
    * @return string
    */
   public function getEncryptionMethod() {
-    if ($this->encryptionMethod === 'STARTTLS') {
+    if (!empty($this->encryptionMethod) && $this->encryptionMethod === 'STARTTLS') {
       return PHPMailer::ENCRYPTION_STARTTLS;
-    } elseif ($this->encryptionMethod === 'SMTPS') {
+    } elseif (!empty($this->encryptionMethod) && $this->encryptionMethod === 'SMTPS') {
       return PHPMailer::ENCRYPTION_SMTPS;
     }
+    return NULL;
   }
 
   /**
    * Return the corresponding SMTP option.
+   * Default is off.
    *
    * @return int
    */
@@ -398,23 +401,18 @@ class MailObject {
   }
 
   /**
-   * @return mixed
+   * @return string
    */
   public function getSubject() {
     return $this->subject;
   }
 
   /**
-   * @return mixed
+   * @return string
    * @throws \Exception
    */
   public function getHtmlBody() {
     return $this->htmlBody;
-//    if (!is_null($this->htmlBody)) {
-//      return $this->htmlBody;
-//    }else {
-//      throw new Exception('No HTML Body found.');
-//    }
   }
 
   /**
@@ -423,13 +421,14 @@ class MailObject {
    * If no alternative body is found,
    * return the html body with stripped tags.
    *
-   * @return mixed
+   * @return string
+   * @throws \Exception
    */
   public function getAltBody() {
     if (!empty($this->altBody)) {
       return $this->altBody;
     }
-    return htmlspecialchars(trim(strip_tags($this->htmlBody)));
+    return htmlspecialchars(trim(strip_tags($this->getHtmlBody())));
   }
 
 }

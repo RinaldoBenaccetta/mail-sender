@@ -6,6 +6,7 @@ require __DIR__ . "/../src/class/settings/Settings.php";
 require __DIR__ . "/../src/class/settings/GetSettings.php";
 
 use MailSender\mail\DefaultContact;
+use MailSender\mail\MailOptions;
 
 class DefaultContactTest extends PHPUnit\Framework\TestCase {
 

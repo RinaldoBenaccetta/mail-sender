@@ -19,8 +19,7 @@ class Settings {
    * @var array
    */
   protected array $global = [
-    'environment' => 'dev', // 'dev' | 'production'
-    'debug' => 'server',
+    'environment' => 'dev', // 'dev' | 'prod'
   ];
 
   /**
@@ -34,7 +33,7 @@ class Settings {
     'encryption' => 'STARTTLS', // 'STARTTLS' | 'SMTPS'
     'smtpAuthentication' => TRUE,
     'mailLogin' => 'benaccettarinaldo@gmail.com',
-    'mailPassword' => 'vivelaneigeDejuin',
+    'mailPassword' => 'vivelaneigeDejuin', // todo : make this more secure, ideally found it in the environment variable.
   ];
 
   /**

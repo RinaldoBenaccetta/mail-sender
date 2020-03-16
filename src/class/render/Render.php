@@ -4,6 +4,8 @@
 namespace MailSender\render;
 
 use MailSender\Directories;
+use MailSender\settings\GetSettings;
+use Twig\Environment;
 
 
 class Render {
@@ -24,12 +26,26 @@ class Render {
 
     $template = $template . '.twig';
 
-    $twig = new \Twig\Environment($loader, [
-      'debug' => TRUE,
+    $settings = GetSettings::getSettings();
+
+    $twig = new Environment($loader, [
+      'debug' => self::getDebug($settings->global->environment),
       'cache' => FALSE, // no need of cache for mails : they are all differents.
     ]);
 
     return $twig->render($template, $data);
+  }
+
+  /**
+   * @param string $environment
+   *
+   * @return bool
+   */
+  private static function getDebug(string $environment) : bool {
+    if (!empty($environment) && $environment === 'dev' ) {
+      return TRUE;
+    }
+    Return FALSE;
   }
 
 

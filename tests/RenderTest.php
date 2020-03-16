@@ -1,6 +1,8 @@
 <?php
 
 require __DIR__ . "/../src/class/render/Render.php";
+require __DIR__ . "/../src/class/settings/Settings.php";
+require __DIR__ . "/../src/class/settings/GetSettings.php";
 
 use MailSender\render\Render;
 

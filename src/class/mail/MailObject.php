@@ -330,7 +330,7 @@ class MailObject {
    * @return mixed
    */
   public function getReplyMail() {
-    if (!is_null($this->replyMail)) {
+    if (!empty($this->replyMail)) {
       return $this->replyMail;
     }
     return $this->getSenderMail();
@@ -343,7 +343,7 @@ class MailObject {
    * @return mixed
    */
   public function getReplyName() {
-    if (!is_null($this->replyName)) {
+    if (!empty($this->replyName)) {
       return $this->replyName;
     }
     return $this->getSenderName();
@@ -426,7 +426,7 @@ class MailObject {
    * @return mixed
    */
   public function getAltBody() {
-    if (!is_null($this->altBody)) {
+    if (!empty($this->altBody)) {
       return $this->altBody;
     }
     return htmlspecialchars(trim(strip_tags($this->htmlBody)));

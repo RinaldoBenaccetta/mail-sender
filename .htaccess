@@ -1,4 +1,5 @@
-#This code only let acces to all index.php files.
+# This code only let acces to all index.php files.
+# Better to use httpd.conf
 
 Order Deny,Allow
 Deny from all

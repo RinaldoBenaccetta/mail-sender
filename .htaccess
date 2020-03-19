@@ -1,0 +1,9 @@
+#This code only let acces to all index.php files.
+#
+#Order Deny,Allow
+#Deny from all
+#
+#<Files index.php>
+#    Order Allow,Deny
+#    Allow from all
+#</Files>

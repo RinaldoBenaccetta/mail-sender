@@ -1,5 +1,6 @@
 <?php
 
+use MailSender\data\Post;
 use MailSender\mail\MailSettings;
 use MailSender\mail\MailSend;
 use MailSender\settings\Settings;
@@ -52,11 +53,38 @@ MailSender\Autoloader::register();
 //echo $message;
 //var_dump($_POST);
 
-$mailSettings = new MailSettings($_POST);
+//$mailSettings = new MailSettings($_POST);
 
 
+//if (!extension_loaded('intl')) {
+//  var_dump('teeeeeeeeeeeeeest');
+//}
 
-Debug::var_dump($_POST);
+
+//Debug::var_dump($_POST);
+
+//$test = [
+//  "senderName" => "Connor",
+//  "senderFirstName" => "Sarah",
+//  "senderPhone" => 12563,
+//  "senderMail" => "localpart@example.com",
+//  "message" => "Hello <bold>world!</bold>",
+//  "dangerous" => "<script>alert('I ll be back!');</script>",
+//  "my array" => [
+//    "1" => "an item",
+//    "2" => (object) [
+//      "3" => "an other item",
+//      "4" => [
+//        "5" => [
+//          "6" => 12345
+//        ]
+//      ]
+//    ]
+//  ]
+//];
+
+$post = new Post();
+$mailSettings = new MailSettings($post->getPost($_POST));
 
 //$options = [
 //  'host' => $mailOptions->getHost(),
@@ -88,7 +116,7 @@ $options = $mailSettings->getAll();
 //echo $message;
 
 // send the mail
-//new MailSend($options);
+new MailSend($options);
 
 ////Enable SMTP debugging
 //// SMTP::DEBUG_OFF = off (for production use)

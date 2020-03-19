@@ -28,11 +28,30 @@ class Settings {
    * @var array
    */
   protected array $mailServer = [
+    /**
+     * The host of the mail server.
+     */
     'host' => 'smtp.gmail.com',
+    /**
+     * The port used to send mails.
+     */
     'port' => 587,
-    'encryption' => 'STARTTLS', // 'STARTTLS' | 'SMTPS'
+    /**
+     * The encryption method.
+     * 'STARTTLS' | 'SMTPS'
+     */
+    'encryption' => 'STARTTLS',
+    /**
+     * Is the smtp authentication must be used?
+     */
     'smtpAuthentication' => TRUE,
+    /**
+     * The login used to connect to mail server.
+     */
     'mailLogin' => 'benaccettarinaldo@gmail.com',
+    /**
+     * The password used to connect to mail server.
+     */
     'mailPassword' => 'vivelaneigeDejuin', // todo : make this more secure, ideally found it in the environment variable.
   ];
 
@@ -47,13 +66,57 @@ class Settings {
    * @var array
    */
   protected array $defaultMailOptions = [
-
-    'template' => 'contact-default', // Default template. Without the .twig suffix
+    /**
+     * Default template. Without the .twig suffix.
+     */
+    'template' => 'contact-default',
+    /*
+     * Default sender mail.
+     */
     'senderMail' => 'rinaldobenaccetta@hotmail.com',
+    /**
+     * Default sender name.
+     */
     'senderName' => 'Rinaldo Benaccetta',
+    /**
+     * Default recipient mail.
+     */
     'recipientMail' => 'rinaldobenaccetta@hotmail.com',
+    /**
+     * Default recipient name.
+     */
     'recipientName' => 'Rinaldo Benaccetta',
+    /**
+     * Default subject.
+     */
     'subject' => 'Le sujet!',
+  ];
+
+  /**
+   * Here is the validations rules for $POST values.
+   *
+   * @var array
+   */
+  protected array $validation = [
+    /**
+     * Theses $POST's values will be validated for correct mail address.
+     * If a value must be validated as an e-mail address,
+     * it must be here.
+     *
+     */
+    'isMail' => [
+      'senderMail',
+      'replyMail',
+      'recipientMail'
+    ],
+    /**
+     * enable or disable DNS validation for mail addresses.
+     */
+    'DNSMailValidation' => TRUE,
+    /**
+     * enable or disable spoof validation for mail addresses.
+     */
+    'SpoofMailValidation' => TRUE,
   ];
 
   /**
@@ -62,7 +125,17 @@ class Settings {
    * @var array
    */
   protected array $defaultContactTemlate = [
+    /**
+     * The prefix for the subject in the default template.
+     * The sender name provided in the $POST values will
+     * be after the prefix.
+     */
     'subjectPrefix' => "Demande d'information de la part de",
+    /**
+     * The suffix for the subject in the default template.
+     * The sender name provided in the $POST values will
+     * be before the suffix.
+     */
     'subjectSuffix' => ".",
   ];
 

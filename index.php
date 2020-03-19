@@ -10,8 +10,10 @@ use MailSender\Directories;
 
 //use MailSender\render\Render;
 
-require '../vendor/autoload.php';
-require 'class/Autoloader.php';
+//require '../vendor/autoload.php';
+require './vendor/autoload.php';
+//require './src/class/Autoloader.php';
+require './src/class/Autoloader.php';
 
 // Call the autoloader
 MailSender\Autoloader::register();
@@ -108,15 +110,15 @@ $mailSettings = new MailSettings($post->getPost($_POST));
 $options = $mailSettings->getAll();
 
 // environment vars :
-//Debug::var_dump(getenv());
-//Debug::var_dump($_SERVER); // best? where to find in Laragon and in jelastic?
+Debug::var_dump(getenv()); // c'est ici que jelastic met ses variables d'environnement
+//Debug::var_dump($_SERVER);
 
 //echo $options['replyName'];
 
 //echo $message;
 
 // send the mail
-new MailSend($options);
+//new MailSend($options);
 
 ////Enable SMTP debugging
 //// SMTP::DEBUG_OFF = off (for production use)

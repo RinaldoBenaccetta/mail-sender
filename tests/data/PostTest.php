@@ -1,13 +1,15 @@
 <?php
 
-require __DIR__ . "/../src/class/settings/Settings.php";
-require __DIR__ . "/../src/class/settings/GetSettings.php";
-require __DIR__ . "/../src/class/data/Post.php";
 
+
+namespace tests\MailSender\data;
+
+use Exception;
+use PHPUnit\Framework\TestCase;
 use MailSender\data\Post;
 
 
-class PostTest extends PHPUnit\Framework\TestCase {
+class PostTest extends TestCase {
 
   /**
    *

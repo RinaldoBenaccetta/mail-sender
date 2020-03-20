@@ -11,7 +11,7 @@ namespace MailSender\settings;
  *
  * @package MailSender\settings
  */
-class Settings {
+class Config {
 
   /**
    * Here is the global settings.
@@ -20,6 +20,7 @@ class Settings {
    */
   protected array $global = [
     'environment' => 'dev', // 'dev' | 'prod'
+    'rootParent' => '0',
   ];
 
   /**

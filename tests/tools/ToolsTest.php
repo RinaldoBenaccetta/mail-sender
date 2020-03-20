@@ -1,6 +1,6 @@
 <?php
 
-//.\vendor\bin\require __DIR__ . "/../src/class/tools/Tools.php";
+require __DIR__ . "/../src/class/tools/Tools.php";
 
 use MailSender\tools\Tools;
 

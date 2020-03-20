@@ -2,8 +2,10 @@
 
 require __DIR__ . "/../src/class/tools/StringTool.php";
 require __DIR__ . "/../src/class/render/Render.php";
-require __DIR__ . "/../src/class/settings/Settings.php";
-require __DIR__ . "/../src/class/settings/GetSettings.php";
+//require __DIR__ . "/../src/class/settings/Settings.php";
+//require __DIR__ . "/../src/class/settings/GetSettings.php";
+require __DIR__ . "/../src/class/settings/Config.php";
+require __DIR__ . "/../src/class/settings/GetConfig.php";
 
 use MailSender\render\Render;
 

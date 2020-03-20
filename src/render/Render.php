@@ -3,8 +3,8 @@
 
 namespace MailSender\render;
 
-use MailSender\Directories;
-use MailSender\settings\GetSettings;
+use MailSender\Path;
+use MailSender\settings\GetConfig;
 use MailSender\tools\StringTool;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -25,11 +25,11 @@ class Render {
    * @throws \Twig\Error\SyntaxError
    */
   public static function render($template, $data) {
-    $loader = new FilesystemLoader(Directories::TEMPLATES);
+    $loader = new FilesystemLoader(Path::TEMPLATES);
 
     $template = self::getTemplateFile($template);
 
-    $settings = GetSettings::getSettings();
+    $settings = GetConfig::getSettings();
 
     $twig = new Environment($loader, [
       'debug' => self::getDebug($settings->global->environment),

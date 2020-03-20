@@ -4,7 +4,7 @@
 namespace MailSender;
 
 
-class Directories {
+class Path {
 
   const ROOT_PATH = __DIR__;
   const TEMPLATES = self::ROOT_PATH . './templates';

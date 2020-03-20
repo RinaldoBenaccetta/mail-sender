@@ -1,14 +1,16 @@
 <?php
 
 require __DIR__ . "/../src/class/mail/MailOptions.php";
-require __DIR__ . "/../src/class/settings/Settings.php";
-require __DIR__ . "/../src/class/settings/GetSettings.php";
+//require __DIR__ . "/../src/class/settings/Settings.php";
+//require __DIR__ . "/../src/class/settings/GetSettings.php";
+require __DIR__ . "/../src/class/settings/Config.php";
+require __DIR__ . "/../src/class/settings/GetConfig.php";
 require __DIR__ . "/../src/class/mail/DefaultContact.php";
 require __DIR__ . "/../src/class/tools/Tools.php";
 
 use MailSender\mail\DefaultContact;
 use MailSender\mail\MailOptions;
-use MailSender\settings\GetSettings;
+use MailSender\settings\GetConfig;
 
 
 class MailOptionsTest extends PHPUnit\Framework\TestCase
@@ -36,7 +38,7 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
   }
 
   public function defaultExpected() {
-    $settings = GetSettings::getSettings();
+    $settings = GetConfig::getSettings();
     return [
       'template' => $settings->defaultMailOptions->template,
       'senderMail' => $settings->defaultMailOptions->senderMail,
@@ -56,7 +58,7 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
   }
 
   public function expectWithOnlySenderName() {
-    $settings = GetSettings::getSettings();
+    $settings = GetConfig::getSettings();
     return [
       'template' => $settings->defaultMailOptions->template,
       'senderMail' => $settings->defaultMailOptions->senderMail,

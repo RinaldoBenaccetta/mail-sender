@@ -4,7 +4,7 @@
 namespace MailSender\mail;
 
 
-use MailSender\settings\GetSettings;
+use MailSender\settings\GetConfig;
 use MailSender\tools\Tools;
 
 /**
@@ -26,8 +26,8 @@ class DefaultContact {
    */
   public static function getSubject($post) {
 
-    $prefix = GetSettings::getSettings()->defaultContactTemlate->subjectPrefix;
-    $suffix = GetSettings::getSettings()->defaultContactTemlate->subjectSuffix;
+    $prefix = GetConfig::getSettings()->defaultContactTemlate->subjectPrefix;
+    $suffix = GetConfig::getSettings()->defaultContactTemlate->subjectSuffix;
     $name = self::getName($post);
     return $prefix . " " . $name . $suffix;
   }

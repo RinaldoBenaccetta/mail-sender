@@ -100,16 +100,18 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
    * @param $expected
    */
   public function testGetDebug($given, $expected) {
+    var_dump($given);
     $mailObject = new MailObject(['debug' => $given]);
+    //var_dump($mailObject)->getDebug();
     $this->assertEquals($expected, $mailObject->getDebug());
   }
 
   public  function getDebugProvider() {
     return [
-      ['off', SMTP::DEBUG_OFF],
-      ['client', SMTP::DEBUG_CLIENT],
-      ['server', SMTP::DEBUG_SERVER],
-      ['', SMTP::DEBUG_OFF],
+      [(string)'off', SMTP::DEBUG_OFF],
+      [(string)'client', SMTP::DEBUG_CLIENT],
+      [(string)'server', SMTP::DEBUG_SERVER],
+      [(string)'otherStuff', SMTP::DEBUG_OFF],
     ];
   }
 

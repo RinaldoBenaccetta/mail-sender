@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . "/../src/class/tools/StringTool.php";
-
 use MailSender\tools\StringTool;
 
 

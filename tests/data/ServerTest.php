@@ -1,13 +1,5 @@
 <?php
 
-//require __DIR__ . "/../src/class/settings/Settings.php";
-//require __DIR__ . "/../src/class/settings/GetSettings.php";
-require __DIR__ . "/../src/class/settings/Config.php";
-require __DIR__ . "/../src/class/settings/GetConfig.php";
-require __DIR__ . "/../src/class/data/Environment.php";
-require __DIR__ . "/../src/class/data/Server.php";
-
-//use Dotenv\Dotenv;
 use MailSender\data\Environment;
 use MailSender\data\Server;
 

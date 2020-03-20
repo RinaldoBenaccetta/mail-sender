@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . "/../src/class/tools/Tools.php";
-
 use MailSender\tools\Tools;
 
 class ToolsTest extends PHPUnit\Framework\TestCase

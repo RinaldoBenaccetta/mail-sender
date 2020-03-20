@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . "/../src/class/mail/MailObject.php";
-
 use MailSender\mail\MailObject;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

@@ -1,12 +1,6 @@
 <?php
 
-require __DIR__ . "/../src/class/mail/DefaultContact.php";
-require __DIR__ . "/../src/class/tools/Tools.php";
-require __DIR__ . "/../src/class/settings/Config.php";
-require __DIR__ . "/../src/class/settings/GetConfig.php";
-
 use MailSender\mail\DefaultContact;
-use MailSender\mail\MailOptions;
 
 class DefaultContactTest extends PHPUnit\Framework\TestCase {
 

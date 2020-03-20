@@ -1,54 +1,43 @@
 <?php
 
-require __DIR__ . "/../src/class/mail/DefaultContact.php";
-require __DIR__ . "/../src/class/tools/StringTool.php";
-require __DIR__ . "/../src/class/render/Render.php";
-require __DIR__ . "/../src/class/mail/MailSettings.php";
-//require __DIR__ . "/../src/class/settings/Settings.php";
-//require __DIR__ . "/../src/class/settings/GetSettings.php";
-require __DIR__ . "/../src/class/settings/Config.php";
-require __DIR__ . "/../src/class/settings/GetConfig.php";
-require __DIR__ . "/../src/class/mail/MailOptions.php";
-require __DIR__ . "/../src/class/tools/Tools.php";
-
 use MailSender\mail\DefaultContact;
 use MailSender\mail\MailSettings;
-use MailSender\settings\GetConfig;
+use MailSender\settings\GetSettings;
 
 class MailSettingsTest extends PHPUnit\Framework\TestCase {
 
   public function testGetHost() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->mailServer->host, $mailSettings->getHost());
   }
 
   public function testGetPort() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->mailServer->port, $mailSettings->getPort());
   }
 
   public function testGetEncryption() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->mailServer->encryption, $mailSettings->getEncryption());
   }
 
   public function testGetSmtpAuthentication() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->mailServer->smtpAuthentication, $mailSettings->getSmtpAuthentication());
   }
 
   public function testGetMailLogin() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->mailServer->mailLogin, $mailSettings->getMailLogin());
   }
 
   public function testGetMailPassword() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->mailServer->mailPassword, $mailSettings->getMailPassword());
   }
@@ -62,7 +51,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase {
   }
 
   public function testGetSenderMailWithoutMailProvided() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->defaultMailOptions->senderMail, $mailSettings->getSenderMail());
   }
@@ -76,7 +65,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase {
   }
 
   public function testGetSenderNameWithoutNameProvided() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->defaultMailOptions->senderName, $mailSettings->getSenderName());
   }
@@ -116,7 +105,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase {
   }
 
   public function testGetRecipientMailWithoutMailProvided() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->defaultMailOptions->recipientMail, $mailSettings->getRecipientMail());
   }
@@ -130,13 +119,13 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase {
   }
 
   public function testGetRecipientNameWithoutNameProvided() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([]);
     $this->assertEquals($settings->defaultMailOptions->recipientName, $mailSettings->getRecipientName());
   }
 
   public function testGetSubjectWithSubjectProvidedWithDefaultTemplate() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $subject = "I'll be back";
     $expected = DefaultContact::getSubject((object) [
       'senderName' => $settings->defaultMailOptions->senderName
@@ -148,7 +137,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase {
   }
 
   public function testGetSubjectWithoutSubjectProvidedWithDefaultTemplate() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $expected = DefaultContact::getSubject((object) [
       'senderName' => $settings->defaultMailOptions->senderName
     ]);
@@ -166,7 +155,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase {
   }
 
   public function testGetSubjectWithoutSubjectProvidedAndNotDefaultTemplate() {
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
     $mailSettings = new MailSettings([
       'template' => 'test-template',
     ]);

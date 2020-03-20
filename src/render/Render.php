@@ -4,7 +4,7 @@
 namespace MailSender\render;
 
 use MailSender\Path;
-use MailSender\settings\GetConfig;
+use MailSender\settings\GetSettings;
 use MailSender\tools\StringTool;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -29,7 +29,7 @@ class Render {
 
     $template = self::getTemplateFile($template);
 
-    $settings = GetConfig::getSettings();
+    $settings = GetSettings::getSettings();
 
     $twig = new Environment($loader, [
       'debug' => self::getDebug($settings->global->environment),

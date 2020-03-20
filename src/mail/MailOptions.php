@@ -3,7 +3,7 @@
 
 namespace MailSender\mail;
 
-use MailSender\settings\GetConfig;
+use MailSender\settings\GetSettings;
 //use MailSender\settings\Settings;
 //use MailSender\tools\Debug;
 
@@ -76,7 +76,7 @@ class MailOptions {
    * @param object $post
    */
   public function __construct(object $post) {
-    $this->_settings = GetConfig::getSettings();
+    $this->_settings = GetSettings::getSettings();
     $this->_post = $post;
     $this->setOptions();
   }

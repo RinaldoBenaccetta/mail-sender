@@ -8,7 +8,7 @@ namespace MailSender\settings;
  *
  * @package MailSender\settings
  */
-class GetConfig extends Config{
+class GetSettings extends Settings{
 
   /**
    * Return an object with all the settings of the application.
@@ -21,7 +21,7 @@ class GetConfig extends Config{
    */
   public static function getSettings() {
     $output = [];
-    $settings = new Config();
+    $settings = new Settings();
     foreach ($settings as $key => $value) {
       $output[$key] = (object) $value;
     }

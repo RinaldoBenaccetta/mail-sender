@@ -4,7 +4,7 @@
 namespace MailSender\mail;
 
 use MailSender\render\Render;
-use MailSender\settings\GetConfig;
+use MailSender\settings\GetSettings;
 
 /**
  * Class MailSettings
@@ -41,7 +41,7 @@ class MailSettings {
   public function __construct($post) {
     // todo : validate post
 
-    $this->_settings = GetConfig::getSettings();
+    $this->_settings = GetSettings::getSettings();
     $this->_post     = $this->getPost($post);
     $this->_options  = $this->getOptions($this->_post);
   }

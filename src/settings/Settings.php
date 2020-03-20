@@ -11,7 +11,7 @@ namespace MailSender\settings;
  *
  * @package MailSender\settings
  */
-class Config {
+class Settings {
 
   /**
    * Here is the global settings.

@@ -6,8 +6,13 @@ namespace MailSender\data;
 
 use Dotenv\Dotenv;
 use MailSender\Path;
-use MailSender\settings\GetConfig;
+use MailSender\settings\GetSettings;
 
+/**
+ * Class Environment
+ *
+ * @package MailSender\data
+ */
 class Environment {
 
   private object $_settings;
@@ -15,25 +20,44 @@ class Environment {
   private array $_environment;
 
 
+  /**
+   * Environment constructor.
+   */
   public function __construct() {
     $this->setSettings();
     $this->setServer();
   }
 
-  public function getEnvironment() {
+  /**
+   * Return an array with the environment variables
+   * listed in .env file.
+   *
+   * @return array
+   */
+  public function getEnvironment() : array {
     return $this->_environment;
   }
 
-  protected function setSettings() {
-    return $this->_settings = GetConfig::getSettings();
+  /**
+   * @return object
+   */
+  protected function setSettings() : object {
+    return $this->_settings = GetSettings::getSettings();
   }
 
-  protected function setServer() {
+  /**
+   * Get the variables included in the .env file.
+   */
+  protected function setServer() : void {
     $dotEnv             = Dotenv::createImmutable(Path::ROOT_PATH . $this->getRootParent());
     $this->_environment = $dotEnv->load();
+
   }
 
-  protected function getRootParent() {
+  /**
+   * @return string
+   */
+  protected function getRootParent() : string {
     $repeat = 1 + $this->_settings->global->rootParent;
     if ($repeat < 1) {
       $repeat = 1;

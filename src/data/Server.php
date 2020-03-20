@@ -2,20 +2,42 @@
 
 namespace MailSender\data;
 
-
+/**
+ * Class Server
+ *
+ * @package MailSender\data
+ */
 class Server {
 
+  /**
+   * @var array
+   */
   private array $_environment;
 
+  /**
+   * Server constructor.
+   */
   public function __construct() {
     $this->setEnvironmentSettings();
   }
 
+  /**
+   *
+   */
   protected function setEnvironmentSettings() {
     $environment = new Environment();
     $this->_environment = $environment->getEnvironment();
   }
 
+  /**
+   * Return an object with the values to access server
+   * provided in the .env file.
+   * 
+   * Use like this :
+   *     $server->getServerSettings()->host
+   *
+   * @return object
+   */
   public function getServerSettings(): object {
     return (object) [
       'host' => (string) $this->_environment['HOST'],

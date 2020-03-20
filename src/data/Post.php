@@ -4,7 +4,7 @@
 namespace MailSender\data;
 
 use Exception;
-use MailSender\settings\GetConfig;
+use MailSender\settings\GetSettings;
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
@@ -39,7 +39,7 @@ class Post {
    *
    */
   public function setSettings(): void {
-    $this->_settings = GetConfig::getSettings();
+    $this->_settings = GetSettings::getSettings();
   }
 
   /**

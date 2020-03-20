@@ -24,7 +24,7 @@ class ServerTest extends PHPUnit\Framework\TestCase {
     $server = new Server();
     $settings = $server->getServerSettings();
 
-    var_dump($settings);
+    //var_dump($settings);
 
     $assertNotEmptyValues = $this->assertNotEmptyValues($settings);
     $assertHasKeyServer = $this->assertHasKeyServer($settings);

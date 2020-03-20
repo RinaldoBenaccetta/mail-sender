@@ -14,47 +14,49 @@ use MailSender\tools\Tools;
  *
  * @package MailSender\mail
  */
-class DefaultContact {
+class DefaultContact
+{
 
 
-  /**
-   * Return the subject builded with the subject's prefix and suffix
-   * and with the post's prefix and suffix.
-   * @param $post
-   *
-   * @return string
-   */
-  public static function getSubject($post) {
-
-    $prefix = GetSettings::getSettings()->defaultContactTemlate->subjectPrefix;
-    $suffix = GetSettings::getSettings()->defaultContactTemlate->subjectSuffix;
-    $name = self::getName($post);
-    return $prefix . " " . $name . $suffix;
-  }
-
-  /**
-   * Return the name builded with the post's firstname and name.
-   *
-   * @param $post
-   *
-   * @return string
-   */
-  public static function getName($post) {
-    if (!empty($post->senderFirstName))
+    /**
+     * Return the subject builded with the subject's prefix and suffix
+     * and with the post's prefix and suffix.
+     * @param $post
+     *
+     * @return string
+     */
+    public static function getSubject($post)
     {
-      $senderFirstName = $post->senderFirstName;
-    } else {
-      $senderFirstName = NULL;
+        $prefix = GetSettings::getSettings(
+        )->defaultContactTemlate->subjectPrefix;
+        $suffix = GetSettings::getSettings(
+        )->defaultContactTemlate->subjectSuffix;
+        $name = self::getName($post);
+        return $prefix . " " . $name . $suffix;
     }
 
-    if (!empty($post->senderName))
+    /**
+     * Return the name builded with the post's firstname and name.
+     *
+     * @param $post
+     *
+     * @return string
+     */
+    public static function getName($post)
     {
-      $senderName = $post->senderName;
-    } else {
-      $senderName = NULL;
-    }
+        if (!empty($post->senderFirstName)) {
+            $senderFirstName = $post->senderFirstName;
+        } else {
+            $senderFirstName = null;
+        }
 
-    return Tools::buildName($senderFirstName, $senderName);
-  }
+        if (!empty($post->senderName)) {
+            $senderName = $post->senderName;
+        } else {
+            $senderName = null;
+        }
+
+        return Tools::buildName($senderFirstName, $senderName);
+    }
 
 }

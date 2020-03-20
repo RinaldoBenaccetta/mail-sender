@@ -20,6 +20,7 @@ require './vendor/autoload.php';
 
 $test = new Server();
 //var_dump($test->getServerSettings());
+dump($test->getServerSettings());
 
 
 //$post = new Post();

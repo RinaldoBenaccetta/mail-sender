@@ -24,39 +24,39 @@ class Settings
         'rootParent' => '0',
     ];
 
-    /**
-     * Here is the options for the server infos.
-     *
-     * @var array
-     */
-    protected array $mailServer = [
-        /**
-         * The host of the mail server.
-         */
-        'host' => 'smtp.gmail.com',
-        /**
-         * The port used to send mails.
-         */
-        'port' => 587,
-        /**
-         * The encryption method.
-         * 'STARTTLS' | 'SMTPS'
-         */
-        'encryption' => 'STARTTLS',
-        /**
-         * Is the smtp authentication must be used?
-         */
-        'smtpAuthentication' => true,
-        /**
-         * The login used to connect to mail server.
-         */
-        'mailLogin' => 'benaccettarinaldo@gmail.com',
-        /**
-         * The password used to connect to mail server.
-         */
-        'mailPassword' => 'vivelaneigeDejuin',
-        // todo : make this more secure, ideally found it in the environment variable.
-    ];
+//    /**
+//     * Here is the options for the server infos.
+//     *
+//     * @var array
+//     */
+//    protected array $mailServer = [
+//        /**
+//         * The host of the mail server.
+//         */
+//        'host' => 'smtp.gmail.com',
+//        /**
+//         * The port used to send mails.
+//         */
+//        'port' => 587,
+//        /**
+//         * The encryption method.
+//         * 'STARTTLS' | 'SMTPS'
+//         */
+//        'encryption' => 'STARTTLS',
+//        /**
+//         * Is the smtp authentication must be used?
+//         */
+//        'smtpAuthentication' => true,
+//        /**
+//         * The login used to connect to mail server.
+//         */
+//        'mailLogin' => 'benaccettarinaldo@gmail.com',
+//        /**
+//         * The password used to connect to mail server.
+//         */
+//        'mailPassword' => 'vivelaneigeDejuin',
+//        // todo : make this more secure, ideally found it in the environment variable.
+//    ];
 
     /**
      * Here is the options for the default mail options.
@@ -74,7 +74,9 @@ class Settings
          */
         'template' => 'contact-default',
         /*
-         * Default sender mail.
+         * Default sender mail. This will be displayed as the sender mail in
+         * the mailbox of the recipient.
+         * This is not the mail of the server mail.
          */
         'senderMail' => 'rinaldobenaccetta@hotmail.com',
         /**

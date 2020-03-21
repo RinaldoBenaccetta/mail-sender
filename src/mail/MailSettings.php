@@ -5,6 +5,9 @@ namespace MailSender\mail;
 
 use MailSender\render\Render;
 use MailSender\settings\GetSettings;
+use MailSender\data\Server;
+
+// todo : set server info from _server
 
 /**
  * Class MailSettings
@@ -38,25 +41,53 @@ class MailSettings
      */
     private object $_settings;
 
+    /**
+     * The values for connecting to the server.
+     * @var object
+     */
+    private object $_server;
+
 
     public function __construct($post)
     {
-        // todo : validate post
+        $this->setSettings();
+        $this->setPost($post);
+        $this->setOptions();
+        $this->setServer();
+    }
 
+    /**
+     *
+     */
+    protected function setSettings(): void
+    {
         $this->_settings = GetSettings::getSettings();
-        $this->_post = $this->getPost($post);
-        $this->_options = $this->getOptions($this->_post);
     }
 
-    private function getOptions($options)
+    /**
+     * @param $post
+     */
+    protected function setPost($post): void
     {
-        $mailOptions = new MailOptions($options);
-        return (object)$mailOptions->getOptions();
+        $this->_post = (object) $post;
     }
 
-    private function getPost($post)
+    /**
+     *
+     */
+    protected function setOptions(): void
     {
-        return (object)$post;
+        $mailOptions = new MailOptions($this->_post);
+        $this->_options = (object) $mailOptions->getOptions();
+    }
+
+    /**
+     *
+     */
+    protected function setServer(): void
+    {
+        $server = new Server();
+        $this->_server = $server->getServerSettings();
     }
 
     /**
@@ -96,7 +127,8 @@ class MailSettings
      */
     public function getHost()
     {
-        return $this->_settings->mailServer->host;
+        return $this->_server->host;
+        //return $this->_settings->mailServer->host;
     }
 
     /**
@@ -106,7 +138,8 @@ class MailSettings
      */
     public function getPort()
     {
-        return $this->_settings->mailServer->port;
+        return $this->_server->port;
+        //return $this->_settings->mailServer->port;
     }
 
     /**
@@ -116,7 +149,8 @@ class MailSettings
      */
     public function getEncryption()
     {
-        return $this->_settings->mailServer->encryption;
+        return $this->_server->encryption;
+        //return $this->_settings->mailServer->encryption;
     }
 
     /**
@@ -126,7 +160,8 @@ class MailSettings
      */
     public function getSmtpAuthentication()
     {
-        return $this->_settings->mailServer->smtpAuthentication;
+        return $this->_server->smtpAuthentication;
+        //return $this->_settings->mailServer->smtpAuthentication;
     }
 
     /**
@@ -136,7 +171,8 @@ class MailSettings
      */
     public function getMailLogin()
     {
-        return $this->_settings->mailServer->mailLogin;
+        return $this->_server->mailLogin;
+        //return $this->_settings->mailServer->mailLogin;
     }
 
     /**
@@ -147,7 +183,8 @@ class MailSettings
     // todo : improve security on this.
     public function getMailPassword()
     {
-        return $this->_settings->mailServer->mailPassword;
+        return $this->_server->mailPassword;
+        //return $this->_settings->mailServer->mailPassword;
     }
 
     /**

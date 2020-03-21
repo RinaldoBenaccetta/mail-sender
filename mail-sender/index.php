@@ -16,7 +16,7 @@ require './vendor/autoload.php';
 $post = new Post($_POST);
 $server = new Server();
 $mailSettings = new MailSettings(
-    $post->getPost(),
+    $post,
     $server->getServerSettings()
 );
 $options = $mailSettings->getAll();

@@ -19,7 +19,7 @@ use Egulias\EmailValidator\Validation\SpoofCheckValidation;
  *
  * @package MailSender\data
  */
-class Post
+class Post implements PostInterface
 {
 
     /**

@@ -3,6 +3,8 @@
 
 namespace MailSender\mail;
 
+use MailSender\data\Post;
+use MailSender\data\PostInterface;
 use MailSender\render\Render;
 use MailSender\settings\GetSettings;
 
@@ -45,7 +47,12 @@ class MailSettings
     private object $_server;
 
 
-    public function __construct($post, $server)
+    /**
+     * MailSettings constructor.
+     * @param PostInterface $post
+     * @param $server
+     */
+    public function __construct(PostInterface $post, $server)
     {
         $this->setSettings();
         $this->setPost($post);
@@ -66,7 +73,7 @@ class MailSettings
      */
     protected function setPost($post): void
     {
-        $this->_post = (object) $post;
+        $this->_post = (object) $post->getPost();
     }
 
     /**

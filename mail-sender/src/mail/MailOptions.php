@@ -101,7 +101,7 @@ class MailOptions
     /*
      * Set the options with infos contained in _post.
      */
-    private function setOptions(): void
+    protected function setOptions(): void
     {
         $this->setTemplate();
         $this->setSenderMail();
@@ -117,7 +117,7 @@ class MailOptions
      * If a template is provided, it will be used,
      * if not, the default template will be used.
      */
-    private function setTemplate(): void
+    protected function setTemplate(): void
     {
         if (!empty($this->_post->template)) {
             $this->_template = $this->_post->template;
@@ -131,7 +131,7 @@ class MailOptions
      * If a sender E-mail is provided, it will be used,
      * if not, the default sender E-mail will be used.
      */
-    private function setSenderMail(): void
+    protected function setSenderMail(): void
     {
         if (!empty($this->_post->senderMail)) {
             $this->_senderMail = $this->_post->senderMail;
@@ -145,7 +145,7 @@ class MailOptions
      * If a sender name is provided, it will be used,
      * is not, the default sender name will be used.
      */
-    private function setSenderName(): void
+    protected function setSenderName(): void
     {
         if (!empty($this->_template)
             && !empty($this->_post->senderName)
@@ -168,7 +168,7 @@ class MailOptions
      * If a recipient E-mail is provided, it will be used,
      * is not, the default recipient E-mail will be used.
      */
-    private function setRecipientMail(): void
+    protected function setRecipientMail(): void
     {
         if (!empty($this->_post->recipientMail)) {
             $this->_recipientMail = $this->_post->recipientMail;
@@ -182,7 +182,7 @@ class MailOptions
      * If a recipient name is provided, it will be used,
      * is not, the default recipient name will be used.
      */
-    private function setRecipientName(): void
+    protected function setRecipientName(): void
     {
         if (!empty($this->_post->recipientName)) {
             $this->_recipientName = $this->_post->recipientName;
@@ -196,7 +196,7 @@ class MailOptions
      * If a subject is provided, it will be used,
      * is not, the default subject will be used.
      */
-    private function setSubject(): void
+    protected function setSubject(): void
     {
         // if template is empty : set it.
         if (empty($this->_template)) {

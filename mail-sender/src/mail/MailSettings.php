@@ -5,9 +5,6 @@ namespace MailSender\mail;
 
 use MailSender\render\Render;
 use MailSender\settings\GetSettings;
-use MailSender\data\Server;
-
-// todo : set server info from _server
 
 /**
  * Class MailSettings
@@ -129,7 +126,6 @@ class MailSettings
     public function getHost()
     {
         return $this->_server->host;
-        //return $this->_settings->mailServer->host;
     }
 
     /**
@@ -140,7 +136,6 @@ class MailSettings
     public function getPort()
     {
         return $this->_server->port;
-        //return $this->_settings->mailServer->port;
     }
 
     /**
@@ -151,7 +146,6 @@ class MailSettings
     public function getEncryption()
     {
         return $this->_server->encryption;
-        //return $this->_settings->mailServer->encryption;
     }
 
     /**
@@ -162,7 +156,6 @@ class MailSettings
     public function getSmtpAuthentication()
     {
         return $this->_server->smtpAuthentication;
-        //return $this->_settings->mailServer->smtpAuthentication;
     }
 
     /**
@@ -173,7 +166,6 @@ class MailSettings
     public function getMailLogin()
     {
         return $this->_server->mailLogin;
-        //return $this->_settings->mailServer->mailLogin;
     }
 
     /**
@@ -185,7 +177,6 @@ class MailSettings
     public function getMailPassword()
     {
         return $this->_server->mailPassword;
-        //return $this->_settings->mailServer->mailPassword;
     }
 
     /**

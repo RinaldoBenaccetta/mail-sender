@@ -4,7 +4,7 @@
 namespace MailSender\tools;
 
 
-class Tools
+class Name
 {
 
     /**
@@ -20,7 +20,6 @@ class Tools
      */
     public static function buildName($firstName, $name)
     {
-        $output = trim($firstName . ' ' . $name);
-        return $output;
+        return trim($firstName . ' ' . $name);
     }
 }

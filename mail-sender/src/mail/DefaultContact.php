@@ -5,7 +5,7 @@ namespace MailSender\mail;
 
 
 use MailSender\settings\GetSettings;
-use MailSender\tools\Tools;
+use MailSender\tools\Name;
 
 /**
  * Class DefaultContact
@@ -56,7 +56,7 @@ class DefaultContact
             $senderName = null;
         }
 
-        return Tools::buildName($senderFirstName, $senderName);
+        return Name::buildName($senderFirstName, $senderName);
     }
 
 }

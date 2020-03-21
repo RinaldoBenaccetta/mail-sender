@@ -15,7 +15,7 @@ class MailSend extends MailObject
         $this->send();
     }
 
-    private function send()
+    protected function send()
     {
         $mail = new PHPMailer(true);
 

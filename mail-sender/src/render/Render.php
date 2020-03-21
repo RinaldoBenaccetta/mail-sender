@@ -53,7 +53,7 @@ class Render
      *
      * @return bool
      */
-    private static function getDebug(string $environment): bool
+    protected static function getDebug(string $environment): bool
     {
         if (!empty($environment) && $environment === 'dev') {
             return true;
@@ -71,7 +71,7 @@ class Render
      *
      * @return string
      */
-    private static function getTemplateFile(string $template): string
+    protected static function getTemplateFile(string $template): string
     {
         if (StringTool::endsWith($template, '.twig')) {
             return $template;

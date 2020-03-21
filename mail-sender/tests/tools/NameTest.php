@@ -1,8 +1,8 @@
 <?php
 
-use MailSender\tools\Tools;
+use MailSender\tools\Name;
 
-class ToolsTest extends PHPUnit\Framework\TestCase
+class NameTest extends PHPUnit\Framework\TestCase
 {
 
   /**
@@ -13,7 +13,7 @@ class ToolsTest extends PHPUnit\Framework\TestCase
    * @param $expected
    */
   public function testBuildName($firstName, $name, $expected) {
-    $this->assertEquals($expected, Tools::buildName($firstName, $name));
+    $this->assertEquals($expected, Name::buildName($firstName, $name));
   }
 
   /**

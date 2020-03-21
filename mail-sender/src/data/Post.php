@@ -40,7 +40,7 @@ class Post
     /**
      *
      */
-    public function setSettings(): void
+    private function setSettings(): void
     {
         $this->_settings = GetSettings::getSettings();
     }
@@ -73,7 +73,7 @@ class Post
      * @return array
      * @throws \Exception
      */
-    private function loopThrough($data)
+    protected function loopThrough($data)
     {
         $output = (array)[];
         foreach ($data as $key => $value) {
@@ -105,7 +105,7 @@ class Post
      *
      * @return bool
      */
-    private function isArrayOrObject($value): bool
+    protected function isArrayOrObject($value): bool
     {
         return is_array($value) || is_object($value);
     }
@@ -117,7 +117,7 @@ class Post
      *
      * @return bool
      */
-    private function isMailAddress(string $key)
+    protected function isMailAddress(string $key)
     {
         return in_array($key, $this->_settings->validation->isMail);
     }
@@ -130,7 +130,7 @@ class Post
      *
      * @return string
      */
-    private function toString($string): string
+    protected function toString($string): string
     {
         return addslashes(htmlspecialchars((string)$string));
     }
@@ -144,7 +144,7 @@ class Post
      * @return string
      * @throws \Exception
      */
-    private function validateMail(string $key, string $mail): string
+    protected function validateMail(string $key, string $mail): string
     {
         $validator = new EmailValidator();
 
@@ -163,7 +163,7 @@ class Post
      *
      * @return \Egulias\EmailValidator\Validation\MultipleValidationWithAnd
      */
-    private function getMailValidationRules()
+    protected function getMailValidationRules()
     {
         $validationList = [new RFCValidation()];
         if ($this->_settings->validation->DNSMailValidation) {

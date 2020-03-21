@@ -12,7 +12,8 @@ require './vendor/autoload.php';
 
 
 $post = new Post();
-$mailSettings = new MailSettings($post->getPost($_POST));
+$server = new Server();
+$mailSettings = new MailSettings($post->getPost($_POST), $server->getServerSettings());
 $options = $mailSettings->getAll();
 
 // send the mail

@@ -48,12 +48,12 @@ class MailSettings
     private object $_server;
 
 
-    public function __construct($post)
+    public function __construct($post, $server)
     {
         $this->setSettings();
         $this->setPost($post);
         $this->setOptions();
-        $this->setServer();
+        $this->setServer($server);
     }
 
     /**
@@ -82,12 +82,13 @@ class MailSettings
     }
 
     /**
-     *
+     * @param object $server
      */
-    protected function setServer(): void
+    protected function setServer(object $server): void
     {
-        $server = new Server();
-        $this->_server = $server->getServerSettings();
+        //$server = new Server();
+        //var_dump($server);
+        $this->_server = $server;
     }
 
     /**

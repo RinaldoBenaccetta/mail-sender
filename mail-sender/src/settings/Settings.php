@@ -21,7 +21,7 @@ class Settings
      */
     protected array $global = [
         'environment' => 'dev', // 'dev' | 'prod'
-        'rootParent' => '0',
+        'rootParent' => '1',
     ];
 
 //    /**

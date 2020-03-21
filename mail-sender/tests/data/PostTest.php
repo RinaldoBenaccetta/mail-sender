@@ -13,14 +13,11 @@ class PostTest extends TestCase {
 
   /**
    *
-   * @param $expected
-   * @param $given
-   *
-   * @throws \Exception
+   * @throws Exception
    */
   public function testSanitize() {
-    $data = new Post();
-    $this->assertEquals($this->getExpected(), $data->getPost($this->getGiven()));
+    $data = new Post($this->getGiven());
+    $this->assertEquals($this->getExpected(), $data->getPost());
   }
 
 
@@ -29,12 +26,12 @@ class PostTest extends TestCase {
    *
    * @param $array
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function testMailException($array) {
-    $data = new Post();
+    $data = new Post($array);
     $this->expectException(Exception::class);
-    $data->getPost($array);
+    $data->getPost();
   }
 
   public function provideTestMail() {
@@ -97,7 +94,7 @@ class PostTest extends TestCase {
   }
 
   public function getGiven() {
-    return (object) [
+    return (array) [
       "senderName" => "Connor",
       "senderFirstName" => "Sarah",
       "senderPhone" => 12563,

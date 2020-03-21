@@ -10,15 +10,16 @@ require './vendor/autoload.php';
 //$test = new Server();
 //dump($test->getServerSettings());
 
+//dump($_POST);
 
-$post = new Post();
+
+$post = new Post($_POST);
 $server = new Server();
-$mailSettings = new MailSettings($post->getPost($_POST), $server->getServerSettings());
+$mailSettings = new MailSettings(
+    $post->getPost(),
+    $server->getServerSettings()
+);
 $options = $mailSettings->getAll();
 
 // send the mail
 new MailSend($options);
-
-
-
-

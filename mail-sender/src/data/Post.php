@@ -30,11 +30,21 @@ class Post
     private object $_settings;
 
     /**
-     * Post constructor.
+     * The post array before sanitization and validation.
+     *
+     * @var array
      */
-    public function __construct()
+    private array $_post;
+
+    /**
+     * Post constructor.
+     *
+     * @param array $post
+     */
+    public function __construct(array $post)
     {
         $this->setSettings();
+        $this->setPost($post);
     }
 
     /**
@@ -46,23 +56,41 @@ class Post
     }
 
     /**
+     * @param array $post
+     */
+    private function setPost(array $post): void
+    {
+        $this->_post = $post;
+    }
+
+    /**
      * Get the Post Values sanitized and validated.
      *
-     * @param $post
-     *
      * @return array|null
-     * @throws \Exception
+     * @throws Exception
      */
-    public function getPost($post)
+    public function getPost()
     {
-        if ($this->isArrayOrObject($post) && !empty($post)) {
-            return $this->loopThrough($post);
+        return $this->loopThrough($this->_post);
+    }
+
+    /**
+     * Loop through array if not empty and is array or object.
+     * If not, return NULL.
+     *
+     * @param $data
+     * @return array|null
+     * @throws Exception
+     */
+    protected function loopThrough($data)
+    {
+        if ($this->isArrayOrObject($data) && !empty($data)) {
+            return $this->processDataLoop($data);
         }
         return null;
     }
 
     /**
-     * Loop through $POST array.
      * Transform objects to array.
      * transform values to string.
      * Transform HTML specials characters to ascii and escape.
@@ -71,25 +99,18 @@ class Post
      * @param $data
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    protected function loopThrough($data)
+    protected function processDataLoop($data): array
     {
         $output = (array)[];
         foreach ($data as $key => $value) {
             switch ($value) {
                 case $this->isArrayOrObject($value):
-                    $output[$key] = $this->getPost($value);
+                    $output[$key] = $this->loopThrough($value);
                     break;
                 case $this->isMailAddress($key):
                     $output[$key] = $this->validateMail($key, $value);
-                    // try catch make fail the test, catch must throw an exeption??
-
-                    //          try {
-                    //            $output[$key] = $this->validateMail($key, $value);
-                    //          } catch (Exception $e) {
-                    //            echo $e;
-                    //          }
                     break;
                 default :
                     $output[$key] = $this->toString($value);
@@ -142,7 +163,7 @@ class Post
      * @param string $mail
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function validateMail(string $key, string $mail): string
     {
@@ -161,7 +182,7 @@ class Post
      * Set the E-mail string validation rules according to
      * Settings.php in validation section.
      *
-     * @return \Egulias\EmailValidator\Validation\MultipleValidationWithAnd
+     * @return MultipleValidationWithAnd
      */
     protected function getMailValidationRules()
     {

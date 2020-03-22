@@ -15,7 +15,7 @@ require './vendor/autoload.php';
 //dump($_POST);
 
 $settings = GetSettings::getSettings();
-$post = new Post($_POST);
+$post = new Post($_POST, $settings);
 $server = new Server();
 $mailOptions = new MailOptions($_POST, $settings);
 $mailSettings = new MailSettings(

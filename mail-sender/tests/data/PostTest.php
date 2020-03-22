@@ -10,6 +10,36 @@ use MailSender\data\Post;
 
 class PostTest extends TestCase
 {
+    public function getSettings()
+    {
+        return (object)[
+            'global' => (object)[
+                'environment' => 'dev',
+                'rootParent' => '1',
+            ],
+            'defaultMailOptions' => (object)[
+                'template' => 'test-template',
+                'senderMail' => 't800@skynet.com',
+                'senderName' => 'T-800',
+                'recipientMail' => 'sarah@connor.com',
+                'recipientName' => 'Sarah Connor',
+                'subject' => 'I ll be back!',
+            ],
+            'validation' => (object)[
+                'isMail' => [
+                    'senderMail',
+                    'replyMail',
+                    'recipientMail'
+                ],
+                'DNSMailValidation' => true,
+                'SpoofMailValidation' => true,
+            ],
+            'defaultContactTemplate' => (object)[
+                'subjectPrefix' => "suffix",
+                'subjectSuffix' => "preffix",
+            ]
+        ];
+    }
 
     /**
      *
@@ -17,7 +47,7 @@ class PostTest extends TestCase
      */
     public function testSanitize()
     {
-        $data = new Post($this->getGiven());
+        $data = new Post($this->getGiven(), $this->getSettings());
         $this->assertEquals($this->getExpected(), $data->getPost());
     }
 
@@ -121,7 +151,7 @@ class PostTest extends TestCase
      */
     public function testMailException($array)
     {
-        $data = new Post($array);
+        $data = new Post($array, $this->getSettings());
         $this->expectException(Exception::class);
         $data->getPost();
     }

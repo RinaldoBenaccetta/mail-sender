@@ -40,19 +40,20 @@ class Post implements PostInterface
      * Post constructor.
      *
      * @param array $post
+     * @param object $settings
      */
-    public function __construct(array $post)
+    public function __construct(array $post, object $settings)
     {
-        $this->setSettings();
+        $this->setSettings($settings);
         $this->setPost($post);
     }
 
     /**
-     *
+     * @param object $settings
      */
-    private function setSettings(): void
+    private function setSettings(object $settings): void
     {
-        $this->_settings = GetSettings::getSettings();
+        $this->_settings = $settings;
     }
 
     /**

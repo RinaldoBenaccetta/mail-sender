@@ -1,5 +1,6 @@
 <?php
 
+use MailSender\data\Environment;
 use MailSender\data\Post;
 use MailSender\data\Server;
 use MailSender\mail\MailOptions;
@@ -15,8 +16,9 @@ require './vendor/autoload.php';
 //dump($_POST);
 
 $settings = GetSettings::getSettings();
+$environment = new Environment($settings);
 $post = new Post($_POST, $settings);
-$server = new Server();
+$server = new Server($environment);
 $mailOptions = new MailOptions($_POST, $settings);
 $mailSettings = new MailSettings(
     $post,

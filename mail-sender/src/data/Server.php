@@ -17,18 +17,19 @@ class Server implements ServerInterface
 
     /**
      * Server constructor.
+     * @param EnvironmentInterface $environment
      */
-    public function __construct()
+    public function __construct(EnvironmentInterface $environment)
     {
-        $this->setEnvironmentSettings();
+        $this->setEnvironmentSettings($environment);
     }
 
     /**
-     *
+     * @param EnvironmentInterface $environment
      */
-    protected function setEnvironmentSettings()
+    protected function setEnvironmentSettings(EnvironmentInterface $environment)
     {
-        $environment = new Environment();
+        //$environment = new Environment();
         $this->_environment = $environment->getEnvironment();
     }
 

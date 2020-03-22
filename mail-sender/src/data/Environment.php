@@ -13,7 +13,7 @@ use MailSender\settings\GetSettings;
  *
  * @package MailSender\data
  */
-class Environment
+class Environment implements EnvironmentInterface
 {
 
     /**
@@ -29,19 +29,21 @@ class Environment
 
     /**
      * Environment constructor.
+     * @param object $_settings
      */
-    public function __construct()
+    public function __construct(object $_settings)
     {
-        $this->setSettings();
+        $this->setSettings($_settings);
         $this->setServer();
     }
 
     /**
+     * @param object $_settings
      * @return object
      */
-    protected function setSettings(): object
+    protected function setSettings(object $_settings): object
     {
-        return $this->_settings = GetSettings::getSettings();
+        return $this->_settings = $_settings;
     }
 
     /**

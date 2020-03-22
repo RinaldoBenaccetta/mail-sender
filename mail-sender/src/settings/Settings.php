@@ -19,9 +19,19 @@ class Settings
      *
      * @var array
      */
-    protected array $global = [
+    public array $global = [
         'environment' => 'dev', // 'dev' | 'prod'
         'rootParent' => '1',
+    ];
+
+    private array $experiment = [
+        'test' => [
+            'testOne' => '1',
+            'testTwo' => [
+                'one' => '1',
+                'two' => '2'
+            ]
+        ]
     ];
 
     /**
@@ -34,7 +44,7 @@ class Settings
      *
      * @var array
      */
-    protected array $defaultMailOptions = [
+    public array $defaultMailOptions = [
         /**
          * Default template. Without the .twig suffix.
          */
@@ -68,7 +78,7 @@ class Settings
      *
      * @var array
      */
-    protected array $validation = [
+    public array $validation = [
         /**
          * Theses $POST's values will be validated for correct mail address.
          * If a value must be validated as an e-mail address,
@@ -95,13 +105,13 @@ class Settings
      *
      * @var array
      */
-    protected array $defaultContactTemplate = [
+    public array $defaultContactTemplate = [
         /**
          * The prefix for the subject in the default template.
          * The sender name provided in the $POST values will
          * be after the prefix.
          */
-        'subjectPrefix' => "Demande d'information de la part de ",
+    'subjectPrefix' => "Demande d'information de la part de ",
         /**
          * The suffix for the subject in the default template.
          * The sender name provided in the $POST values will

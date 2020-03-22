@@ -7,15 +7,15 @@ use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
 use MailSender\mail\MailSettings;
 use MailSender\settings\GetSettings;
+use MailSender\settings\Settings;
 
 require './vendor/autoload.php';
 
-//$test = new Server();
-//dump($test->getServerSettings());
 
-//dump($_POST);
+$settingsClass = new Settings();
+$settings = (new GetSettings($settingsClass))->getSettings();
+dump($settings);
 
-$settings = GetSettings::getSettings();
 $environment = new Environment($settings);
 $post = new Post($_POST, $settings);
 $server = new Server($environment);

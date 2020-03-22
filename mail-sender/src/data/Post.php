@@ -141,7 +141,7 @@ class Post implements PostInterface
      */
     protected function isMailAddress(string $key)
     {
-        return in_array($key, $this->_settings->validation->isMail);
+        return in_array($key, (array) $this->_settings->validation->isMail);
     }
 
     /**

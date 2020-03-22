@@ -55,25 +55,26 @@ class MailSettings
     /**
      * MailSettings constructor.
      * @param PostInterface $post
-     * @param $server
-     * @param $mailOptions
+     * @param ServerInterface $server
+     * @param MailOptionsInterface $mailOptions
+     * @param object $settings
      * @throws Exception
      */
     public function __construct(PostInterface $post, ServerInterface $server,
-        MailOptionsInterface $mailOptions)
+        MailOptionsInterface $mailOptions, object $settings)
     {
-        $this->setSettings();
+        $this->setSettings($settings);
         $this->setPost($post);
         $this->setOptions($mailOptions);
         $this->setServer($server);
     }
 
     /**
-     *
+     * @param object $settings
      */
-    protected function setSettings(): void
+    protected function setSettings(object $settings): void
     {
-        $this->_settings = GetSettings::getSettings();
+        $this->_settings = $settings;
     }
 
     /**

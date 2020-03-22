@@ -23,7 +23,8 @@ $mailOptions = new MailOptions($_POST, $settings);
 $mailSettings = new MailSettings(
     $post,
     $server,
-    $mailOptions
+    $mailOptions,
+    $settings
 );
 $options = $mailSettings->getAll();
 

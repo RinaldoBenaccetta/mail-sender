@@ -2,8 +2,10 @@
 
 use MailSender\data\Post;
 use MailSender\data\Server;
+use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
 use MailSender\mail\MailSettings;
+use MailSender\settings\GetSettings;
 
 require './vendor/autoload.php';
 
@@ -12,12 +14,14 @@ require './vendor/autoload.php';
 
 //dump($_POST);
 
-
+$settings = GetSettings::getSettings();
 $post = new Post($_POST);
 $server = new Server();
+$mailOptions = new MailOptions($_POST, $settings);
 $mailSettings = new MailSettings(
     $post,
-    $server->getServerSettings()
+    $server,
+    $mailOptions
 );
 $options = $mailSettings->getAll();
 

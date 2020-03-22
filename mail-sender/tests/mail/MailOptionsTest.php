@@ -8,70 +8,116 @@ use MailSender\settings\GetSettings;
 class MailOptionsTest extends PHPUnit\Framework\TestCase
 {
 
-  /**
-   * @dataProvider getOptionsProvider
-   *
-   * @param $expected
-   * @param $object
-   */
-  public function testOptions($expected, $object) {
-    $mailOptions = new MailOptions($object);
-    $this->assertEquals($expected, $mailOptions->getOptions());
-    $this->assertIsArray($mailOptions->getOptions());
+    /**
+     * @dataProvider getOptionsProvider
+     *
+     * @param $expected
+     * @param $object
+     */
+    public function testOptions($expected, $object)
+    {
+        $mailOptions = $this->getMailOptions($object);
+        $this->assertEquals($expected, $mailOptions->getOptions());
+        $this->assertIsArray($mailOptions->getOptions());
+    }
 
-  }
+    public function getMailOptions($object)
+    {
+        return new MailOptions($object, $this->getSettings());
+    }
 
-  public function getOptionsProvider() {
-    return [
-      [(array) $this->defaultExpected(), (object) []],// provide empty object, get default options
-      [(array) $this->provideAllData(), (object) $this->provideAllData()],// provide datas, get thes datas.
-      [(array) $this->expectWithOnlySenderName(), (object) $this->provideOnlySenderName()],// provide datas with only sender name.
-    ];
-  }
+    public function getSettings()
+    {
+        return (object)[
+            'global' => (object)[
+                'environment' => 'dev',
+                'rootParent' => '1',
+            ],
+            'defaultMailOptions' => (object)[
+                'template' => 'test-template',
+                'senderMail' => 't800@skynet.com',
+                'senderName' => 'T-800',
+                'recipientMail' => 'sarah@connor.com',
+                'recipientName' => 'Sarah Connor',
+                'subject' => 'I ll be back!',
+            ],
+            'validation' => (object)[
+                'isMail' => [
+                    'senderMail',
+                    'replyMail',
+                    'recipientMail'
+                ],
+                'DNSMailValidation' => true,
+                'SpoofMailValidation' => true,
+            ],
+            'defaultContactTemplate' => (object)[
+                'subjectPrefix' => "suffix",
+                'subjectSuffix' => "preffix",
+            ]
+        ];
+    }
 
-  public function defaultExpected() {
-    $settings = GetSettings::getSettings();
-    return [
-      'template' => $settings->defaultMailOptions->template,
-      'senderMail' => $settings->defaultMailOptions->senderMail,
-      'senderName' => $settings->defaultMailOptions->senderName,
-      'recipientMail' => $settings->defaultMailOptions->recipientMail,
-      'recipientName' => $settings->defaultMailOptions->recipientName,
-      'subject' => DefaultContact::getSubject((object) [
-        'senderName' => $settings->defaultMailOptions->senderName
-      ]),
-    ];
-  }
+    public function getOptionsProvider()
+    {
+        return [
+            [(array)$this->defaultExpected(), (array)[]],
+            // provide empty object, get
+            // default options
+            [(array)$this->provideAllData(), (array)$this->provideAllData()],
+            //
+            // provide datas, get theses datas.
+            [
+                (array)$this->expectWithOnlySenderName(),
+                (array)
+                $this->provideOnlySenderName()
+            ],
+            // provide datas with only sender name.
+        ];
+    }
 
-  public function provideOnlySenderName() {
-    return [
-      'senderName' => 'Sarah Connor',
-      ];
-  }
+    public function defaultExpected()
+    {
+        $settings = $this->getSettings();
+        return [
+            'template' => $settings->defaultMailOptions->template,
+            'senderMail' => $settings->defaultMailOptions->senderMail,
+            'senderName' => $settings->defaultMailOptions->senderName,
+            'recipientMail' => $settings->defaultMailOptions->recipientMail,
+            'recipientName' => $settings->defaultMailOptions->recipientName,
+            'subject' => $settings->defaultMailOptions->subject,
+        ];
+    }
 
-  public function expectWithOnlySenderName() {
-    $settings = GetSettings::getSettings();
-    return [
-      'template' => $settings->defaultMailOptions->template,
-      'senderMail' => $settings->defaultMailOptions->senderMail,
-      'senderName' => 'Sarah Connor',
-      'recipientMail' => $settings->defaultMailOptions->recipientMail,
-      'recipientName' => $settings->defaultMailOptions->recipientName,
-      'subject' => DefaultContact::getSubject((object) [
-        'senderName' => 'Sarah Connor'
-      ]),
-    ];
-  }
+    public function provideAllData()
+    {
+        return [
+            'template' => 'beautiful-template',
+            'senderMail' => 'T-800@skynet.com',
+            'senderName' => 'T-800',
+            'recipientMail' => 'sarah@connor.com',
+            'recipientName' => 'Sarah Connor',
+            'subject' => "I'll be back.",
+        ];
+    }
 
-  public function provideAllData() {
-    return [
-      'template' => 'beautiful-template',
-      'senderMail' => 'T-800@skynet.com',
-      'senderName' => 'T-800',
-      'recipientMail' => 'sarah@connor.com',
-      'recipientName' => 'Sarah Connor',
-      'subject' => "I'll be back.",
-    ];
-  }
+    public function expectWithOnlySenderName()
+    {
+        $settings = $this->getSettings();
+        return [
+            'template' => $settings->defaultMailOptions->template,
+            'senderMail' => $settings->defaultMailOptions->senderMail,
+            'senderName' => 'Sarah Connor',
+            'recipientMail' => $settings->defaultMailOptions->recipientMail,
+            'recipientName' => $settings->defaultMailOptions->recipientName,
+            'subject' => $settings->defaultMailOptions->subject,
+        ];
+    }
+
+    public function provideOnlySenderName()
+    {
+        return [
+            'senderName' => 'Sarah Connor',
+        ];
+    }
 
 }

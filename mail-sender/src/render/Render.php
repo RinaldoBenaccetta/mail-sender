@@ -7,6 +7,9 @@ use MailSender\Path;
 use MailSender\settings\GetSettings;
 use MailSender\tools\StringTool;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
 
@@ -21,9 +24,9 @@ class Render
      * @param $data
      *
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public static function render($template, $data)
     {
@@ -35,30 +38,15 @@ class Render
 
         $twig = new Environment(
             $loader, [
-            'debug' => self::getDebug($settings->global->environment),
-            'cache' => false,
-            // no need of cache for mails : they are all differents.
-        ]
+                       'debug' => self::getDebug(
+                           $settings->global->environment
+                       ),
+                       'cache' => false,
+                       // no need of cache for mails : they are all differents.
+                   ]
         );
 
         return $twig->render($template, $data);
-    }
-
-    /**
-     * Return the twig's debug value in terms of environment.
-     * Return TRUE if in dev environment.
-     * Return FALSE if not in dev environment.
-     *
-     * @param string $environment
-     *
-     * @return bool
-     */
-    protected static function getDebug(string $environment): bool
-    {
-        if (!empty($environment) && $environment === 'dev') {
-            return true;
-        }
-        Return false;
     }
 
     /**
@@ -77,6 +65,23 @@ class Render
             return $template;
         }
         return $template . '.twig';
+    }
+
+    /**
+     * Return the twig's debug value in terms of environment.
+     * Return TRUE if in dev environment.
+     * Return FALSE if not in dev environment.
+     *
+     * @param string $environment
+     *
+     * @return bool
+     */
+    protected static function getDebug(string $environment): bool
+    {
+        if (!empty($environment) && $environment === 'dev') {
+            return true;
+        }
+        Return false;
     }
 
 

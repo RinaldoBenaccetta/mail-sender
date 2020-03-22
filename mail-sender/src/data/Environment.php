@@ -37,17 +37,6 @@ class Environment
     }
 
     /**
-     * Return an array with the environment variables
-     * listed in .env file.
-     *
-     * @return array
-     */
-    public function getEnvironment(): array
-    {
-        return $this->_environment;
-    }
-
-    /**
      * @return object
      */
     protected function setSettings(): object
@@ -76,6 +65,17 @@ class Environment
             $repeat = 1;
         }
         return str_repeat('/..', $repeat) . '/';
+    }
+
+    /**
+     * Return an array with the environment variables
+     * listed in .env file.
+     *
+     * @return array
+     */
+    public function getEnvironment(): array
+    {
+        return $this->_environment;
     }
 
 }

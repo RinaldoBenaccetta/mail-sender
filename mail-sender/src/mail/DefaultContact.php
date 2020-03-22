@@ -23,16 +23,15 @@ class DefaultContact
      * and with the post's prefix and suffix.
      * @param $post
      *
+     * @param $settings
      * @return string
      */
-    public static function getSubject($post)
+    public static function getSubject($post, $settings)
     {
-        $prefix = GetSettings::getSettings(
-        )->defaultContactTemlate->subjectPrefix;
-        $suffix = GetSettings::getSettings(
-        )->defaultContactTemlate->subjectSuffix;
+        $prefix = $settings->defaultContactTemplate->subjectPrefix;
+        $suffix = $settings->defaultContactTemplate->subjectSuffix;
         $name = self::getName($post);
-        return $prefix . " " . $name . $suffix;
+        return $prefix . $name . $suffix;
     }
 
     /**

@@ -72,35 +72,17 @@ class MailOptions
     /**
      * MailOptions constructor.
      *
-     * @param object $post
+     * @param array $post
+     * @param $settings
      */
-    public function __construct(object $post)
+    public function __construct(array $post, object $settings)
     {
-        $this->_settings = GetSettings::getSettings();
-        $this->_post = $post;
+//        $this->_settings = GetSettings::getSettings();
+        $this->_settings = $settings;
+        $this->_post = (object)$post;
         $this->setOptions();
     }
 
-    /**
-     * Return the options for rendering.
-     *
-     * @return array
-     */
-    public function getOptions(): array
-    {
-        return [
-            'template' => $this->_template,
-            'senderMail' => $this->_senderMail,
-            'senderName' => $this->_senderName,
-            'recipientMail' => $this->_recipientMail,
-            'recipientName' => $this->_recipientName,
-            'subject' => $this->_subject,
-        ];
-    }
-
-    /*
-     * Set the options with infos contained in _post.
-     */
     protected function setOptions(): void
     {
         $this->setTemplate();
@@ -111,6 +93,9 @@ class MailOptions
         $this->setSubject();
     }
 
+    /*
+     * Set the options with infos contained in _post.
+     */
 
     /**
      * Define the template.
@@ -203,21 +188,27 @@ class MailOptions
             $this->setTemplate();
         }
 
-        $defaultTemplate = $this->_settings->defaultMailOptions->template;
-
-        if ($this->_template === $defaultTemplate
-            && empty($this->_post->senderName)
+        if ($this->isDefaultTemplate(
+                $this->_template
+            ) && empty($this->_post->senderName)
         ) {
             // if this is default template and not have sender name
             $this->_subject = DefaultContact::getSubject(
-                (object)['senderName' => $this->_settings->defaultMailOptions->senderName]
+                (object)[
+                    'senderName' =>
+                        $this->_settings->defaultMailOptions->senderName
+                ],
+                $this->_settings
             );
-        } elseif ($this->_template === $defaultTemplate
+        } elseif ($this->isDefaultTemplate($this->_template)
             && !empty($this->_post->senderName)
         ) {
             // if this is default template and have sender name
-            $this->_subject = DefaultContact::getSubject($this->_post);
-        } elseif ($this->_template != $defaultTemplate
+            $this->_subject = DefaultContact::getSubject(
+                $this->_post,
+                $this->_settings
+            );
+        } elseif (!$this->isDefaultTemplate($this->_template)
             && !empty($this->_post->subject)
         ) {
             // if this is not default template and have a post subject
@@ -226,6 +217,38 @@ class MailOptions
             // if this is not default template and have not a post subject
             $this->_subject = $this->_settings->defaultMailOptions->subject;
         }
+    }
+
+    /**
+     * Define if template is contact-default.
+     * It is not in reference of defaultMailOptions in class Settings.
+     *
+     * @param $template
+     * @return bool
+     */
+    protected function isDefaultTemplate($template)
+    {
+        if ($template === 'contact-default') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Return the options for rendering.
+     *
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return [
+            'template' => $this->_template,
+            'senderMail' => $this->_senderMail,
+            'senderName' => $this->_senderName,
+            'recipientMail' => $this->_recipientMail,
+            'recipientName' => $this->_recipientName,
+            'subject' => $this->_subject,
+        ];
     }
 
 }

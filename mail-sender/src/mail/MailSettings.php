@@ -3,10 +3,14 @@
 
 namespace MailSender\mail;
 
+use Exception;
 use MailSender\data\Post;
 use MailSender\data\PostInterface;
 use MailSender\render\Render;
 use MailSender\settings\GetSettings;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class MailSettings
@@ -51,12 +55,14 @@ class MailSettings
      * MailSettings constructor.
      * @param PostInterface $post
      * @param $server
+     * @param $mailOptions
+     * @throws Exception
      */
-    public function __construct(PostInterface $post, $server)
+    public function __construct(PostInterface $post, $server, $mailOptions)
     {
         $this->setSettings();
         $this->setPost($post);
-        $this->setOptions();
+        $this->setOptions($mailOptions);
         $this->setServer($server);
     }
 
@@ -70,38 +76,36 @@ class MailSettings
 
     /**
      * @param $post
+     * @throws Exception
      */
-    protected function setPost($post): void
+    protected function setPost(PostInterface $post): void
     {
-        $this->_post = (object) $post->getPost();
+        $this->_post = (object)$post->getPost();
     }
 
     /**
-     *
+     * @param $mailOptions
      */
-    protected function setOptions(): void
+    protected function setOptions($mailOptions): void
     {
-        $mailOptions = new MailOptions($this->_post);
-        $this->_options = (object) $mailOptions->getOptions();
+        $this->_options = (object)$mailOptions->getOptions();
     }
 
     /**
-     * @param object $server
+     * @param $server
      */
-    protected function setServer(object $server): void
+    protected function setServer($server): void
     {
-        //$server = new Server();
-        //var_dump($server);
-        $this->_server = $server;
+        $this->_server = $server->getServerSettings();
     }
 
     /**
      * Return an array with all the settings of the e-mail.
      *
      * @return array
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getAll()
     {
@@ -180,7 +184,6 @@ class MailSettings
      *
      * @return mixed
      */
-    // todo : improve security on this.
     public function getMailPassword()
     {
         return $this->_server->mailPassword;
@@ -267,22 +270,6 @@ class MailSettings
     }
 
     /**
-     * Return recipient name from POST.
-     * OR
-     * Return default recipient name from settings/GetSettings
-     * According to MailOptions class.
-     *
-     * @return string|null
-     */
-    public function getRecipientName()
-    {
-        if (!empty($this->_options->recipientName)) {
-            return $this->_options->recipientName;
-        }
-        return null;
-    }
-
-    /**
      * Return debug for PHPMailer
      * in terms of environment from settings/GetSettings.
      * 'dev' will return 'server'.
@@ -332,9 +319,9 @@ class MailSettings
      * the default template will be used.
      *
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getHtmlBody()
     {
@@ -355,6 +342,22 @@ class MailSettings
         } else {
             return null;
         }
+    }
+
+    /**
+     * Return recipient name from POST.
+     * OR
+     * Return default recipient name from settings/GetSettings
+     * According to MailOptions class.
+     *
+     * @return string|null
+     */
+    public function getRecipientName()
+    {
+        if (!empty($this->_options->recipientName)) {
+            return $this->_options->recipientName;
+        }
+        return null;
     }
 
 }

@@ -91,6 +91,18 @@ class Post implements PostInterface
     }
 
     /**
+     * Check if provided value type is array or object.
+     *
+     * @param $value
+     *
+     * @return bool
+     */
+    protected function isArrayOrObject($value): bool
+    {
+        return is_array($value) || is_object($value);
+    }
+
+    /**
      * Transform objects to array.
      * transform values to string.
      * Transform HTML specials characters to ascii and escape.
@@ -120,18 +132,6 @@ class Post implements PostInterface
     }
 
     /**
-     * Check if provided value type is array or object.
-     *
-     * @param $value
-     *
-     * @return bool
-     */
-    protected function isArrayOrObject($value): bool
-    {
-        return is_array($value) || is_object($value);
-    }
-
-    /**
      * Check if the key is present in the isMail array in Settings.
      *
      * @param string $key
@@ -141,19 +141,6 @@ class Post implements PostInterface
     protected function isMailAddress(string $key)
     {
         return in_array($key, $this->_settings->validation->isMail);
-    }
-
-
-    /**
-     * Transform HTML specials characters to ascii and escape the string.
-     *
-     * @param $string
-     *
-     * @return string
-     */
-    protected function toString($string): string
-    {
-        return addslashes(htmlspecialchars((string)$string));
     }
 
     /**
@@ -172,7 +159,7 @@ class Post implements PostInterface
         $multipleValidations = $this->getMailValidationRules();
 
         if (!$validator->isValid($mail, $multipleValidations)) {
-            throw new Exception("value provided for {$key} is not valid.");
+            throw new Exception("value ($mail) provided for {$key} is not valid.");
         }
 
         return $mail;
@@ -194,6 +181,18 @@ class Post implements PostInterface
             $validationList[] = new SpoofCheckValidation();
         }
         return new MultipleValidationWithAnd($validationList);
+    }
+
+    /**
+     * Transform HTML specials characters to ascii and escape the string.
+     *
+     * @param $string
+     *
+     * @return string
+     */
+    protected function toString($string): string
+    {
+        return addslashes(htmlspecialchars((string)$string));
     }
 
 }

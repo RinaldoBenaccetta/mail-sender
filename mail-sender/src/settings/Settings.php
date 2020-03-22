@@ -24,40 +24,6 @@ class Settings
         'rootParent' => '1',
     ];
 
-//    /**
-//     * Here is the options for the server infos.
-//     *
-//     * @var array
-//     */
-//    protected array $mailServer = [
-//        /**
-//         * The host of the mail server.
-//         */
-//        'host' => 'smtp.gmail.com',
-//        /**
-//         * The port used to send mails.
-//         */
-//        'port' => 587,
-//        /**
-//         * The encryption method.
-//         * 'STARTTLS' | 'SMTPS'
-//         */
-//        'encryption' => 'STARTTLS',
-//        /**
-//         * Is the smtp authentication must be used?
-//         */
-//        'smtpAuthentication' => true,
-//        /**
-//         * The login used to connect to mail server.
-//         */
-//        'mailLogin' => 'benaccettarinaldo@gmail.com',
-//        /**
-//         * The password used to connect to mail server.
-//         */
-//        'mailPassword' => 'vivelaneigeDejuin',
-//        // todo : make this more secure, ideally found it in the environment variable.
-//    ];
-
     /**
      * Here is the options for the default mail options.
      * If nothing is provided when sending mail,
@@ -129,13 +95,13 @@ class Settings
      *
      * @var array
      */
-    protected array $defaultContactTemlate = [
+    protected array $defaultContactTemplate = [
         /**
          * The prefix for the subject in the default template.
          * The sender name provided in the $POST values will
          * be after the prefix.
          */
-        'subjectPrefix' => "Demande d'information de la part de",
+        'subjectPrefix' => "Demande d'information de la part de ",
         /**
          * The suffix for the subject in the default template.
          * The sender name provided in the $POST values will

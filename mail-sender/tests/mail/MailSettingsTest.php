@@ -1,14 +1,53 @@
 <?php
 
+use MailSender\data\Server;
 use MailSender\mail\DefaultContact;
+use MailSender\mail\MailOptions;
 use MailSender\mail\MailSettings;
+use PHPUnit\Framework\TestCase;
 use MailSender\settings\GetSettings;
+use MailSender\data\Post;
 
-class MailSettingsTest extends PHPUnit\Framework\TestCase
+class MailSettingsTest extends TestCase
 {
 
-    public function getServerSettings() {
-        return (object) [
+    public function testGetHost()
+    {
+        $mailSettings = $this->getMailSettings();
+        $this->assertEquals(
+            $this->getServer()->host,
+            $mailSettings->getHost()
+        );
+    }
+
+    public function getMailSettings()
+    {
+        return $this->getCustomMailSettings($this->getPost());
+    }
+
+    public function getCustomMailSettings(
+        $array = [
+            'provideSomething' => 'something'
+        ]
+    ) {
+        $post = $this->createMock(Post::class);
+
+        $post->method('getPost')
+            ->willReturn((object)$array);
+
+        $server = $this->createMock(Server::class);
+
+        $server->method('getServerSettings')
+            ->willReturn($this->getServer());
+
+        $mailOptions = new MailOptions($array, $this->getSettings());
+
+        return new MailSettings($post, $server, $mailOptions);
+    }
+
+    public function getServer()
+    {
+        return (object)[
             "host" => "smtp.gmail.com",
             "port" => "587",
             "encryption" => "STARTTLS",
@@ -18,32 +57,56 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
         ];
     }
 
-    public function getSettings() {
-        return (object) GetSettings::getSettings();
-    }
-
-    public function getMailSettings() {
-        $settings = $this->getSettings();
-        $serverSettings = $this->getServerSettings();
-        return new MailSettings($settings, $serverSettings);
-    }
-
-
-
-    public function testGetHost()
+    public function getSettings()
     {
-        $mailSettings = $this->getMailSettings();
-        $this->assertEquals(
-            $this->getServerSettings()->host,
-            $mailSettings->getHost()
-        );
+        return (object)[
+            'global' => (object)[
+                'environment' => 'dev',
+                'rootParent' => '1',
+            ],
+            'defaultMailOptions' => (object)[
+                'template' => 'test-template',
+                'senderMail' => 't800@skynet.com',
+                'senderName' => 'T-800',
+                'recipientMail' => 'sarah@connor.com',
+                'recipientName' => 'Sarah Connor',
+                'subject' => 'I ll be back!',
+            ],
+            'validation' => (object)[
+                'isMail' => [
+                    'senderMail',
+                    'replyMail',
+                    'recipientMail'
+                ],
+                'DNSMailValidation' => true,
+                'SpoofMailValidation' => true,
+            ],
+            'defaultContactTemplate' => (object)[
+                'subjectPrefix' => "suffix",
+                'subjectSuffix' => "preffix",
+            ]
+        ];
+        //return (object) GetSettings::getSettings();
+    }
+
+    public function getPost()
+    {
+        return (array)[
+            'senderMail' => 't1000@skynet.com',
+            'senderName' => 'T-1000',
+            'replyMail' => 'Arnold@skynet.com',
+            'replyName' => 'Arnold',
+            'recipientMail' => 'sarah@connor.com',
+            'recipientName' => 'Sarah Connor',
+            'subject' => 'Sarah Connor?',
+        ];
     }
 
     public function testGetPort()
     {
         $mailSettings = $this->getMailSettings();
         $this->assertEquals(
-            $this->getServerSettings()->port,
+            $this->getServer()->port,
             $mailSettings->getPort()
         );
     }
@@ -52,7 +115,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     {
         $mailSettings = $this->getMailSettings();
         $this->assertEquals(
-            $this->getServerSettings()->encryption,
+            $this->getServer()->encryption,
             $mailSettings->getEncryption()
         );
     }
@@ -61,7 +124,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     {
         $mailSettings = $this->getMailSettings();
         $this->assertEquals(
-            $this->getServerSettings()->smtpAuthentication,
+            $this->getServer()->smtpAuthentication,
             $mailSettings->getSmtpAuthentication()
         );
     }
@@ -70,7 +133,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     {
         $mailSettings = $this->getMailSettings();
         $this->assertEquals(
-            $this->getServerSettings()->mailLogin,
+            $this->getServer()->mailLogin,
             $mailSettings->getMailLogin()
         );
     }
@@ -79,7 +142,7 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     {
         $mailSettings = $this->getMailSettings();
         $this->assertEquals(
-            $this->getServerSettings()->mailPassword,
+            $this->getServer()->mailPassword,
             $mailSettings->getMailPassword()
         );
     }
@@ -87,17 +150,18 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     public function testGetSenderMailWithMailProvided()
     {
         $senderMail = 't800@skynet.com';
-        $mailSettings = new MailSettings(
-            (object)[
-                'senderMail' => $senderMail
-            ], $this->getServerSettings()
+        $mailSettings = $this->getCustomMailSettings(
+            [
+                'senderMail' =>
+                    $senderMail
+            ]
         );
         $this->assertEquals($senderMail, $mailSettings->getSenderMail());
     }
 
     public function testGetSenderMailWithoutMailProvided()
     {
-        $mailSettings = $this->getMailSettings();
+        $mailSettings = $this->getCustomMailSettings();
         $this->assertEquals(
             $this->getSettings()->defaultMailOptions->senderMail,
             $mailSettings->getSenderMail()
@@ -107,17 +171,15 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     public function testGetSenderNameWithNameProvided()
     {
         $senderName = 'Sarah Connor';
-        $mailSettings = new MailSettings(
-            (object) [
-                'senderName' => $senderName
-            ], $this->getServerSettings()
+        $mailSettings = $this->getCustomMailSettings(
+            ['senderName' => $senderName]
         );
         $this->assertEquals($senderName, $mailSettings->getSenderName());
     }
 
     public function testGetSenderNameWithoutNameProvided()
     {
-        $mailSettings = $this->getMailSettings();
+        $mailSettings = $this->getCustomMailSettings();
         $this->assertEquals(
             $this->getSettings()->defaultMailOptions->senderName,
             $mailSettings->getSenderName()
@@ -127,51 +189,45 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     public function testGetReplyMailWithNameProvided()
     {
         $replyMail = 't800@skynet.com';
-        $mailSettings = new MailSettings(
-            (object) [
-                'replyMail' => $replyMail
-            ], $this->getServerSettings()
+        $mailSettings = $this->getCustomMailSettings(
+            ['replyMail' => $replyMail]
         );
         $this->assertEquals($replyMail, $mailSettings->getReplyMail());
     }
 
     public function testGetReplyMailWithoutNameProvided()
     {
-        $mailSettings = new MailSettings([], $this->getServerSettings());
+        $mailSettings = $this->getCustomMailSettings();
         $this->assertEquals(null, $mailSettings->getReplyMail());
     }
 
     public function testGetReplyNameWithNameProvided()
     {
         $replyName = 'Sarah Connor';
-        $mailSettings = new MailSettings(
-            (object) [
-                'replyName' => $replyName
-            ], $this->getServerSettings()
+        $mailSettings = $this->getCustomMailSettings(
+            ['replyName' => $replyName]
         );
         $this->assertEquals($replyName, $mailSettings->getReplyName());
     }
 
     public function testGetReplyNameWithoutNameProvided()
     {
-        $mailSettings = new MailSettings([], $this->getServerSettings());
+        $mailSettings = $this->getCustomMailSettings();
         $this->assertEquals(null, $mailSettings->getReplyName());
     }
 
     public function testGetRecipientMailWithMailProvided()
     {
         $recipientMail = 't800@skynet.com';
-        $mailSettings = new MailSettings(
-            (object) [
-                'recipientMail' => $recipientMail
-            ], $this->getServerSettings()
+        $mailSettings = $this->getCustomMailSettings(
+            ['recipientMail' => $recipientMail]
         );
         $this->assertEquals($recipientMail, $mailSettings->getRecipientMail());
     }
 
     public function testGetRecipientMailWithoutMailProvided()
     {
-        $mailSettings = new MailSettings([], $this->getServerSettings());
+        $mailSettings = $this->getCustomMailSettings();
         $this->assertEquals(
             $this->getSettings()->defaultMailOptions->recipientMail,
             $mailSettings->getRecipientMail()
@@ -181,18 +237,15 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     public function testGetRecipientNameWithNameProvided()
     {
         $recipientName = 'Sarah Connor';
-        $mailSettings = new MailSettings(
-            (object) [
-                'recipientName' => $recipientName
-            ], $this->getServerSettings()
+        $mailSettings = $this->getCustomMailSettings(
+            ['recipientName' => $recipientName]
         );
         $this->assertEquals($recipientName, $mailSettings->getRecipientName());
     }
 
     public function testGetRecipientNameWithoutNameProvided()
     {
-        //$settings = $this->getJoinedSettings();
-        $mailSettings = new MailSettings([], $this->getServerSettings());
+        $mailSettings = $this->getCustomMailSettings();
         $this->assertEquals(
             $this->getSettings()->defaultMailOptions->recipientName,
             $mailSettings->getRecipientName()
@@ -204,13 +257,16 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
         $subject = "I'll be back";
         $expected = DefaultContact::getSubject(
             (object)[
-                'senderName' => $this->getSettings()->defaultMailOptions->senderName
-            ]
+                'senderName' => $this->getSettings(
+                )->defaultMailOptions->senderName
+            ],
+            $this->getSettings()
         );
-        $mailSettings = new MailSettings(
-            (object) [
+        $mailSettings = $this->getCustomMailSettings(
+            [
+                'template' => 'contact-default',
                 'subject' => $subject
-            ], $this->getServerSettings()
+            ]
         );
         $this->assertEquals($expected, $mailSettings->getSubject());
     }
@@ -219,31 +275,35 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     {
         $expected = DefaultContact::getSubject(
             (object)[
-                'senderName' => $this->getSettings()->defaultMailOptions->senderName
+                'senderName' => $this->getSettings(
+                )->defaultMailOptions->senderName
+            ],
+            $this->getSettings()
+        );
+        $mailSettings = $this->getCustomMailSettings(
+            [
+                'template' => 'contact-default',
             ]
         );
-        $mailSettings = new MailSettings([], $this->getServerSettings());
         $this->assertEquals($expected, $mailSettings->getSubject());
     }
 
-    public function testGetSubjectWithSubjectProvidedAndNotDefaultTemplate()
+    public function testGetSubjectWithSubjectProvidedAndNoDefaultTemplate()
     {
         $subject = "I'll be back";
-        $mailSettings = new MailSettings(
+        $mailSettings = $this->getCustomMailSettings(
             [
                 'template' => 'test-template',
                 'subject' => $subject
-            ], $this->getServerSettings()
+            ]
         );
         $this->assertEquals($subject, $mailSettings->getSubject());
     }
 
-    public function testGetSubjectWithoutSubjectProvidedAndNotDefaultTemplate()
+    public function testGetSubjectWithoutSubjectProvidedAndNoDefaultTemplate()
     {
-        $mailSettings = new MailSettings(
-            [
-                'template' => 'test-template',
-            ], $this->getServerSettings()
+        $mailSettings = $this->getCustomMailSettings(
+            ['template' => 'test-template']
         );
         $this->assertEquals(
             $this->getSettings()->defaultMailOptions->subject,
@@ -256,13 +316,12 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
         $message = 'Hello';
         $name = 'Sarah Connor';
         $expected = "Hello <strong>Sarah Connor</strong>";
-
-        $mailSettings = new MailSettings(
+        $mailSettings = $this->getCustomMailSettings(
             [
                 'message' => $message,
                 'name' => $name,
                 'template' => 'test-template',
-            ], $this->getServerSettings()
+            ]
         );
 
         $this->assertEquals($expected, $mailSettings->getHtmlBody());
@@ -271,20 +330,13 @@ class MailSettingsTest extends PHPUnit\Framework\TestCase
     public function testGetAltBodyWithAltBodyProvided()
     {
         $expected = "Hello Sarah Connor";
-
-        $mailSettings = new MailSettings(
-            [
-                'altBody' => $expected,
-            ], $this->getServerSettings()
-        );
-
+        $mailSettings = $this->getCustomMailSettings(['altBody' => $expected]);
         $this->assertEquals($expected, $mailSettings->getAltBody());
     }
 
     public function testGetAltBodyWithNoAltBodyProvided()
     {
-        $mailSettings = new MailSettings([], $this->getServerSettings());
-
+        $mailSettings = $this->getCustomMailSettings();
         $this->assertEquals(null, $mailSettings->getAltBody());
     }
 

@@ -12,26 +12,6 @@ class MailObject
 
 
     /**
-     * Debug mode.
-     *
-     * off = for production use
-     * client  = client messages
-     * server = client and server messages
-     *
-     * @var string
-     */
-    private string $debug;
-
-    /**
-     * The encryption mechanism to use - STARTTLS or SMTPS.
-     *
-     * STARTTLS or SMTPS.
-     *
-     * @var string
-     */
-    private string $encryptionMethod;
-
-    /**
      * The hostname of the mail server.
      *
      * use
@@ -41,7 +21,6 @@ class MailObject
      * @var string
      */
     protected string $host;
-
     /**
      * The SMTP port number - 587 for authenticated TLS,
      * a.k.a. RFC4409 SMTP submission.
@@ -49,14 +28,12 @@ class MailObject
      * @var int
      */
     protected int $port;
-
     /**
      * Whether to use SMTP authentication.
      *
      * @var bool
      */
     protected bool $smtpAuthentication;
-
     /**
      * Username to use for SMTP authentication.
      * Use full email address for gmail.
@@ -64,77 +41,84 @@ class MailObject
      * @var string
      */
     protected string $mailLogin;
-
     /**
      * Password to use for SMTP authentication.
      *
      * @var string
      */
     protected string $mailPassword;
-
     /**
      * E-mail the message is to be sent from.
      *
      * @var string
      */
     protected string $senderMail;
-
     /**
      * Name the message is to be sent to.
      *
      * @var string
      */
     protected string $senderName;
-
     /**
      * An alternative E-mail reply-to address.
      *
      * @var string
      */
     protected string $replyMail;
-
     /**
      * An alternative Name reply-to address.
      *
      * @var string
      */
     protected string $replyName;
-
     /**
      * E-mail the message is to be sent to.
      *
      * @var string
      */
     protected string $recipientMail;
-
     /**
      * Name the message is to be sent to.
      *
      * @var string
      */
     protected string $recipientName;
-
     /**
      * The mail subject.
      *
      * @var string
      */
     protected string $subject;
-
     /**
      * The body of the mail in HTML.
      *
      * @var string
      */
     protected string $htmlBody;
-
     /**
      * The Alternative of the HTML mail in plain text.
      *
      * @var string
      */
     protected string $altBody;
-
+    /**
+     * Debug mode.
+     *
+     * off = for production use
+     * client  = client messages
+     * server = client and server messages
+     *
+     * @var string
+     */
+    private string $debug;
+    /**
+     * The encryption mechanism to use - STARTTLS or SMTPS.
+     *
+     * STARTTLS or SMTPS.
+     *
+     * @var string
+     */
+    private string $encryptionMethod;
 
     public function __construct($options)
     {
@@ -157,147 +141,19 @@ class MailObject
     }
 
     /**
-     * @param string $host
-     */
-    public function setHost(string $host): void
-    {
-        $this->host = $host;
-    }
-
-    /**
-     * @param int $port
-     */
-    public function setPort(int $port): void
-    {
-        $this->port = $port;
-    }
-
-    /**
-     * @param string $encryptionMethod
-     *
-     * @throws \Exception
-     */
-    public function setEncryptionMethod(string $encryptionMethod): void
-    {
-        if ($encryptionMethod === 'STARTTLS' || $encryptionMethod === 'SMTPS') {
-            $this->encryptionMethod = $encryptionMethod;
-        } else {
-            throw new Exception(
-                'Encryption method should be STARTTLS or SMTPS : ' . $encryptionMethod . ' given.'
-            );
-        }
-    }
-
-    /**
-     * @param bool $smtpAuthentication
-     */
-    public function setSmtpAuthentication(bool $smtpAuthentication): void
-    {
-        $this->smtpAuthentication = $smtpAuthentication;
-    }
-
-    /**
-     * @param string $mailLogin
-     */
-    public function setMailLogin(string $mailLogin): void
-    {
-        $this->mailLogin = $mailLogin;
-    }
-
-    /**
-     * @param string $mailPassword
-     */
-    public function setMailPassword(string $mailPassword): void
-    {
-        $this->mailPassword = $mailPassword;
-    }
-
-    /**
-     * @param string $senderMail
-     */
-    public function setSenderMail(string $senderMail): void
-    {
-        $this->senderMail = $senderMail;
-    }
-
-    /**
-     * @param string $senderName
-     */
-    public function setSenderName(string $senderName): void
-    {
-        $this->senderName = $senderName;
-    }
-
-    /**
-     * @param string $replyMail
-     */
-    public function setReplyMail(string $replyMail): void
-    {
-        $this->replyMail = $replyMail;
-    }
-
-    /**
-     * @param string $replyName
-     */
-    public function setReplyName(string $replyName): void
-    {
-        $this->replyName = $replyName;
-    }
-
-    /**
-     * @param string $recipientMail
-     */
-    public function setRecipientMail(string $recipientMail): void
-    {
-        $this->recipientMail = $recipientMail;
-    }
-
-    /**
-     * @param string $recipientName
-     */
-    public function setRecipientName(string $recipientName): void
-    {
-        $this->recipientName = $recipientName;
-    }
-
-    /**
-     * @param string $debug
-     */
-    public function setDebug(string $debug): void
-    {
-        $this->debug = $debug;
-    }
-
-    /**
-     * @param string $subject
-     */
-    public function setSubject(string $subject): void
-    {
-        $this->subject = $subject;
-    }
-
-    /**
-     * @param string $htmlBody
-     */
-    public function setHtmlBody(string $htmlBody): void
-    {
-        $this->htmlBody = $htmlBody;
-    }
-
-    /**
-     * @param string $altBody
-     */
-    public function setAltBody(string $altBody): void
-    {
-        $this->altBody = $altBody;
-    }
-
-    /**
      * @return string
      */
     public function getHost()
     {
         return $this->host;
+    }
+
+    /**
+     * @param string $host
+     */
+    public function setHost(string $host): void
+    {
+        $this->host = $host;
     }
 
     /**
@@ -309,11 +165,27 @@ class MailObject
     }
 
     /**
+     * @param int $port
+     */
+    public function setPort(int $port): void
+    {
+        $this->port = $port;
+    }
+
+    /**
      * @return bool
      */
     public function getSmtpAuthentication()
     {
         return $this->smtpAuthentication;
+    }
+
+    /**
+     * @param bool $smtpAuthentication
+     */
+    public function setSmtpAuthentication(bool $smtpAuthentication): void
+    {
+        $this->smtpAuthentication = $smtpAuthentication;
     }
 
     /**
@@ -325,6 +197,14 @@ class MailObject
     }
 
     /**
+     * @param string $mailLogin
+     */
+    public function setMailLogin(string $mailLogin): void
+    {
+        $this->mailLogin = $mailLogin;
+    }
+
+    /**
      * @return string
      */
     public function getMailPassword()
@@ -333,19 +213,11 @@ class MailObject
     }
 
     /**
-     * @return string
+     * @param string $mailPassword
      */
-    public function getSenderMail()
+    public function setMailPassword(string $mailPassword): void
     {
-        return $this->senderMail;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSenderName()
-    {
-        return $this->senderName;
+        $this->mailPassword = $mailPassword;
     }
 
     /**
@@ -363,6 +235,30 @@ class MailObject
     }
 
     /**
+     * @param string $replyMail
+     */
+    public function setReplyMail(string $replyMail): void
+    {
+        $this->replyMail = $replyMail;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSenderMail()
+    {
+        return $this->senderMail;
+    }
+
+    /**
+     * @param string $senderMail
+     */
+    public function setSenderMail(string $senderMail): void
+    {
+        $this->senderMail = $senderMail;
+    }
+
+    /**
      * Return the name to reply-to.
      * If there is no E-mail to reply, this will return the sender name.
      *
@@ -377,6 +273,30 @@ class MailObject
     }
 
     /**
+     * @param string $replyName
+     */
+    public function setReplyName(string $replyName): void
+    {
+        $this->replyName = $replyName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSenderName()
+    {
+        return $this->senderName;
+    }
+
+    /**
+     * @param string $senderName
+     */
+    public function setSenderName(string $senderName): void
+    {
+        $this->senderName = $senderName;
+    }
+
+    /**
      * @return string
      */
     public function getRecipientMail()
@@ -385,11 +305,27 @@ class MailObject
     }
 
     /**
+     * @param string $recipientMail
+     */
+    public function setRecipientMail(string $recipientMail): void
+    {
+        $this->recipientMail = $recipientMail;
+    }
+
+    /**
      * @return string
      */
     public function getRecipientName()
     {
         return $this->recipientName;
+    }
+
+    /**
+     * @param string $recipientName
+     */
+    public function setRecipientName(string $recipientName): void
+    {
+        $this->recipientName = $recipientName;
     }
 
     /**
@@ -406,6 +342,22 @@ class MailObject
             return PHPMailer::ENCRYPTION_SMTPS;
         }
         return null;
+    }
+
+    /**
+     * @param string $encryptionMethod
+     *
+     * @throws Exception
+     */
+    public function setEncryptionMethod(string $encryptionMethod): void
+    {
+        if ($encryptionMethod === 'STARTTLS' || $encryptionMethod === 'SMTPS') {
+            $this->encryptionMethod = $encryptionMethod;
+        } else {
+            throw new Exception(
+                'Encryption method should be STARTTLS or SMTPS : ' . $encryptionMethod . ' given.'
+            );
+        }
     }
 
     /**
@@ -432,6 +384,14 @@ class MailObject
     }
 
     /**
+     * @param string $debug
+     */
+    public function setDebug(string $debug): void
+    {
+        $this->debug = $debug;
+    }
+
+    /**
      * @return string
      */
     public function getSubject()
@@ -440,12 +400,11 @@ class MailObject
     }
 
     /**
-     * @return string
-     * @throws \Exception
+     * @param string $subject
      */
-    public function getHtmlBody()
+    public function setSubject(string $subject): void
     {
-        return $this->htmlBody;
+        $this->subject = $subject;
     }
 
     /**
@@ -455,7 +414,7 @@ class MailObject
      * return the html body with stripped tags.
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getAltBody()
     {
@@ -463,6 +422,31 @@ class MailObject
             return $this->altBody;
         }
         return htmlspecialchars(trim(strip_tags($this->getHtmlBody())));
+    }
+
+    /**
+     * @param string $altBody
+     */
+    public function setAltBody(string $altBody): void
+    {
+        $this->altBody = $altBody;
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getHtmlBody()
+    {
+        return $this->htmlBody;
+    }
+
+    /**
+     * @param string $htmlBody
+     */
+    public function setHtmlBody(string $htmlBody): void
+    {
+        $this->htmlBody = $htmlBody;
     }
 
 }

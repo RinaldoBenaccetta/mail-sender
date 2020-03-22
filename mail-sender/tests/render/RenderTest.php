@@ -10,6 +10,36 @@ use Twig\Error\SyntaxError;
  */
 class RenderTest extends PHPUnit\Framework\TestCase
 {
+    public function getSettings()
+    {
+        return (object)[
+            'global' => (object)[
+                'environment' => 'dev',
+                'rootParent' => '1',
+            ],
+            'defaultMailOptions' => (object)[
+                'template' => 'test-template',
+                'senderMail' => 't800@skynet.com',
+                'senderName' => 'T-800',
+                'recipientMail' => 'sarah@connor.com',
+                'recipientName' => 'Sarah Connor',
+                'subject' => 'I ll be back!',
+            ],
+            'validation' => (object)[
+                'isMail' => [
+                    'senderMail',
+                    'replyMail',
+                    'recipientMail'
+                ],
+                'DNSMailValidation' => true,
+                'SpoofMailValidation' => true,
+            ],
+            'defaultContactTemplate' => (object)[
+                'subjectPrefix' => "suffix",
+                'subjectSuffix' => "preffix",
+            ]
+        ];
+    }
 
     /**
      * @dataProvider provideTestRender
@@ -33,7 +63,8 @@ class RenderTest extends PHPUnit\Framework\TestCase
                 [
                     'message' => $message,
                     'name' => $name
-                ]
+                ],
+                $this->getSettings(),
             )
         );
     }

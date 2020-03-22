@@ -86,7 +86,6 @@ class MailSettingsTest extends TestCase
                 'subjectSuffix' => "preffix",
             ]
         ];
-        //return (object) GetSettings::getSettings();
     }
 
     public function getPost()

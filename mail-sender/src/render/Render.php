@@ -23,18 +23,16 @@ class Render
      * @param $template
      * @param $data
      *
+     * @param object $settings
      * @return string
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
-    public static function render($template, $data)
+    public static function render($template, $data, object $settings)
     {
         $loader = new FilesystemLoader(Path::TEMPLATES);
 
         $template = self::getTemplateFile($template);
 
-        $settings = GetSettings::getSettings();
+        //$settings = $settings;
 
         $twig = new Environment(
             $loader, [

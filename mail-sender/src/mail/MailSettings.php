@@ -330,7 +330,7 @@ class MailSettings
     {
         $template = $this->_options->template;
         $data = (array)$this->_post;
-        return Render::render($template, $data);
+        return Render::render($template, $data, $this->_settings);
     }
 
     /**

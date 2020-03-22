@@ -10,7 +10,7 @@ use MailSender\settings\GetSettings;
  *
  * @package MailSender\mail
  */
-class MailOptions
+class MailOptions implements MailOptionsInterface
 {
 
     /**

@@ -7,7 +7,7 @@ namespace MailSender\data;
  *
  * @package MailSender\data
  */
-class Server
+class Server implements ServerInterface
 {
 
     /**

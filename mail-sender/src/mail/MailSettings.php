@@ -6,6 +6,7 @@ namespace MailSender\mail;
 use Exception;
 use MailSender\data\Post;
 use MailSender\data\PostInterface;
+use MailSender\data\ServerInterface;
 use MailSender\render\Render;
 use MailSender\settings\GetSettings;
 use Twig\Error\LoaderError;
@@ -58,7 +59,8 @@ class MailSettings
      * @param $mailOptions
      * @throws Exception
      */
-    public function __construct(PostInterface $post, $server, $mailOptions)
+    public function __construct(PostInterface $post, ServerInterface $server,
+        MailOptionsInterface $mailOptions)
     {
         $this->setSettings();
         $this->setPost($post);
@@ -80,21 +82,21 @@ class MailSettings
      */
     protected function setPost(PostInterface $post): void
     {
-        $this->_post = (object)$post->getPost();
+        $this->_post = (object) $post->getPost();
     }
 
     /**
      * @param $mailOptions
      */
-    protected function setOptions($mailOptions): void
+    protected function setOptions(MailOptionsInterface $mailOptions): void
     {
-        $this->_options = (object)$mailOptions->getOptions();
+        $this->_options = (object) $mailOptions->getOptions();
     }
 
     /**
      * @param $server
      */
-    protected function setServer($server): void
+    protected function setServer(ServerInterface $server): void
     {
         $this->_server = $server->getServerSettings();
     }

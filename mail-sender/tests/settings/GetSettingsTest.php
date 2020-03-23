@@ -30,12 +30,13 @@ class GetSettingsTest extends TestCase
                 "threeOne" => "3.1",
                 "threeTwo" => "3.2"
             ]
+            // four is not here : it is protected or private.
         ];
     }
 
     public function getSettingsMock() {
 
-        $stub = $this->getMockBuilder('FakeSettings')
+        $stub = $this->getMockBuilder('FakeSettingsClass')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -59,6 +60,11 @@ class GetSettingsTest extends TestCase
             "threeOne" => "3.1",
             "threeTwo" => "3.2"
         ];
+//        $stub->four = (array) [// I want this to be protected or private to
+//            // not be present in the output.
+//            "fourOne" => "4.1",
+//            "fourTwo" => "4.2"
+//        ];
         return $stub;
     }
 
@@ -66,7 +72,7 @@ class GetSettingsTest extends TestCase
         $expected = $this->getExpected();
         $getSettings = new GetSettings($this->getSettingsMock());
         $value = $getSettings->getSettings();
-        $this->assertEquals((array)$expected, (array)$value);
+        $this->assertEquals($expected, $value);
     }
 
 }

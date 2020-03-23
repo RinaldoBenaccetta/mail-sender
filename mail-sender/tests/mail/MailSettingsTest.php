@@ -33,7 +33,7 @@ class MailSettingsTest extends TestCase
         $post = $this->createMock(Post::class);
 
         $post->method('getPost')
-            ->willReturn((object)$array);
+            ->willReturn((array)$array);
 
         $server = $this->createMock(Server::class);
 

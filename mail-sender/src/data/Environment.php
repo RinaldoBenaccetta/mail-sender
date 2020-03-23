@@ -61,7 +61,6 @@ class Environment implements EnvironmentInterface
      */
     protected function getRootParent(): string
     {
-        //var_dump($this->_settings['global']);
         $repeat = 1 + $this->_settings->global->rootParent;
         if ($repeat < 1) {
             $repeat = 1;

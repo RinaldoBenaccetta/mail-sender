@@ -27,7 +27,7 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
         $post = $this->createMock(Post::class);
 
         $post->method('getPost')
-            ->willReturn((array)$object);
+            ->willReturn((object)$object);
 
         return new MailOptions($post, $this->getSettings());
     }

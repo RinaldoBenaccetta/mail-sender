@@ -98,7 +98,7 @@ class PostTest extends TestCase
 
     public function getExpected()
     {
-        return (array)[
+        return (object)[
             "senderName" => "Connor",
             "senderFirstName" => "Sarah",
             "senderPhone" => "12563",

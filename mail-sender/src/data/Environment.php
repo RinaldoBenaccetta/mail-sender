@@ -22,10 +22,10 @@ class Environment implements EnvironmentInterface
     private object $_settings;
 
     /**
+     *
      * @var array
      */
     private array $_environment;
-
 
     /**
      * Environment constructor.
@@ -39,11 +39,10 @@ class Environment implements EnvironmentInterface
 
     /**
      * @param object $_settings
-     * @return object
      */
-    protected function setSettings(object $_settings): object
+    protected function setSettings(object $_settings)
     {
-        return $this->_settings = $_settings;
+        $this->_settings = $_settings;
     }
 
     /**

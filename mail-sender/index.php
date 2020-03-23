@@ -11,22 +11,26 @@ use MailSender\settings\Settings;
 
 require './vendor/autoload.php';
 
-
 $settingsClass = new Settings();
 $settings = (new GetSettings($settingsClass))->getSettings();
-dump($settings);
 
-$environment = new Environment($settings);
-$post = new Post($_POST, $settings);
-$server = new Server($environment);
-$mailOptions = new MailOptions($_POST, $settings);
-$mailSettings = new MailSettings(
-    $post,
-    $server,
-    $mailOptions,
-    $settings
-);
-$options = $mailSettings->getAll();
-
-// send the mail
-new MailSend($options);
+try {
+    $environment = new Environment($settings);
+    $post = new Post($_POST, $settings);
+    $server = new Server($environment);
+    $mailOptions = new MailOptions($post, $settings);
+    $mailSettings = new MailSettings(
+        $post,
+        $server,
+        $mailOptions,
+        $settings
+    );
+    $options = $mailSettings->getAll();// send the mail
+    new MailSend($options);
+} catch (Exception $e) {
+    dump('error');
+    dump($mailOptions);
+}
+dump($mailOptions);
+dump($_POST);
+dump($post);

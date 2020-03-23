@@ -3,6 +3,7 @@
 
 namespace MailSender\mail;
 
+use MailSender\data\PostInterface;
 use MailSender\settings\GetSettings;
 
 /**
@@ -72,15 +73,18 @@ class MailOptions implements MailOptionsInterface
     /**
      * MailOptions constructor.
      *
-     * @param array $post
-     * @param $settings
+     * @param PostInterface $post
+     * @param object $settings
      */
-    public function __construct(array $post, object $settings)
+    public function __construct(PostInterface $post, object $settings)
     {
-//        $this->_settings = GetSettings::getSettings();
         $this->_settings = $settings;
-        $this->_post = (object)$post;
+        $this->setPost($post);
         $this->setOptions();
+    }
+
+    public function setPost(PostInterface $post): void {
+        $this->_post = (object) $post->getPost();
     }
 
     protected function setOptions(): void

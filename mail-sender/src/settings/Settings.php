@@ -20,18 +20,8 @@ class Settings
      * @var array
      */
     public array $global = [
-        'environment' => 'dev', // 'dev' | 'prod'
+        'environment' => 'prod', // 'dev' | 'prod'
         'rootParent' => '1',
-    ];
-
-    private array $experiment = [
-        'test' => [
-            'testOne' => '1',
-            'testTwo' => [
-                'one' => '1',
-                'two' => '2'
-            ]
-        ]
     ];
 
     /**

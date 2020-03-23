@@ -1,5 +1,6 @@
 <?php
 
+use MailSender\data\Post;
 use MailSender\mail\DefaultContact;
 use MailSender\mail\MailOptions;
 use MailSender\settings\GetSettings;
@@ -23,7 +24,12 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
 
     public function getMailOptions($object)
     {
-        return new MailOptions($object, $this->getSettings());
+        $post = $this->createMock(Post::class);
+
+        $post->method('getPost')
+            ->willReturn((object)$object);
+
+        return new MailOptions($post, $this->getSettings());
     }
 
     public function getSettings()
@@ -61,10 +67,8 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
     {
         return [
             [(array)$this->defaultExpected(), (array)[]],
-            // provide empty object, get
-            // default options
+            // provide empty object, get default options
             [(array)$this->provideAllData(), (array)$this->provideAllData()],
-            //
             // provide datas, get theses datas.
             [
                 (array)$this->expectWithOnlySenderName(),

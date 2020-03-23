@@ -255,4 +255,15 @@ class MailOptions implements MailOptionsInterface
         ];
     }
 
+    public function getSettings(): object
+    {
+        return $this->_settings;
+    }
+
+    public function getPost(): object
+    {
+        return $this->_post;
+    }
+
+
 }

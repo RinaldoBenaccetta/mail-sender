@@ -19,12 +19,7 @@ try {
     $post = new Post($_POST, $settings);
     $server = new Server($environment);
     $mailOptions = new MailOptions($post, $settings);
-    $mailSettings = new MailSettings(
-        $post,
-        $server,
-        $mailOptions,
-        $settings
-    );
+    $mailSettings = new MailSettings($server, $mailOptions);
     $options = $mailSettings->getAll();// send the mail
     new MailSend($options);
 } catch (Exception $e) {
@@ -32,5 +27,5 @@ try {
     dump($mailOptions);
 }
 dump($mailOptions);
-dump($_POST);
-dump($post);
+//dump($post);
+//dump($mailSettings);

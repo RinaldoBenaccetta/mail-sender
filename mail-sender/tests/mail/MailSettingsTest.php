@@ -42,7 +42,7 @@ class MailSettingsTest extends TestCase
 
         $mailOptions = new MailOptions($post, $this->getSettings());
 
-        return new MailSettings($post, $server, $mailOptions, $this->getSettings());
+        return new MailSettings($server, $mailOptions);
     }
 
     public function getServer()

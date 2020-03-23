@@ -54,40 +54,36 @@ class MailSettings
 
     /**
      * MailSettings constructor.
-     * @param PostInterface $post
      * @param ServerInterface $server
      * @param MailOptionsInterface $mailOptions
-     * @param object $settings
-     * @throws Exception
      */
-    public function __construct(PostInterface $post, ServerInterface $server,
-        MailOptionsInterface $mailOptions, object $settings)
+    public function __construct(ServerInterface $server,
+        MailOptionsInterface $mailOptions)
     {
-        $this->setSettings($settings);
-        $this->setPost($post);
+        $this->setSettings($mailOptions);
+        $this->setPost($mailOptions);
         $this->setOptions($mailOptions);
         $this->setServer($server);
     }
 
     /**
-     * @param object $settings
+     * @param MailOptionsInterface $mailOptions
      */
-    protected function setSettings(object $settings): void
+    protected function setSettings(MailOptionsInterface $mailOptions): void
     {
-        $this->_settings = $settings;
+        $this->_settings = $mailOptions->getSettings();
     }
 
     /**
-     * @param $post
-     * @throws Exception
+     * @param MailOptionsInterface $mailOptions
      */
-    protected function setPost(PostInterface $post): void
+    protected function setPost(MailOptionsInterface $mailOptions): void
     {
-        $this->_post = (object) $post->getPost();
+        $this->_post = $mailOptions->getPost();
     }
 
     /**
-     * @param $mailOptions
+     * @param MailOptionsInterface $mailOptions
      */
     protected function setOptions(MailOptionsInterface $mailOptions): void
     {
@@ -95,7 +91,7 @@ class MailSettings
     }
 
     /**
-     * @param $server
+     * @param ServerInterface $server
      */
     protected function setServer(ServerInterface $server): void
     {

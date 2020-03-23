@@ -37,6 +37,13 @@ class Post implements PostInterface
     private array $_post;
 
     /**
+     * The post array after sanitization and validation.
+     *
+     * @var array
+     */
+    private array $_postOutput;
+
+    /**
      * Post constructor.
      *
      * @param array $post
@@ -69,10 +76,14 @@ class Post implements PostInterface
      *
      * @return array|null
      * @throws Exception
+     * @return array
      */
-    public function getPost()
+    public function getPost(): array
     {
-        return $this->loopThrough($this->_post);
+        if (empty($this->_postOutput)) {
+            $this->_postOutput = $this->loopThrough($this->_post);
+        }
+        return $this->_postOutput;
     }
 
     /**

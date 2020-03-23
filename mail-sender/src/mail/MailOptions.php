@@ -13,6 +13,10 @@ use MailSender\settings\GetSettings;
  */
 class MailOptions implements MailOptionsInterface
 {
+    /**
+     * The default template name.
+     */
+    const CONTACT_DEFAULT = 'contact-default';
 
     /**
      * The template.
@@ -232,7 +236,7 @@ class MailOptions implements MailOptionsInterface
      */
     protected function isDefaultTemplate($template)
     {
-        if ($template === 'contact-default') {
+        if ($template === self::CONTACT_DEFAULT) {
             return true;
         }
         return false;

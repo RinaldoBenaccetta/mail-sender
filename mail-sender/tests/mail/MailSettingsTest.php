@@ -40,7 +40,7 @@ class MailSettingsTest extends TestCase
         $server->method('getServerSettings')
             ->willReturn($this->getServer());
 
-        $mailOptions = new MailOptions($array, $this->getSettings());
+        $mailOptions = new MailOptions($post, $this->getSettings());
 
         return new MailSettings($post, $server, $mailOptions, $this->getSettings());
     }

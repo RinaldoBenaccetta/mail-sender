@@ -38,6 +38,7 @@ class GetSettings
      * Arrays of arrays become objects of objects.
      * Properties in provided class must be public.
      * All non public properties will be ignored.
+     * Only arrays are accepted, otherwise
      *
      * use example :
      *     $settings = (new GetSettings($settingsClass))->getSettings();
@@ -60,10 +61,11 @@ class GetSettings
     protected function processArray($data) {
         $output = [];
         foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $output[$key] = (object) $this->processArray($value);
-            } else {
+            if (!is_array($value)) {
                 $output[$key] = $value;
+            } else {
+                $output[$key] = (object) $this->processArray($value);
+
             }
         }
         return (object) $output;

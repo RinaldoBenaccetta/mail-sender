@@ -4,7 +4,6 @@
 namespace MailSender\data;
 
 use Exception;
-use MailSender\settings\GetSettings;
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;

@@ -25,6 +25,31 @@ class Settings
     ];
 
     /**
+     * Here is the redirection pages links.
+     * Put them here and access them like this :
+     * $settings->redirect->myPage
+     *
+     * The links are from SRC folder + htmlRootParent.
+     *
+     * @var array
+     */
+    public array $redirect = [
+        /**
+         * The default page for redirect when there are an error.
+         */
+        'defaultMailErrorPage' => '../mail-error.html',
+        /**
+         * The default page for redirect when the mail is sends.
+         */
+        'defaultMailOkPage' => '../thank-you.html',
+        /**
+         * Here is the number of parents from the root of
+         * mail-sender to find the root of html.
+         */
+        'htmlRootParent' => '0',
+    ];
+
+    /**
      * Here is the options for the default mail options.
      * If nothing is provided when sending mail,
      * then theses settings will be used.
@@ -101,7 +126,7 @@ class Settings
          * The sender name provided in the $POST values will
          * be after the prefix.
          */
-    'subjectPrefix' => "Demande d'information de la part de ",
+        'subjectPrefix' => "Demande d'information de la part de ",
         /**
          * The suffix for the subject in the default template.
          * The sender name provided in the $POST values will

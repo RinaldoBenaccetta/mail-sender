@@ -52,7 +52,7 @@ class Redirect
      */
     protected function getHTMLRootParent(): string
     {
-        $repeat = $this->_settings->global->htmlRootParent;
+        $repeat = $this->_settings->redirect->htmlRootParent;
         if ($repeat < 0) {
             $repeat = 0;
         }

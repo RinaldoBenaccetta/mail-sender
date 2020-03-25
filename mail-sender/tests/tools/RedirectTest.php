@@ -11,7 +11,7 @@ class RedirectTest extends TestCase
     public function getSettings()
     {
         return (object)[
-            'global' => (object)[
+            'redirect' => (object)[
                 'htmlRootParent' => '1'
             ]
         ];

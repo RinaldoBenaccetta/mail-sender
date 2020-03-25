@@ -3,11 +3,13 @@
 use MailSender\data\Environment;
 use MailSender\data\Post;
 use MailSender\data\Server;
+use MailSender\exception\ExceptionHandler;
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
 use MailSender\mail\MailSettings;
 use MailSender\settings\GetSettings;
 use MailSender\settings\Settings;
+use MailSender\tools\Redirect;
 
 require './vendor/autoload.php';
 
@@ -20,12 +22,11 @@ try {
     $server = new Server($environment);
     $mailOptions = new MailOptions($post, $settings);
     $mailSettings = new MailSettings($server, $mailOptions);
-    $options = $mailSettings->getAll();// send the mail
+    $options = $mailSettings->getAll();
+    // send the mail
     new MailSend($options);
+    new Redirect($settings, $settings->redirect->defaultMailOkPage);
 } catch (Exception $e) {
-    dump('error');
-    dump($mailOptions);
+    new ExceptionHandler($settings, $e);
 }
-dump($mailOptions);
-//dump($post);
-//dump($mailSettings);
+

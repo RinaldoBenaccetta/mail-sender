@@ -25,6 +25,7 @@ try {
     $options = $mailSettings->getAll();
     // send the mail
     new MailSend($options);
+    // todo : use post option for ok redirection if exist
     new Redirect($settings, $settings->redirect->defaultMailOkPage);
 } catch (Exception $e) {
     new ExceptionHandler($settings, $e);

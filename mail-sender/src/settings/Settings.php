@@ -29,7 +29,10 @@ class Settings
      * Put them here and access them like this :
      * $settings->redirect->myPage
      *
-     * The links are from SRC folder + htmlRootParent.
+     * The links are from mail-sender/src folder + htmlRootParent.
+     *
+     * Redirect class will use the page value
+     * and prefix it with '../' multiplied by htmlRootParent.
      *
      * @var array
      */
@@ -37,16 +40,16 @@ class Settings
         /**
          * The default page for redirect when there are an error.
          */
-        'defaultMailErrorPage' => '../mail-error.html',
+        'defaultMailErrorPage' => 'mail-error.html',
         /**
          * The default page for redirect when the mail is sends.
          */
-        'defaultMailOkPage' => '../thank-you.html',
+        'defaultMailOkPage' => 'thank-you.html',
         /**
          * Here is the number of parents from the root of
          * mail-sender to find the root of html.
          */
-        'htmlRootParent' => '0',
+        'htmlRootParent' => '1',
     ];
 
     /**

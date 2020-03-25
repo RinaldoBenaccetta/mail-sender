@@ -8,7 +8,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "MailSender\\": "src/"
+            "MailSender\\": "src/",
+            "MailSenderTest\\": "tests/"
         }
     },
     "require": {

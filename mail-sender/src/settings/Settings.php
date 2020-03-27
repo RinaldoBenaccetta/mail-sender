@@ -25,7 +25,13 @@ class Settings
     ];
 
     public array $response = [
+        /**
+         * The message sended back by Ajax when mail is sended without error.
+         */
         'success' => 'ok',
+        /**
+         * The message sended back when an error occur.
+         */
         'error' => 'error',
     ];
 

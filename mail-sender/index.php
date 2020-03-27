@@ -45,7 +45,7 @@ try {
     //echo json_encode('mail sended');
     //new Redirect($settings, $settings->redirect->defaultMailOkPage);
 } catch (Exception $e) {
-    echo ('error');
-    //new ExceptionHandler($settings, $e);
+    //echo ('error');
+    new ExceptionHandler($settings, $e);
 }
 

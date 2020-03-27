@@ -12,14 +12,8 @@ use MailSender\tools\Redirect;
  *
  * @package MailSender\response
  */
-class Success
+class Success extends Response
 {
-    /**
-     * @var object
-     */
-    private object $_settings;
-
-
     /**
      * Success constructor.
      *
@@ -27,16 +21,8 @@ class Success
      */
     public function __construct($settings)
     {
-        $this->setSettings($settings);
+        parent::__construct($settings);
         $this->response();
-    }
-
-    /**
-     * @param object $settings
-     */
-    private function setSettings(object $settings): void
-    {
-        $this->_settings = $settings;
     }
 
     /**
@@ -53,48 +39,29 @@ class Success
 
         switch ($client) {
             case 'js' :
-                // if the request is from Javascript.
+                // If the request is from Javascript.
                 $this->defaultSuccess();
                 break;
-            case NULL :
-                // if the request is from HTML
-                $this->redirectPage();
+            case null :
+                // If the request is from HTML
+                // Redirect the page to the URL of redirect->defaultMailOkPage
+                // in Settings class.
+                $this->redirectPage(
+                    $this->_settings->redirect->defaultMailOkPage
+                );
                 break;
             default :
-                // if the request is from another
+                // If the request is from another.
                 $this->defaultSuccess();
         }
-
-    }
-
-    /**
-     * Check if client value in $_POST is set.
-     *
-     * @return mixed|null
-     */
-    protected function client() {
-        if (!empty($_POST['client'])) {
-            return $_POST['client'];
-        }
-        return NULL;
-    }
-
-    /**
-     * Redirect the page to the URL of redirect->defaultMailOkPage
-     * in Settings class.
-     *
-     * @return Redirect
-     */
-    protected function redirectPage() : Redirect {
-        return new Redirect($this->_settings,
-                            $this->_settings->redirect->defaultMailOkPage);
     }
 
     /**
      * The default success send back the value of
      * response->success in Settings class.
      */
-    protected function defaultSuccess() : void {
+    protected function defaultSuccess(): void
+    {
         echo $this->_settings->response->success;
     }
 

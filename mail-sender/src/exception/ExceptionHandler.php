@@ -4,6 +4,7 @@
 namespace MailSender\exception;
 
 
+use MailSender\response\Error;
 use MailSender\tools\Redirect;
 
 class ExceptionHandler
@@ -62,8 +63,9 @@ class ExceptionHandler
      */
     protected function handle($exception) {
         if (!empty($this->_errorPage)) {
-            echo ('error');
-            new Redirect($this->_settings, $this->_errorPage);
+            new Error($this->_settings, $this->_errorPage);
+//            echo ('error');
+//            new Redirect($this->_settings, $this->_errorPage);
         } else {
             echo $exception->getMessage();
         }

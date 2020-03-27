@@ -26,6 +26,7 @@ class Settings
 
     public array $response = [
         'success' => 'ok',
+        'error' => 'error',
     ];
 
     /**

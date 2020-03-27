@@ -24,6 +24,10 @@ class Settings
         'rootParent' => '1',
     ];
 
+    public array $response = [
+        'success' => 'ok',
+    ];
+
     /**
      * Here is the redirection pages links.
      * Put them here and access them like this :

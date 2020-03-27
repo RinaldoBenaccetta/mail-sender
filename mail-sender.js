@@ -1,59 +1,80 @@
-// function sendMail(){
-// // Create our XMLHttpRequest object
-//     var hr = new XMLHttpRequest();
-// // Create some variables we need to send to our PHP file
-//     var url = "processForm.php";
-//     var fn = document.getElementById("fname").value;
-//     var ln = document.getElementById("lname").value;
-//     var vars = "firstname="+fn+"&lastname="+ln;
-//     hr.open("POST", url, true);
-//     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-// // Access the onreadystatechange event for the XMLHttpRequest object
-//     hr.onreadystatechange = function() {
-//         if(hr.readyState == 4 && hr.status == 200) {
-//             var return_data = hr.responseText;
-//             document.getElementById("status").innerHTML = return_data;
+// XMLHttpRequest version with minAjax library
+// function sendMail() {
+//     document.getElementById("mail-status").innerHTML = "processing...";
+//     minAjax({
+//         url:"mail-sender/index.php",//request URL
+//         type:"POST",//Request type GET/POST
+//         //Send Data in form of GET/POST
+//         data:getValues(),
+//         //CALLBACK FUNCTION with RESPONSE as argument
+//         success: function(data){
+//             document.getElementById("mail-status").innerHTML = data;
+//             //alert(data);
 //         }
-//     }
-// // Send the data to PHP now... and wait for response to update the status div
-//     hr.send(vars); // Actually execute the request
-//     document.getElementById("status").innerHTML = "processing...";
+//
+//     });
 // }
 
-function sendMail(){
-// Create our XMLHttpRequest object
-    var hr = new XMLHttpRequest();
-// Create some variables we need to send to our PHP file
-    let postValues = getValues();
-    console.log(postValues);
-
-    var url = "mail-sender/index.php";
-    hr.open("POST", url, true);
-    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-// Access the onreadystatechange event for the XMLHttpRequest object
-    hr.onreadystatechange = function() {
-        if(hr.readyState === 4 && hr.status === 200) {
-            document.getElementById("status").innerHTML = hr.responseText;
-        }
-    };
-// Send the data to PHP now... and wait for response to update the status div
-    hr.send(postValues); // Actually execute the request
+function sendMail() {
     document.getElementById("mail-status").innerHTML = "processing...";
+
+    var input = getValues()
+
+    var data = new FormData()
+
+    request(data, input)
 }
+
+function request(data, input) {
+    data.append('senderName', input['senderName'])
+    data.append('senderFirstName', input['senderFirstName'])
+    data.append('senderPhone', input['senderPhone'])
+    data.append('senderMail', input['senderMail'])
+    data.append('message', input['message'])
+    data.append('senderPhone', input['senderPhone'])
+    data.append('mailError', input['mailError'])
+    data.append('client', input['client'])
+
+    fetch('mail-sender/index.php', {
+
+        method: 'POST',
+
+        body: data
+
+        //body: JSON.stringify(getValues()) // don't work
+
+        //body: getValues() // don't work
+
+    }).then(res => {
+        if(res.ok) {
+            res.text()
+                .then(text => {
+                document.getElementById("mail-status").textContent = text;
+            });
+        } else {
+            throw Error(`Request rejected with status ${res.status}`);
+        }
+    })
+        .catch((error) => console.log(error))
+}
+
 
 function getValues() {
     return {
-        'senderName': document
+        client: 'js',
+        senderName: document
             .getElementById("senderName").value,
-        'senderFirstName': document
+        senderFirstName: document
             .getElementById("senderFirstName").value,
-        'senderPhone': document
+        senderPhone: document
             .getElementById("senderPhone").value,
-        'senderMail': document
+        senderMail: document
             .getElementById("senderMail").value,
-        'mailOk': document
+        message: document
+            .getElementById("message").value,
+        mailOk: document
             .getElementById("mailOk").value,
-        'mailError': document
+        mailError: document
             .getElementById("mailError").value,
     };
 }

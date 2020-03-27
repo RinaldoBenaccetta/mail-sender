@@ -62,6 +62,7 @@ class ExceptionHandler
      */
     protected function handle($exception) {
         if (!empty($this->_errorPage)) {
+            echo ('error');
             new Redirect($this->_settings, $this->_errorPage);
         } else {
             echo $exception->getMessage();

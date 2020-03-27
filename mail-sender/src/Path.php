@@ -14,4 +14,5 @@ class Path
     const RENDER = self::CLASS_ROOT . './render';
     const SETTINGS = self::CLASS_ROOT . './settings';
     const TOOLS = self::CLASS_ROOT . './tools';
+    const PARENT_ROOT = '../' . self::ROOT_PATH;
 }

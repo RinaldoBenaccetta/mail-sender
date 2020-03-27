@@ -9,12 +9,26 @@ use MailSender\mail\MailSend;
 use MailSender\mail\MailSettings;
 use MailSender\settings\GetSettings;
 use MailSender\settings\Settings;
+use MailSender\tools\Log;
 use MailSender\tools\Redirect;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
+use MailSender\response\Success;
 
 require './vendor/autoload.php';
 
 $settingsClass = new Settings();
 $settings = (new GetSettings($settingsClass))->getSettings();
+
+//dump($_REQUEST); // $_POST = $_REQUEST
+//dump($_POST); // $_POST = $_REQUEST
+
+//dump(json_encode($_REQUEST));
+//$logger = new Log(json_encode($_POST));
+//print_r($_POST);
+////$logger->info($_POST);
+//$logger->warning('Adding a new user', (string)['username' => 'Seldaek']);
 
 try {
     $environment = new Environment($settings);
@@ -26,8 +40,12 @@ try {
     // send the mail
     new MailSend($options);
     // todo : use post option for ok redirection if exist
-    new Redirect($settings, $settings->redirect->defaultMailOkPage);
+    new Success($settings);
+
+    //echo json_encode('mail sended');
+    //new Redirect($settings, $settings->redirect->defaultMailOkPage);
 } catch (Exception $e) {
-    new ExceptionHandler($settings, $e);
+    echo ('error');
+    //new ExceptionHandler($settings, $e);
 }
 

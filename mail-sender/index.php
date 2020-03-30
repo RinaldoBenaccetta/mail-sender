@@ -21,15 +21,6 @@ require './vendor/autoload.php';
 $settingsClass = new Settings();
 $settings = (new GetSettings($settingsClass))->getSettings();
 
-//dump($_REQUEST); // $_POST = $_REQUEST
-//dump($_POST); // $_POST = $_REQUEST
-
-//dump(json_encode($_REQUEST));
-//$logger = new Log(json_encode($_POST));
-//print_r($_POST);
-////$logger->info($_POST);
-//$logger->warning('Adding a new user', (string)['username' => 'Seldaek']);
-
 try {
     $environment = new Environment($settings);
     $post = new Post($_POST, $settings);
@@ -39,13 +30,11 @@ try {
     $options = $mailSettings->getAll();
     // send the mail
     new MailSend($options);
-    // todo : use post option for ok redirection if exist
     new Success($settings);
-
-    //echo json_encode('mail sended');
-    //new Redirect($settings, $settings->redirect->defaultMailOkPage);
 } catch (Exception $e) {
-    //echo ('error');
     new ExceptionHandler($settings, $e);
+} finally {
+    // add what would be executed even if an exception is throw
+    // close all here
 }
 

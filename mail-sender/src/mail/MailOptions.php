@@ -273,5 +273,5 @@ class MailOptions implements MailOptionsInterface
     {
         return $this->_post;
     }
-    
+
 }

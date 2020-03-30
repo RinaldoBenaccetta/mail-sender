@@ -6,7 +6,6 @@ namespace MailSender\mail;
 use MailSender\exception\SettingsException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use Exception;
 
 class MailObject
 {
@@ -348,7 +347,7 @@ class MailObject
     /**
      * @param string $encryptionMethod
      *
-     * @throws Exception
+     * @throws SettingsException
      */
     public function setEncryptionMethod(string $encryptionMethod): void
     {
@@ -413,7 +412,6 @@ class MailObject
      * return the html body with stripped tags.
      *
      * @return string
-     * @throws Exception
      */
     public function getAltBody()
     {
@@ -433,7 +431,6 @@ class MailObject
 
     /**
      * @return string
-     * @throws Exception
      */
     public function getHtmlBody()
     {

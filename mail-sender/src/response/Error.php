@@ -3,6 +3,7 @@
 
 namespace MailSender\response;
 
+// todo : send back error codes based on the exception.
 
 class Error extends Response
 {

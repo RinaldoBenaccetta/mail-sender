@@ -4,6 +4,7 @@ use MailSender\data\Environment;
 use MailSender\data\Post;
 use MailSender\data\Server;
 use MailSender\exception\ExceptionHandler;
+use MailSender\exception\SettingsException;
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
 use MailSender\mail\MailSettings;
@@ -31,8 +32,15 @@ try {
     // send the mail
     new MailSend($options);
     new Success($settings);
-} catch (Exception $e) {
-    new ExceptionHandler($settings, $e);
+}
+//catch (Exception $e) {
+//    new ExceptionHandler($settings, $e);
+//}
+catch (SettingsException $e) {
+
+    echo $e->getCode();
+    echo $e->getMessage();
+
 } finally {
     // add what would be executed even if an exception is throw
     // close all here

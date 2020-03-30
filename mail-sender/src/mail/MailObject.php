@@ -3,6 +3,7 @@
 
 namespace MailSender\mail;
 
+use MailSender\exception\SettingsException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Exception;
@@ -354,8 +355,9 @@ class MailObject
         if ($encryptionMethod === 'STARTTLS' || $encryptionMethod === 'SMTPS') {
             $this->encryptionMethod = $encryptionMethod;
         } else {
-            throw new Exception(
-                'Encryption method should be STARTTLS or SMTPS : ' . $encryptionMethod . ' given.'
+            throw new SettingsException(
+                'Encryption method should be STARTTLS or SMTPS : ' .
+                $encryptionMethod . ' given.'
             );
         }
     }

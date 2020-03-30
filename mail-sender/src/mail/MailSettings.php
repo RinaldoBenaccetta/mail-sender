@@ -97,6 +97,7 @@ class MailSettings
      * Return an array with all the settings of the e-mail.
      *
      * @return array
+     * @throws RenderException
      */
     public function getAll()
     {

@@ -97,6 +97,9 @@ class MailOptions implements MailOptionsInterface
         $this->_post = (object) $post->getPost();
     }
 
+    /**
+     * @throws ForgottenOptionException
+     */
     protected function setOptions(): void
     {
         $this->setTemplate();
@@ -286,11 +289,21 @@ class MailOptions implements MailOptionsInterface
         ];
     }
 
+    /**
+     * Return the settings of the app.
+     *
+     * @return object
+     */
     public function getSettings(): object
     {
         return $this->_settings;
     }
 
+    /**
+     * Return the sanitized and validated $_POST.
+     * 
+     * @return object
+     */
     public function getPost(): object
     {
         return $this->_post;

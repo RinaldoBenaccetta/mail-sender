@@ -13,3 +13,6 @@ Error with the template engine.
 
 ### 3000
 The provide E-mail is not valid according to the E-mail validations settings.
+
+### 4000
+Error in MailSend class while sending the mail.

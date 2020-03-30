@@ -6,6 +6,7 @@ use MailSender\data\Server;
 use MailSender\exception\EmailValidationException;
 use MailSender\exception\ExceptionHandler;
 use MailSender\exception\RenderException;
+use MailSender\exception\SendingException;
 use MailSender\exception\SettingsException;
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
@@ -38,17 +39,21 @@ try {
 //catch (Exception $e) {
 //    new ExceptionHandler($settings, $e);
 //}
-catch (SettingsException $e) {
-
-    echo $e->getCode();
-    echo $e->getMessage();
-
-}
+//catch (Exception $e) {
+//
+//    echo $e->getCode();
+//    echo $e->getMessage();
+//
+//}
 catch (RenderException $e) {
     echo $e->getCode();
     echo $e->getMessage();
 }
 catch (EmailValidationException $e) {
+    echo $e->getCode();
+    echo $e->getMessage();
+}
+catch (SendingException $e) {
     echo $e->getCode();
     echo $e->getMessage();
 }

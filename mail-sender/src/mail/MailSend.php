@@ -3,6 +3,7 @@
 
 namespace MailSender\mail;
 
+use MailSender\exception\SendingException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -69,7 +70,7 @@ class MailSend extends MailObject
 
             //echo 'Message sent!';
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            throw new SendingException($mail->ErrorInfo);
         }
 
 

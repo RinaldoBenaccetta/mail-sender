@@ -355,10 +355,7 @@ class MailObject
         if ($encryptionMethod === 'STARTTLS' || $encryptionMethod === 'SMTPS') {
             $this->encryptionMethod = $encryptionMethod;
         } else {
-            throw new SettingsException(
-                'Encryption method should be STARTTLS or SMTPS : ' .
-                $encryptionMethod . ' given.'
-            );
+            throw new SettingsException($encryptionMethod);
         }
     }
 

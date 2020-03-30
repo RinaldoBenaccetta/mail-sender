@@ -10,8 +10,9 @@ class SettingsException extends Exception
 {
     const CODE = 1000;
 
-    public function __construct($message, $code = 8012)
+    public function __construct($value, $code = self::CODE)
     {
+        $message = "Encryption method should be STARTTLS or SMTPS : {$value} given";
         parent::__construct($message, $code);
     }
 }

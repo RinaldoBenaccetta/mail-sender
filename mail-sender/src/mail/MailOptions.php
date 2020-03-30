@@ -3,6 +3,7 @@
 
 namespace MailSender\mail;
 
+use Exception;
 use MailSender\data\PostInterface;
 
 /**
@@ -78,6 +79,7 @@ class MailOptions implements MailOptionsInterface
      *
      * @param PostInterface $post
      * @param object $settings
+     * @throws Exception
      */
     public function __construct(PostInterface $post, object $settings)
     {
@@ -86,6 +88,10 @@ class MailOptions implements MailOptionsInterface
         $this->setOptions();
     }
 
+    /**
+     * @param PostInterface $post
+     * @throws Exception
+     */
     public function setPost(PostInterface $post): void {
         $this->_post = (object) $post->getPost();
     }
@@ -267,6 +273,5 @@ class MailOptions implements MailOptionsInterface
     {
         return $this->_post;
     }
-
-
+    
 }

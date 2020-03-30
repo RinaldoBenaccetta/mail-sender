@@ -75,7 +75,7 @@ class Post implements PostInterface
      * Get the Post Values sanitized and validated.
      *
      * @return object
-     * @throws Exception
+     * @throws EmailValidationException
      */
     public function getPost(): object
     {
@@ -91,7 +91,7 @@ class Post implements PostInterface
      *
      * @param $data
      * @return array|null
-     * @throws Exception
+     * @throws EmailValidationException
      */
     protected function loopThrough($data)
     {
@@ -122,7 +122,7 @@ class Post implements PostInterface
      * @param $data
      *
      * @return array
-     * @throws Exception
+     * @throws EmailValidationException
      */
     protected function processDataLoop($data): array
     {
@@ -161,7 +161,7 @@ class Post implements PostInterface
      * @param string $mail
      *
      * @return string
-     * @throws Exception
+     * @throws EmailValidationException
      */
     protected function validateMail(string $key, string $mail): string
     {

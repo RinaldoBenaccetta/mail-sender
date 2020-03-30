@@ -3,8 +3,6 @@
 
 namespace MailSender\mail;
 
-
-use MailSender\settings\GetSettings;
 use MailSender\tools\Name;
 
 /**

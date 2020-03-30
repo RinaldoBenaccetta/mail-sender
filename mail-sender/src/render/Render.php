@@ -4,7 +4,6 @@
 namespace MailSender\render;
 
 use MailSender\Path;
-use MailSender\settings\GetSettings;
 use MailSender\tools\StringTool;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -17,14 +16,17 @@ class Render
 {
 
     /**
-     * Return the rendered HTML with the provided template and datas.
-     * The .twig extension can be forgeted for $template argument.
+     * Return the rendered HTML with the provided template and data.
+     * The .twig extension can be forget for $template argument.
      *
      * @param $template
      * @param $data
      *
      * @param object $settings
      * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public static function render($template, $data, object $settings)
     {

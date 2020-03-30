@@ -3,8 +3,13 @@
 
 namespace MailSender\mail;
 
+use Exception;
 use MailSender\data\ServerInterface;
+use MailSender\exception\RenderException;
 use MailSender\render\Render;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class MailSettings
@@ -308,12 +313,21 @@ class MailSettings
      * the default template will be used.
      *
      * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws RenderException
      */
     public function getHtmlBody()
     {
         $template = $this->_options->template;
         $data = (array)$this->_post;
-        return Render::render($template, $data, $this->_settings);
+        try {
+            return Render::render($template, $data, $this->_settings);
+        } catch (Exception $e) {
+            throw new RenderException($e->getMessage());
+        }
+
     }
 
     /**

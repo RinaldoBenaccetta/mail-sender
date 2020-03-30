@@ -7,3 +7,6 @@ There is an htaccess file at the root that deny access to all but index.php. Tha
 ## Errors :
 ### 1000
 Encryption in .env file is wrong, *STARTTLS* or *SMTPS* must be used.
+
+### 2000
+Error with the template engine.

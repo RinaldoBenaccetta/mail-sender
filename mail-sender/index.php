@@ -4,6 +4,7 @@ use MailSender\data\Environment;
 use MailSender\data\Post;
 use MailSender\data\Server;
 use MailSender\exception\ExceptionHandler;
+use MailSender\exception\RenderException;
 use MailSender\exception\SettingsException;
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSend;
@@ -41,7 +42,14 @@ catch (SettingsException $e) {
     echo $e->getCode();
     echo $e->getMessage();
 
-} finally {
+}
+catch (RenderException $e) {
+    echo $e->getCode();
+    echo $e->getMessage();
+}
+
+
+finally {
     // add what would be executed even if an exception is throw
     // close all here
 }

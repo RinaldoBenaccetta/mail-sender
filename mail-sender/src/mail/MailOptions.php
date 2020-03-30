@@ -4,7 +4,6 @@
 namespace MailSender\mail;
 
 use MailSender\data\PostInterface;
-use MailSender\settings\GetSettings;
 
 /**
  * Class MailOptions

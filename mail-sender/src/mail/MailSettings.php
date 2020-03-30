@@ -3,15 +3,8 @@
 
 namespace MailSender\mail;
 
-use Exception;
-use MailSender\data\Post;
-use MailSender\data\PostInterface;
 use MailSender\data\ServerInterface;
 use MailSender\render\Render;
-use MailSender\settings\GetSettings;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 /**
  * Class MailSettings
@@ -102,9 +95,6 @@ class MailSettings
      * Return an array with all the settings of the e-mail.
      *
      * @return array
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
     public function getAll()
     {
@@ -318,9 +308,6 @@ class MailSettings
      * the default template will be used.
      *
      * @return string
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
     public function getHtmlBody()
     {

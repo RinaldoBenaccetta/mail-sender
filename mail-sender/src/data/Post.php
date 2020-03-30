@@ -10,6 +10,7 @@ use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Egulias\EmailValidator\Validation\SpoofCheckValidation;
+use MailSender\exception\EmailValidationException;
 
 
 /**
@@ -169,7 +170,7 @@ class Post implements PostInterface
         $multipleValidations = $this->getMailValidationRules();
 
         if (!$validator->isValid($mail, $multipleValidations)) {
-            throw new Exception("value ($mail) provided for {$key} is not valid.");
+            throw new EmailValidationException($mail, $key);
         }
 
         return $mail;

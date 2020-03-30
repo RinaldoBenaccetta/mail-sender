@@ -3,6 +3,7 @@
 use MailSender\data\Environment;
 use MailSender\data\Post;
 use MailSender\data\Server;
+use MailSender\exception\EmailValidationException;
 use MailSender\exception\ExceptionHandler;
 use MailSender\exception\RenderException;
 use MailSender\exception\SettingsException;
@@ -44,6 +45,10 @@ catch (SettingsException $e) {
 
 }
 catch (RenderException $e) {
+    echo $e->getCode();
+    echo $e->getMessage();
+}
+catch (EmailValidationException $e) {
     echo $e->getCode();
     echo $e->getMessage();
 }

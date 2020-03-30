@@ -10,3 +10,6 @@ Encryption in .env file is wrong, *STARTTLS* or *SMTPS* must be used.
 
 ### 2000
 Error with the template engine.
+
+### 3000
+The provide E-mail is not valid according to the E-mail validations settings.

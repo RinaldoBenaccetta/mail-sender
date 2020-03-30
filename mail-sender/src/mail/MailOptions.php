@@ -115,13 +115,16 @@ class MailOptions implements MailOptionsInterface
      * Define the template.
      * If a template is provided, it will be used,
      * if not, the default template will be used.
+     * @throws ForgottenOptionException
      */
     protected function setTemplate(): void
     {
         if (!empty($this->_post->template)) {
             $this->_template = $this->_post->template;
-        } else {
+        } elseif(!empty($this->_settings->defaultMailOptions->template)) {
             $this->_template = $this->_settings->defaultMailOptions->template;
+        } else {
+            throw new ForgottenOptionException('Empty template.', 5060);
         }
     }
 

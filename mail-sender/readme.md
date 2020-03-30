@@ -34,3 +34,6 @@ Recipient mail is not provided or have no default in settings.
 
 ### 5050
 Subject is not provided or have no default in settings.
+
+### 5060
+Template is not provided or have no default in settings.

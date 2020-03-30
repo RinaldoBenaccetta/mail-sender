@@ -16,3 +16,12 @@ The provide E-mail is not valid according to the E-mail validations settings.
 
 ### 4000
 Error in MailSend class while sending the mail.
+
+### 5000
+Invalid option exception. There is a problem with provided arguments.
+
+#### 5010
+Sender name is not provided or have no default in settings.
+
+### 5020
+Sender mail is not provided or have no default in settings.

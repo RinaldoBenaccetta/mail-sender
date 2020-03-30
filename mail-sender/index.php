@@ -5,6 +5,7 @@ use MailSender\data\Post;
 use MailSender\data\Server;
 use MailSender\exception\EmailValidationException;
 use MailSender\exception\ExceptionHandler;
+use MailSender\exception\ForgottenOptionException;
 use MailSender\exception\RenderException;
 use MailSender\exception\SendingException;
 use MailSender\exception\SettingsException;
@@ -54,6 +55,10 @@ catch (EmailValidationException $e) {
     echo $e->getMessage();
 }
 catch (SendingException $e) {
+    echo $e->getCode();
+    echo $e->getMessage();
+}
+catch (ForgottenOptionException $e) {
     echo $e->getCode();
     echo $e->getMessage();
 }

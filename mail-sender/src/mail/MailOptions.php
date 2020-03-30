@@ -5,6 +5,7 @@ namespace MailSender\mail;
 
 use Exception;
 use MailSender\data\PostInterface;
+use MailSender\exception\ForgottenOptionException;
 
 /**
  * Class MailOptions
@@ -128,13 +129,17 @@ class MailOptions implements MailOptionsInterface
      * Define the sender E-mail.
      * If a sender E-mail is provided, it will be used,
      * if not, the default sender E-mail will be used.
+     * @throws ForgottenOptionException
      */
     protected function setSenderMail(): void
     {
         if (!empty($this->_post->senderMail)) {
             $this->_senderMail = $this->_post->senderMail;
-        } else {
+        } elseif (!empty($this->_settings->defaultMailOptions->senderMail)) {
             $this->_senderMail = $this->_settings->defaultMailOptions->senderMail;
+        }
+        else {
+            throw new ForgottenOptionException('Empty sender mail', 5020);
         }
     }
 
@@ -142,6 +147,7 @@ class MailOptions implements MailOptionsInterface
      * Define the sender name.
      * If a sender name is provided, it will be used,
      * is not, the default sender name will be used.
+     * @throws ForgottenOptionException
      */
     protected function setSenderName(): void
     {
@@ -154,10 +160,14 @@ class MailOptions implements MailOptionsInterface
         } elseif (!empty($this->_post->senderName)) {
             // if there is a sender name in post, use it
             $this->_senderName = $this->_post->senderName;
-        } else {
+        } elseif (!empty($this->_settings->defaultMailOptions->senderName)) {
             // if there is no sender name in post and is not default template
             // use the default sender name
             $this->_senderName = $this->_settings->defaultMailOptions->senderName;
+        }
+        else {
+            // if empty throw exception
+            throw new ForgottenOptionException('Empty sender name', 5010);
         }
     }
 

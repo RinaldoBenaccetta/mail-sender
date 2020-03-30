@@ -139,7 +139,7 @@ class MailOptions implements MailOptionsInterface
             $this->_senderMail = $this->_settings->defaultMailOptions->senderMail;
         }
         else {
-            throw new ForgottenOptionException('Empty sender mail', 5020);
+            throw new ForgottenOptionException('Empty sender mail.', 5020);
         }
     }
 
@@ -167,7 +167,7 @@ class MailOptions implements MailOptionsInterface
         }
         else {
             // if empty throw exception
-            throw new ForgottenOptionException('Empty sender name', 5010);
+            throw new ForgottenOptionException('Empty sender name.', 5010);
         }
     }
 
@@ -175,13 +175,16 @@ class MailOptions implements MailOptionsInterface
      * Define the recipient E-mail.
      * If a recipient E-mail is provided, it will be used,
      * is not, the default recipient E-mail will be used.
+     * @throws ForgottenOptionException
      */
     protected function setRecipientMail(): void
     {
         if (!empty($this->_post->recipientMail)) {
             $this->_recipientMail = $this->_post->recipientMail;
-        } else {
+        } elseif(!empty($this->_settings->defaultMailOptions->recipientMail)) {
             $this->_recipientMail = $this->_settings->defaultMailOptions->recipientMail;
+        } else {
+            throw new ForgottenOptionException('Empty recipient mail.', 5040);
         }
     }
 
@@ -189,13 +192,16 @@ class MailOptions implements MailOptionsInterface
      * Define the recipient name.
      * If a recipient name is provided, it will be used,
      * is not, the default recipient name will be used.
+     * @throws ForgottenOptionException
      */
     protected function setRecipientName(): void
     {
         if (!empty($this->_post->recipientName)) {
             $this->_recipientName = $this->_post->recipientName;
-        } else {
+        } elseif (!empty($this->_settings->defaultMailOptions->recipientName)) {
             $this->_recipientName = $this->_settings->defaultMailOptions->recipientName;
+        } else {
+            throw new ForgottenOptionException('Empty recipient name.', 5030);
         }
     }
 
@@ -203,6 +209,7 @@ class MailOptions implements MailOptionsInterface
      * Define the subject.
      * If a subject is provided, it will be used,
      * is not, the default subject will be used.
+     * @throws ForgottenOptionException
      */
     protected function setSubject(): void
     {
@@ -236,9 +243,11 @@ class MailOptions implements MailOptionsInterface
         ) {
             // if this is not default template and have a post subject
             $this->_subject = $this->_post->subject;
-        } else {
+        } elseif (!empty($this->_settings->defaultMailOptions->subject)) {
             // if this is not default template and have not a post subject
             $this->_subject = $this->_settings->defaultMailOptions->subject;
+        } else {
+            throw new ForgottenOptionException('Empty subject.', 5050);
         }
     }
 

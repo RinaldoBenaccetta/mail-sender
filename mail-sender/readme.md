@@ -25,3 +25,12 @@ Sender name is not provided or have no default in settings.
 
 ### 5020
 Sender mail is not provided or have no default in settings.
+
+#### 5030
+Recipient name is not provided or have no default in settings.
+
+### 5040
+Recipient mail is not provided or have no default in settings.
+
+### 5050
+Subject is not provided or have no default in settings.

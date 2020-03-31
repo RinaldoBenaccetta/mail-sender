@@ -301,7 +301,7 @@ class MailOptions implements MailOptionsInterface
 
     /**
      * Return the sanitized and validated $_POST.
-     * 
+     *
      * @return object
      */
     public function getPost(): object

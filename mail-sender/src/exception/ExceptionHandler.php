@@ -89,7 +89,7 @@ class ExceptionHandler
 
     /**
      * Log the exception.
-     * 
+     *
      * @param object $exception
      */
     protected function logException(object $exception): void

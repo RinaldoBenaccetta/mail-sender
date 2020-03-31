@@ -4,8 +4,6 @@
 namespace MailSender\response;
 
 
-use MailSender\tools\Redirect;
-
 /**
  * Class Success
  * Handle success of mail sending.
@@ -27,7 +25,7 @@ class ReturnSuccess extends Response
      * @param $settings
      * @param string|null $successPage
      */
-    public function __construct($settings, string $successPage = NULL)
+    public function __construct($settings, string $successPage = null)
     {
         parent::__construct($settings);
         $this->setSuccessPage($successPage);
@@ -37,13 +35,14 @@ class ReturnSuccess extends Response
     /**
      * @param string|null $successPage
      */
-    protected function setSuccessPage(string $successPage = NULL) : void {
+    protected function setSuccessPage(string $successPage = null): void
+    {
         if (!empty($successPage)) {
             $this->_successPage = $successPage;
         } elseif (!empty($this->_settings->redirect->defaultMailOkPage)) {
             $this->_successPage = $this->_settings->redirect->defaultMailOkPage;
         } else {
-            $this->_successPage = NULL;
+            $this->_successPage = null;
         }
     }
 

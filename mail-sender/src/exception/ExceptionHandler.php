@@ -33,21 +33,23 @@ class ExceptionHandler
      * @param $exception
      * @param string $errorPage An error page can be passed as argument.
      */
-    public function __construct(object $settings, $exception, string
-    $errorPage =
-    NULL )
-    {
+    public function __construct(
+        object $settings,
+        $exception,
+        string $errorPage =
+        null
+    ) {
         $this->setSettings($settings);
         $this->setErrorPage($errorPage);
         $this->handle($exception);
-
     }
 
     /**
      * @param object $settings
      */
-    protected function setSettings(object $settings): void {
-        $this->_settings = (object) $settings;
+    protected function setSettings(object $settings): void
+    {
+        $this->_settings = (object)$settings;
     }
 
     /**
@@ -58,29 +60,40 @@ class ExceptionHandler
      *
      * @param $errorPage
      */
-    protected function setErrorPage(string $errorPage = NULL): void {
+    protected function setErrorPage(string $errorPage = null): void
+    {
         if (!empty($errorPage)) {
             $this->_errorPage = $errorPage;
-        } elseif(!empty($this->_settings->redirect->defaultMailErrorPage)) {
+        } elseif (!empty($this->_settings->redirect->defaultMailErrorPage)) {
             $this->_errorPage =
                 $this->_settings->redirect->defaultMailErrorPage;
         } else {
-            $this->_errorPage = NULL;
+            $this->_errorPage = null;
         }
     }
 
     /**
+     * Return the error and log it.
+     *
      * @param object $exception
      */
-    protected function handle(object $exception) {
-        new ReturnError($this->_settings, $this->_errorPage, $exception->getCode());
+    protected function handle(object $exception)
+    {
+        new ReturnError(
+            $this->_settings,
+            $this->_errorPage,
+            $exception->getCode()
+        );
         $this->logException($exception);
     }
 
     /**
+     * Log the exception.
+     * 
      * @param object $exception
      */
-    protected function logException(object $exception): void {
+    protected function logException(object $exception): void
+    {
         $severity = $this->getSeverity($exception->getCode());
         new Log($severity, $exception->getMessage());
     }
@@ -93,7 +106,8 @@ class ExceptionHandler
      * @param $code
      * @return string
      */
-    protected function getSeverity($code): string {
+    protected function getSeverity($code): string
+    {
         switch ($code) {
             case 5000 :
             case 5010 :

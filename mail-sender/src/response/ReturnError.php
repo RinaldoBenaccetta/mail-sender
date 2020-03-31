@@ -3,7 +3,6 @@
 
 namespace MailSender\response;
 
-// todo : send back error codes based on the exception.
 
 class ReturnError extends Response
 {
@@ -33,9 +32,11 @@ class ReturnError extends Response
      * @param $errorPage
      * @param $code
      */
-    public function __construct($settings, string $errorPage = NULL, int
-    $code = NULL)
-    {
+    public function __construct(
+        $settings,
+        string $errorPage = null,
+        int $code = null
+    ) {
         parent::__construct($settings);
         $this->setErrorPage($errorPage);
         $this->setCode($code);
@@ -45,21 +46,21 @@ class ReturnError extends Response
     /**
      * @param int $code
      */
-    protected function setCode(int $code = NULL): void {
+    protected function setCode(int $code = null): void
+    {
         if (!empty($code)) {
             $this->_code = $code;
         } else {
             $this->_code = self::UNDETERMINED_CODE;
         }
-
     }
 
     /**
      * @param string $errorPage
      */
-    protected function setErrorPage(string $errorPage = NULL): void {
+    protected function setErrorPage(string $errorPage = null): void
+    {
         $this->_errorPage = $errorPage;
-
     }
 
     protected function response()
@@ -72,7 +73,7 @@ class ReturnError extends Response
                 // If the request is from Javascript.
                 $this->returnErrorMessage();
                 break;
-            case NULL :
+            case null :
                 // If the request is from HTML
                 // If there is a page.
                 if (!empty($this->_errorPage)) {
@@ -88,7 +89,6 @@ class ReturnError extends Response
                 // If the request is from another.
                 $this->returnErrorMessage();
         }
-
     }
 
     /**
@@ -97,7 +97,8 @@ class ReturnError extends Response
      *
      * @return string
      */
-    protected function getErrorFlag() : string {
+    protected function getErrorFlag(): string
+    {
         return $this->_settings->response->error;
     }
 
@@ -106,7 +107,8 @@ class ReturnError extends Response
      *
      * @return void
      */
-    protected function returnErrorMessage(): void {
+    protected function returnErrorMessage(): void
+    {
         echo $this->getErrorFlag() . ':' . $this->_code;
     }
 

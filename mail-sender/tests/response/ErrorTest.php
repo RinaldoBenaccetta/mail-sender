@@ -2,7 +2,7 @@
 
 namespace response;
 
-use MailSender\response\Error;
+use MailSender\response\ReturnError;
 use PHPUnit\Framework\TestCase;
 
 class ErrorTest extends TestCase
@@ -16,8 +16,9 @@ class ErrorTest extends TestCase
      */
     public function testErrorWithFilledPostClient($post, $expected)
     {
+        // expect return a string with the error and code.
         $_POST['client'] = $post;
-        new Error($this->getSettings(), $this->getErrorPage());
+        new ReturnError($this->getSettings(), $this->getErrorPage());
         $this->expectOutputString($expected);
     }
 
@@ -25,14 +26,23 @@ class ErrorTest extends TestCase
      * @runInSeparateProcess
      */
     public function testErrorWithoutFilledPostClient()
+        // expect redirect to error page.
     {
         $_POST = [];
-        new Error($this->getSettings(), $this->getErrorPage());
+        new ReturnError($this->getSettings(), $this->getErrorPage());
 
         $this->assertContains(
             "Location: ../{$this->getErrorPage()}",
             xdebug_get_headers()
         );
+    }
+
+    public function testErrorWithoutFilledPostClientAndEmptyErrorPage()
+    {
+        // expect return a string with the error and code.
+        $_POST = [];
+        new ReturnError($this->getSettings(), NULL);
+        $this->expectOutputString($this->getSettings()->response->error . ":9000");
     }
 
     public function getErrorPage()
@@ -57,9 +67,10 @@ class ErrorTest extends TestCase
      */
     public function getGetDataProvider()
     {
+        // add code 9000 at the end.
         return [
-            ['js', $this->getSettings()->response->error],
-            ['something', $this->getSettings()->response->error],
+            ['js', $this->getSettings()->response->error . ":9000"],
+            ['something', $this->getSettings()->response->error . ":9000"],
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace response;
 
-use MailSender\response\Success;
+use MailSender\response\ReturnSuccess;
 use PHPUnit\Framework\TestCase;
 
 class SuccessTest extends TestCase
@@ -17,7 +17,7 @@ class SuccessTest extends TestCase
     public function testSuccessWithFilledPostClient($post, $expected)
     {
         $_POST['client'] = $post;
-        new Success($this->getSettings());
+        new ReturnSuccess($this->getSettings());
         $this->expectOutputString($expected);
     }
 
@@ -27,7 +27,7 @@ class SuccessTest extends TestCase
     public function testSuccessWithoutFilledPostClient()
     {
         $_POST = [];
-        new Success($this->getSettings());
+        new ReturnSuccess($this->getSettings());
 
         $this->assertContains(
             "Location: ../{$this->getSettings()->redirect->defaultMailOkPage}",

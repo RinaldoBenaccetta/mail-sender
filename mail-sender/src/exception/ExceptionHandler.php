@@ -4,7 +4,8 @@
 namespace MailSender\exception;
 
 
-use MailSender\response\Error;
+use MailSender\response\ReturnError;
+use MailSender\tools\Log;
 
 class ExceptionHandler
 {
@@ -20,9 +21,20 @@ class ExceptionHandler
      *
      * @var string
      */
-    private string $_errorPage;
+    private ?string $_errorPage;
 
-    public function __construct(object $settings, $exception, $errorPage =
+    /**
+     * ExceptionHandler constructor.
+     * An error page can be specified, it can be from custom settings or from
+     * $post. The custom settings must be a better solution : it is recovered
+     * at start of the app. And the $post process can trow exception itself.
+     *
+     * @param object $settings
+     * @param $exception
+     * @param string $errorPage An error page can be passed as argument.
+     */
+    public function __construct(object $settings, $exception, string
+    $errorPage =
     NULL )
     {
         $this->setSettings($settings);
@@ -46,7 +58,7 @@ class ExceptionHandler
      *
      * @param $errorPage
      */
-    protected function setErrorPage($errorPage): void {
+    protected function setErrorPage(string $errorPage = NULL): void {
         if (!empty($errorPage)) {
             $this->_errorPage = $errorPage;
         } elseif(!empty($this->_settings->redirect->defaultMailErrorPage)) {
@@ -60,11 +72,48 @@ class ExceptionHandler
     /**
      * @param object $exception
      */
-    protected function handle($exception) {
-        if (!empty($this->_errorPage)) {
-            new Error($this->_settings, $this->_errorPage);
-        } else {
-            echo $exception->getMessage();
+    protected function handle(object $exception) {
+        new ReturnError($this->_settings, $this->_errorPage, $exception->getCode());
+        $this->logException($exception);
+    }
+
+    /**
+     * @param object $exception
+     */
+    protected function logException(object $exception): void {
+        $severity = $this->getSeverity($exception->getCode());
+        new Log($severity, $exception->getMessage());
+    }
+
+    /**
+     * Get the severity of the exception according to the provided code.
+     * list of severity :
+     * https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#leveraging-channels
+     *
+     * @param $code
+     * @return string
+     */
+    protected function getSeverity($code): string {
+        switch ($code) {
+            case 5000 :
+            case 5010 :
+            case 5020 :
+            case 5030 :
+            case 5040 :
+            case 5050 :
+            case 5060 :
+                return 'warning';
+                break;
+            case 2000 :
+                return 'error';
+                break;
+            case 4000:
+            case 1000 :
+                return 'critical';
+                break;
+            default : // code 3000 is handled here.
+                return 'notice';
+                break;
         }
     }
 }

@@ -12,8 +12,9 @@ use MailSender\tools\Redirect;
  *
  * @package MailSender\response
  */
-class Success extends Response
+class ReturnSuccess extends Response
 {
+    // todo: add success custom page like in exception handler.
     /**
      * Success constructor.
      *
@@ -40,7 +41,7 @@ class Success extends Response
         switch ($client) {
             case 'js' :
                 // If the request is from Javascript.
-                $this->defaultSuccess();
+                $this->returnSuccessFlag();
                 break;
             case null :
                 // If the request is from HTML
@@ -52,7 +53,7 @@ class Success extends Response
                 break;
             default :
                 // If the request is from another.
-                $this->defaultSuccess();
+                $this->returnSuccessFlag();
         }
     }
 
@@ -60,7 +61,7 @@ class Success extends Response
      * The default success send back the value of
      * response->success in Settings class.
      */
-    protected function defaultSuccess(): void
+    protected function returnSuccessFlag(): void
     {
         echo $this->_settings->response->success;
     }

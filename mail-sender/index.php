@@ -19,7 +19,7 @@ use MailSender\tools\Redirect;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
-use MailSender\response\Success;
+use MailSender\response\ReturnSuccess;
 
 require './vendor/autoload.php';
 
@@ -35,34 +35,29 @@ try {
     $options = $mailSettings->getAll();
     // send the mail
     new MailSend($options);
-    new Success($settings);
+    new ReturnSuccess($settings);
 }
 //catch (Exception $e) {
 //    new ExceptionHandler($settings, $e);
 //}
-//catch (Exception $e) {
-//
-//    echo $e->getCode();
-//    echo $e->getMessage();
-//
-//}
+
 catch (RenderException $e) {
-    echo $e->getCode();
-    echo $e->getMessage();
+    new ExceptionHandler($settings, $e);
 }
 catch (EmailValidationException $e) {
-    echo $e->getCode();
-    echo $e->getMessage();
+    new ExceptionHandler($settings, $e);
 }
 catch (SendingException $e) {
-    echo $e->getCode();
-    echo $e->getMessage();
+    new ExceptionHandler($settings, $e);
 }
 catch (ForgottenOptionException $e) {
-    echo $e->getCode();
-    echo $e->getMessage();
+    new ExceptionHandler($settings, $e);
 }
+catch (Exception $e) {
 
+    new ExceptionHandler($settings, $e);
+
+}
 
 finally {
     // add what would be executed even if an exception is throw

@@ -12,7 +12,7 @@ Encryption in .env file is wrong, *STARTTLS* or *SMTPS* must be used.
 Error with the template engine.
 
 ### 3000
-The provide E-mail is not valid according to the E-mail validations settings.
+The provided E-mail is not valid according to the E-mail validations settings.
 
 ### 4000
 Error in MailSend class while sending the mail.
@@ -23,17 +23,20 @@ Invalid option exception. There is a problem with provided arguments.
 #### 5010
 Sender name is not provided or have no default in settings.
 
-### 5020
+#### 5020
 Sender mail is not provided or have no default in settings.
 
 #### 5030
 Recipient name is not provided or have no default in settings.
 
-### 5040
+#### 5040
 Recipient mail is not provided or have no default in settings.
 
-### 5050
+#### 5050
 Subject is not provided or have no default in settings.
 
-### 5060
+#### 5060
 Template is not provided or have no default in settings.
+
+### 9000
+Undetermined error.

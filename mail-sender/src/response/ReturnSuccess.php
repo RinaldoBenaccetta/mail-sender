@@ -14,16 +14,37 @@ use MailSender\tools\Redirect;
  */
 class ReturnSuccess extends Response
 {
-    // todo: add success custom page like in exception handler.
+    /**
+     * @var string|null
+     */
+    private ?string $_successPage;
+
     /**
      * Success constructor.
+     * An ok page can be specified, it can be from custom settings or from
+     * $post.
      *
      * @param $settings
+     * @param string|null $successPage
      */
-    public function __construct($settings)
+    public function __construct($settings, string $successPage = NULL)
     {
         parent::__construct($settings);
+        $this->setSuccessPage($successPage);
         $this->response();
+    }
+
+    /**
+     * @param string|null $successPage
+     */
+    protected function setSuccessPage(string $successPage = NULL) : void {
+        if (!empty($successPage)) {
+            $this->_successPage = $successPage;
+        } elseif (!empty($this->_settings->redirect->defaultMailOkPage)) {
+            $this->_successPage = $this->_settings->redirect->defaultMailOkPage;
+        } else {
+            $this->_successPage = NULL;
+        }
     }
 
     /**
@@ -31,7 +52,7 @@ class ReturnSuccess extends Response
      * received in $_POST.
      * If client variable is not set, it will assume that is a
      * post received directly by an HTML form and redirect to
-     * the success page
+     * the success page.
      * (the URL set in redirect->defaultMailOkPage) in Settings class.
      */
     protected function response()
@@ -45,11 +66,14 @@ class ReturnSuccess extends Response
                 break;
             case null :
                 // If the request is from HTML
-                // Redirect the page to the URL of redirect->defaultMailOkPage
-                // in Settings class.
-                $this->redirectPage(
-                    $this->_settings->redirect->defaultMailOkPage
-                );
+                // If there is a page
+                if (!empty($this->_successPage)) {
+                    // Redirect the page to the URL
+                    $this->redirectPage($this->_successPage);
+                } else {
+                    // Return the message.
+                    $this->returnSuccessFlag();
+                }
                 break;
             default :
                 // If the request is from another.

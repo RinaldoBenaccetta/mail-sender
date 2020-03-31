@@ -3,7 +3,10 @@
 
 namespace MailSender\response;
 
-
+/**
+ * Class ReturnError
+ * @package MailSender\response
+ */
 class ReturnError extends Response
 {
     /**
@@ -14,14 +17,14 @@ class ReturnError extends Response
     /**
      * The URL of the error page.
      *
-     * @var string
+     * @var string|null
      */
     private ?string $_errorPage;
 
     /**
      * The code of the error.
      *
-     * @var int
+     * @var int|null
      */
     private ?int $_code;
 
@@ -44,7 +47,7 @@ class ReturnError extends Response
     }
 
     /**
-     * @param int $code
+     * @param int|null $code
      */
     protected function setCode(int $code = null): void
     {
@@ -56,7 +59,7 @@ class ReturnError extends Response
     }
 
     /**
-     * @param string $errorPage
+     * @param string|null $errorPage
      */
     protected function setErrorPage(string $errorPage = null): void
     {

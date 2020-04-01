@@ -4,6 +4,16 @@ settings are in src/cass/settings/Settings.php
 
 There is an htaccess file at the root that deny access to all but index.php. That seems to not affect parent directories.
 
+## Response
+### From an HTML form
+If redirect value is true, the page will be redirected according to *mailOK* and *mailError* values. If *mailOk* is not provided, the default one in settings will be used. If *mailError* is not provided, the default one in settings will be used.
+
+If redirect value is not set or set to false, a page with *ok* or the error will be displayed.
+
+### From other clients (JS, PHP,...)
+A message with *ok* will be send in case of succes. If an error occur, a response with the error number will be sended, in this form : **error:number**, eg. : **error:1000**
+
+
 ## Errors :
 ### 1000
 Encryption in .env file is wrong, *STARTTLS* or *SMTPS* must be used.
@@ -37,6 +47,9 @@ Subject is not provided or have no default in settings.
 
 #### 5060
 Template is not provided or have no default in settings.
+
+#### 5070
+$_POST is empty or not provided. Verify if you send datas or if the method is POST and no GET.
 
 ### 9000
 Undetermined error.

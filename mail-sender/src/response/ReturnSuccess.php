@@ -61,22 +61,28 @@ class ReturnSuccess extends Response
         switch ($client) {
             case 'js' :
                 // If the request is from Javascript.
-                $this->returnSuccessFlag();
+                $this->returnSuccessMessage();
                 break;
             case null :
                 // If the request is from HTML
-                // If there is a page
-                if (!empty($this->_successPage)) {
-                    // Redirect the page to the URL
-                    $this->redirectPage($this->_successPage);
-                } else {
-                    // Return the message.
-                    $this->returnSuccessFlag();
-                }
+                $this->returningWay();
                 break;
             default :
                 // If the request is from another.
-                $this->returnSuccessFlag();
+                $this->returnSuccessMessage();
+        }
+    }
+
+    /**
+     * Evaluate the returning way.
+     * if value redirect is set to true and there is an error page,
+     * the page will be redirect. Otherwise an echo message will be sends.
+     */
+    protected function returningWay() {
+        if($this->isRedirected() && !empty($this->_successPage)) {
+            $this->redirectPage($this->_successPage);
+        } else {
+            $this->returnSuccessMessage();
         }
     }
 
@@ -84,7 +90,7 @@ class ReturnSuccess extends Response
      * The default success send back the value of
      * response->success in Settings class.
      */
-    protected function returnSuccessFlag(): void
+    protected function returnSuccessMessage(): void
     {
         echo $this->_settings->response->success;
     }

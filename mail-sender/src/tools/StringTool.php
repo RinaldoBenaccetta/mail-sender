@@ -39,4 +39,19 @@ class StringTool
         return (substr($haystack, -$length) === $needle);
     }
 
+    /**
+     * Transform HTML specials characters to ascii and escape the string.
+     *
+     * @param null $string
+     * @return string|null
+     */
+    public static function toSanitizedString($string = null): ?string
+    {
+        if (!empty($string)) {
+            return addslashes(htmlspecialchars((string)$string));
+        }
+        return null;
+
+    }
+
 }

@@ -4,6 +4,7 @@
 namespace MailSender\response;
 
 use MailSender\tools\Redirect;
+use MailSender\tools\StringTool;
 
 /**
  * Class Response
@@ -49,14 +50,40 @@ class Response
     }
 
     /**
+     * Check if page would be redirected or not,
+     * according to noRedirect value in $_POST.
+     *
+     * @return bool
+     */
+    protected function isRedirected(): bool
+    {
+        if (isset($_POST['redirect'])) {
+            $redirect = StringTool::toSanitizedString($_POST['redirect']);
+        } else {
+            $redirect = null;
+        }
+
+        if (!empty($redirect)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Check if client value in $_POST is set.
      *
      * @return mixed|null
      */
     protected function client()
     {
-        if (!empty($_POST['client'])) {
-            return $_POST['client'];
+        if (isset($_POST['client'])) {
+            $client = StringTool::toSanitizedString($_POST['client']);
+        } else {
+            $client = null;
+        }
+
+        if (!empty($client) || $client  != 'html') {
+            return strtolower($client);
         }
         return null;
     }

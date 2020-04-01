@@ -1,4 +1,10 @@
 /**
+ * Here is an example of integration of mail sender within Javascript.
+ * There is two example methods : by classic XMLHttpRequest and by fetch method.
+ */
+
+
+/**
  * The URL of the php file that process mail request.
  *
  * @type {string}
@@ -10,7 +16,7 @@ const URL = "mail-sender/index.php"
  * Must be POST and no change.
  * @type {string}
  */
-const METHOD = "GET"
+const METHOD = "POST"
 
 /**
  * Get the values from the form.
@@ -20,6 +26,7 @@ const METHOD = "GET"
 function getValues() {
     return {
         client: 'js',
+        redirect: 'true',
         senderName: document
             .getElementById("senderName").value,
         senderFirstName: document
@@ -52,6 +59,7 @@ function sendMailWithMinAjax() {
         data: getValues(),
         //CALLBACK FUNCTION with RESPONSE as argument
         success: function (response) {
+            console.log(response)
             handleResponse(response)
         }
 
@@ -163,5 +171,6 @@ function handleVoid() {
  * @returns {*|string}
  */
 function getCode(response) {
+    console.log(response)
     return response.split(':')[1]
 }

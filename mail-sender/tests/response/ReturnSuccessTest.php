@@ -5,7 +5,7 @@ namespace response;
 use MailSender\response\ReturnSuccess;
 use PHPUnit\Framework\TestCase;
 
-class SuccessTest extends TestCase
+class ReturnSuccessTest extends TestCase
 {
 
     /**
@@ -21,14 +21,22 @@ class SuccessTest extends TestCase
         $this->expectOutputString($expected);
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testSuccessWithoutFilledPostClient()
     {
         $_POST = [];
         new ReturnSuccess($this->getSettings());
+        $this->expectOutputString($this->getSettings()->response->success);
+    }
 
+    /**
+     * @runInSeparateProcess
+     */
+    public function testSuccessWithRedirectTrue()
+    {
+        $_POST = [
+            'redirect' => true,
+        ];
+        new ReturnSuccess($this->getSettings());
         $this->assertContains(
             "Location: ../{$this->getSettings()->redirect->defaultMailOkPage}",
             xdebug_get_headers()

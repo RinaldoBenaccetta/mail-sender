@@ -66,31 +66,38 @@ class ReturnError extends Response
         $this->_errorPage = $errorPage;
     }
 
+    /**
+     * Evaluate the response according to client.
+     */
     protected function response()
     {
         $client = $this->client();
 
         switch ($client) {
             case 'js' :
-
                 // If the request is from Javascript.
                 $this->returnErrorMessage();
                 break;
             case null :
                 // If the request is from HTML
-                // If there is a page.
-                if (!empty($this->_errorPage)) {
-                    // Redirect the page to the URL of _errorPage.
-                    $this->redirectPage($this->_errorPage);
-                } else {
-                    // return the message.
-                    $this->returnErrorMessage();
-                }
-
+                $this->returningWay();
                 break;
             default :
                 // If the request is from another.
                 $this->returnErrorMessage();
+        }
+    }
+
+    /**
+     * Evaluate the returning way.
+     * if value redirect is set to true and there is an error page,
+     * the page will be redirect. Otherwise an echo message will be sends.
+     */
+    protected function returningWay() {
+        if($this->isRedirected() && !empty($this->_errorPage)) {
+            $this->redirectPage($this->_errorPage);
+        } else {
+            $this->returnErrorMessage();
         }
     }
 

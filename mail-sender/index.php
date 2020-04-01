@@ -35,7 +35,12 @@ try {
     $options = $mailSettings->getAll();
     // send the mail
     new MailSend($options);
-    new ReturnSuccess($settings);
+    if (property_exists($post->getPost(), 'mailOk')) {
+        $successPage = $post->getPost()->mailOk;
+    } else {
+        $successPage = null;
+    }
+    new ReturnSuccess($settings, $successPage);
 }
 //catch (Exception $e) {
 //    new ExceptionHandler($settings, $e);

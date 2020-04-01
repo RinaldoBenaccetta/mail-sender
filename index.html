@@ -33,11 +33,11 @@
             <textarea name="message" id="message"></textarea>
         </label>
 
-    <!--    one ../ by parent of the index in mail-sender php script -->
-        <input type="hidden" name="mailOk" id="mailOk" value="thankyou.html">
+        <input type="hidden" name="mailOk" id="mailOk"
+               value="custom-thank-you.html">
 
-        <!--    one ../ by parent of the index in mail-sender php script -->
-        <input type="hidden" name="mailError" id="mailError" value="error.html">
+        <input type="hidden" name="mailError" id="mailError"
+               value="custom-error.html">
 
         <input type="hidden" name="redirect" id="redirect" value=true>
 
@@ -53,44 +53,6 @@
 
     <script type="text/javascript" src="minAjax.js"></script>
     <script type="text/javascript" src="mail-sender.js"></script>
-
-
-<!--<h2>Use the HTTP method POST to send data to the PHP file.</h2>-->
-
-<!--<p id="demo"></p>-->
-
-<!--<script>-->
-<!--    var obj, dbParam, xmlhttp, myObj, x, txt = "";-->
-<!--    // obj = { "table":"products", "limit":10 };-->
-<!--    obj = {-->
-<!--        "name": "Benaccetta",-->
-<!--        "firstName": "Rinaldo",-->
-<!--        "phone": "0498 / 82 89 93",-->
-<!--        "eMail": "rinaldobenaccetta@hotmail.com",-->
-<!--        "message": "hello, ca va?"-->
-<!--    };-->
-
-<!--    dbParam = JSON.stringify(obj);-->
-
-<!--    console.log(dbParam);-->
-
-<!--    xmlhttp = new XMLHttpRequest();-->
-
-<!--    xmlhttp.onreadystatechange = function() {-->
-<!--        if (this.readyState === 4 && this.status === 200) {-->
-<!--            myObj = JSON.parse(this.responseText);-->
-<!--            for (x in myObj) {-->
-<!--                txt += myObj[x].name + "<br>";-->
-<!--            }-->
-<!--            //document.getElementById("demo").innerHTML = txt;-->
-<!--        }-->
-<!--    };-->
-<!--    xmlhttp.open("POST", "src/index.php", true);-->
-<!--    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");-->
-<!--    xmlhttp.send("x=" + dbParam);-->
-<!--    console.log("send!");-->
-<!--</script>-->
-
 
 </body>
 </html>

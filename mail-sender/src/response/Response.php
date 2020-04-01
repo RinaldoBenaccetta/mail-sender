@@ -23,9 +23,9 @@ class Response
     /**
      * Response constructor.
      *
-     * @param $settings
+     * @param object $settings
      */
-    public function __construct($settings)
+    public function __construct(object $settings)
     {
         $this->setSettings($settings);
     }
@@ -76,9 +76,9 @@ class Response
      * Check directly from $_POST instead of $post because $post can throw
      * error.
      *
-     * @return mixed|null
+     * @return string|null
      */
-    protected function client()
+    protected function client(): ?string
     {
         if (isset($_POST['client'])) {
             $client = StringTool::toSanitizedString($_POST['client']);

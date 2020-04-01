@@ -11,6 +11,7 @@ use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Egulias\EmailValidator\Validation\SpoofCheckValidation;
 use MailSender\exception\EmailValidationException;
+use MailSender\exception\ForgottenOptionException;
 
 
 /**
@@ -48,6 +49,7 @@ class Post implements PostInterface
      *
      * @param array $post
      * @param object $settings
+     * @throws ForgottenOptionException
      */
     public function __construct(array $post, object $settings)
     {
@@ -65,10 +67,16 @@ class Post implements PostInterface
 
     /**
      * @param array $post
+     * @throws ForgottenOptionException
      */
     private function setPost(array $post): void
     {
-        $this->_post = $post;
+        if (!empty($post)) {
+            $this->_post = $post;
+        } else {
+            throw new ForgottenOptionException('POST error.', 5070);
+        }
+
     }
 
     /**

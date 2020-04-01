@@ -10,6 +10,8 @@ If redirect value is true, the page will be redirected according to *mailOK* and
 
 If redirect value is not set or set to false, a page with *ok* or the error will be displayed.
 
+Default error page must be set in Settings->redirect->defaultMailErrorPage and the page must be created for backup in case of POST error.
+
 ### From other clients (JS, PHP,...)
 A message with *ok* will be send in case of succes. If an error occur, a response with the error number will be sended, in this form : **error:number**, eg. : **error:1000**
 

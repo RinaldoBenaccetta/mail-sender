@@ -16,6 +16,7 @@ use MailSender\settings\GetSettings;
 use MailSender\settings\Settings;
 use MailSender\tools\Log;
 use MailSender\tools\Redirect;
+use MailSender\tools\StringTool;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
@@ -46,22 +47,25 @@ try {
 //    new ExceptionHandler($settings, $e);
 //}
 
-catch (RenderException $e) {
-    new ExceptionHandler($settings, $e);
-}
-catch (EmailValidationException $e) {
-    new ExceptionHandler($settings, $e);
-}
-catch (SendingException $e) {
-    new ExceptionHandler($settings, $e);
-}
-catch (ForgottenOptionException $e) {
-    new ExceptionHandler($settings, $e);
-}
+//catch (RenderException $e) {
+//    new ExceptionHandler($settings, $e);
+//}
+//catch (EmailValidationException $e) {
+//    new ExceptionHandler($settings, $e);
+//}
+//catch (SendingException $e) {
+//    new ExceptionHandler($settings, $e);
+//}
+//catch (ForgottenOptionException $e) {
+//    new ExceptionHandler($settings, $e);
+//}
 catch (Exception $e) {
-
-    new ExceptionHandler($settings, $e);
-
+    if (isset($_POST['mailError'])) {
+        $errorPage = StringTool::toSanitizedString($_POST['mailError']);
+    } else {
+        $errorPage = null;
+    }
+    new ExceptionHandler($settings, $e, $errorPage);
 }
 
 finally {

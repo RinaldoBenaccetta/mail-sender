@@ -52,6 +52,8 @@ class Response
     /**
      * Check if page would be redirected or not,
      * according to noRedirect value in $_POST.
+     * Check directly from $_POST instead of $post because $post can throw
+     * error.
      *
      * @return bool
      */
@@ -71,6 +73,8 @@ class Response
 
     /**
      * Check if client value in $_POST is set.
+     * Check directly from $_POST instead of $post because $post can throw
+     * error.
      *
      * @return mixed|null
      */

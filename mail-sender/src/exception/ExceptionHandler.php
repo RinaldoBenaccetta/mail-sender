@@ -116,6 +116,7 @@ class ExceptionHandler
             case 5040 :
             case 5050 :
             case 5060 :
+            case 5070 :
                 return 'warning';
                 break;
             case 2000 :

@@ -4,6 +4,7 @@
 namespace MailSender\exception;
 
 
+use MailSender\mail\MailLog;
 use MailSender\response\ReturnError;
 use MailSender\tools\Log;
 
@@ -85,6 +86,21 @@ class ExceptionHandler
             $exception->getCode()
         );
         $this->logException($exception);
+        $this->sendMailLog($exception);
+    }
+
+    /**
+     * Check if error log must sends by mail.
+     *
+     * @param string $severity
+     * @return bool
+     */
+    protected function shouldSendMail(string $severity): bool
+    {
+        if (in_array($severity, (array)$this->_settings->severity->list)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -96,6 +112,20 @@ class ExceptionHandler
     {
         $severity = $this->getSeverity($exception->getCode());
         new Log($severity, $exception->getMessage());
+    }
+
+    /**
+     * Check if should send mail according to settings and
+     * send mail or not.
+     *
+     * @param object $exception
+     */
+    protected function sendMailLog(object $exception): void
+    {
+        $severity = $this->getSeverity($exception->getCode());
+        if ($this->shouldSendMail($severity)) {
+            new MailLog($this->_settings, $severity, $exception->getMessage());
+        }
     }
 
     /**
@@ -120,9 +150,10 @@ class ExceptionHandler
                 return 'warning';
                 break;
             case 2000 :
+            case 9000 :
                 return 'error';
                 break;
-            case 4000:
+            case 4000 :
             case 1000 :
                 return 'critical';
                 break;

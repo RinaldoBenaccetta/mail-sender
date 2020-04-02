@@ -24,6 +24,11 @@ class Settings
         'rootParent' => '1',
     ];
 
+    /**
+     * Here is responses of server.
+     *
+     * @var array
+     */
     public array $response = [
         /**
          * The message sended back by Ajax when mail is sended without error.
@@ -33,6 +38,27 @@ class Settings
          * The message sended back when an error occur.
          */
         'error' => 'error',
+    ];
+
+    /**
+     * List of severity of errors.
+     *
+     * @var array
+     */
+    public array $severity = [
+        /**
+         * Uncomment desired notice.
+         */
+      'list' => [
+          //'debug',
+          //'info',
+          //'notice',
+          'warning',
+          'error',
+          'critical',
+          'alert',
+          'emergency',
+      ]
     ];
 
     /**

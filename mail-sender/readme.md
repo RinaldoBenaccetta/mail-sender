@@ -18,18 +18,33 @@ A message with *ok* will be send in case of succes. If an error occur, a respons
 
 ## Errors :
 ### 1000
+
+Critical.
+
 Encryption in .env file is wrong, *STARTTLS* or *SMTPS* must be used.
 
 ### 2000
+
+Error.
+
 Error with the template engine.
 
 ### 3000
+
+Notice.
+
 The provided E-mail is not valid according to the E-mail validations settings.
 
 ### 4000
+
+Critical.
+
 Error in MailSend class while sending the mail.
 
 ### 5000
+
+Warning.
+
 Invalid option exception. There is a problem with provided arguments.
 
 #### 5010
@@ -54,4 +69,7 @@ Template is not provided or have no default in settings.
 $_POST is empty or not provided. Verify if you send datas or if the method is POST and no GET.
 
 ### 9000
+
+Error.
+
 Undetermined error.

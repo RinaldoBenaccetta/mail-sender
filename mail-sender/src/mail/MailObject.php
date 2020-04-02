@@ -21,6 +21,7 @@ class MailObject
      * @var string
      */
     protected string $host;
+
     /**
      * The SMTP port number - 587 for authenticated TLS,
      * a.k.a. RFC4409 SMTP submission.
@@ -28,12 +29,14 @@ class MailObject
      * @var int
      */
     protected int $port;
+
     /**
      * Whether to use SMTP authentication.
      *
      * @var bool
      */
     protected bool $smtpAuthentication;
+
     /**
      * Username to use for SMTP authentication.
      * Use full email address for gmail.
@@ -41,66 +44,77 @@ class MailObject
      * @var string
      */
     protected string $mailLogin;
+
     /**
      * Password to use for SMTP authentication.
      *
      * @var string
      */
     protected string $mailPassword;
+
     /**
      * E-mail the message is to be sent from.
      *
      * @var string
      */
     protected string $senderMail;
+
     /**
      * Name the message is to be sent to.
      *
      * @var string
      */
     protected string $senderName;
+
     /**
      * An alternative E-mail reply-to address.
      *
      * @var string
      */
     protected string $replyMail;
+
     /**
      * An alternative Name reply-to address.
      *
      * @var string
      */
     protected string $replyName;
+
     /**
      * E-mail the message is to be sent to.
      *
      * @var string
      */
     protected string $recipientMail;
+
     /**
      * Name the message is to be sent to.
      *
      * @var string
      */
     protected string $recipientName;
+
     /**
      * The mail subject.
      *
      * @var string
      */
     protected string $subject;
+
     /**
      * The body of the mail in HTML.
      *
      * @var string
      */
     protected string $htmlBody;
+
     /**
      * The Alternative of the HTML mail in plain text.
      *
      * @var string
      */
     protected string $altBody;
+
     /**
      * Debug mode.
      *
@@ -111,6 +125,7 @@ class MailObject
      * @var string
      */
     private string $debug;
+
     /**
      * The encryption mechanism to use - STARTTLS or SMTPS.
      *

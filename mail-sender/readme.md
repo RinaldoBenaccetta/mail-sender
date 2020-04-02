@@ -29,6 +29,14 @@ Default error page must be set in Settings->redirect->defaultMailErrorPage and t
 ### From other clients (JS, PHP,...)
 A message with *ok* will be send in case of succes. If an error occur, a response with the error number will be sended, in this form : **error:number**, eg. : **error:1000**
 
+### Troubleshooting
+
+When environment is set to dev in settings, the response will be poluted by the logs from PhpMailer.
+
+When an error occur a 1000 or 4000 error occur, the response can be poluted by the logs from PhpMailer.
+
+
+
 
 ## Errors :
 ### 1000

@@ -12,6 +12,7 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 use Egulias\EmailValidator\Validation\SpoofCheckValidation;
 use MailSender\exception\EmailValidationException;
 use MailSender\exception\ForgottenOptionException;
+use MailSender\tools\StringTool;
 
 
 /**
@@ -144,7 +145,9 @@ class Post implements PostInterface
                     $output[$key] = $this->validateMail($key, $value);
                     break;
                 default :
-                    $output[$key] = $this->toString($value);
+//                    $output[$key] = $this->toString($value);
+                    $output[$key] = StringTool::toSanitizedString($value);
+                    // todo : use stringtools to string instead.
             }
         }
         return $output;
@@ -200,18 +203,6 @@ class Post implements PostInterface
             $validationList[] = new SpoofCheckValidation();
         }
         return new MultipleValidationWithAnd($validationList);
-    }
-
-    /**
-     * Transform HTML specials characters to ascii and escape the string.
-     *
-     * @param $string
-     *
-     * @return string
-     */
-    protected function toString($string): string
-    {
-        return addslashes(htmlspecialchars((string)$string));
     }
 
 }

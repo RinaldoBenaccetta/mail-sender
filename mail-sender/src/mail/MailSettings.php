@@ -100,7 +100,7 @@ class MailSettings
      * @return array
      * @throws RenderException
      */
-    public function getAll()
+    public function getAll(): array
     {
         return [
             'host' => $this->getHost(),

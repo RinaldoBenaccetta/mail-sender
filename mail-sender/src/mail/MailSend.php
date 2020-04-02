@@ -10,12 +10,20 @@ use PHPMailer\PHPMailer\Exception;
 class MailSend extends MailObject
 {
 
+    /**
+     * MailSend constructor.
+     * @param $options
+     * @throws SendingException
+     */
     public function __construct($options)
     {
         parent::__construct($options);
         $this->send();
     }
 
+    /**
+     * @throws SendingException
+     */
     protected function send()
     {
         $mail = new PHPMailer(true);

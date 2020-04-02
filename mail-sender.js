@@ -27,6 +27,17 @@ function getValues() {
     return {
         client: 'js',
         redirect: 'true',
+        // template can be sets here :
+        // template: 'test-template',
+        // subject can be sets here :
+        // subject: 'hello!',
+        // custom values used in custom template can be set :
+        // myValue: 'me',
+        // objects to :
+        // myObject: {
+        //  firstValue: 'value'
+        //  secondValue: 42
+        // }
         senderName: document
             .getElementById("senderName").value,
         senderFirstName: document

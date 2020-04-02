@@ -1,8 +1,22 @@
+# Mail sender
+
 Tested with PHP 7.4.3
 
 settings are in src/cass/settings/Settings.php
 
 There is an htaccess file at the root that deny access to all but index.php. That seems to not affect parent directories.
+
+## templating
+
+Templates are in Twig ( https://twig.symfony.com/ ) and should be put in */src/templates/* folder.
+
+Custom templates can be specified in POST with the value *template*. If no one is specified, the default one sets in settings will be used. If no one is set in settings, an error will occur.
+
+The values can be all ones sends by POST, and can be accessed like this : {{ myValue }}. Object values can be accessed like this : *{{ myObject.myValue }}*
+
+## Subject
+
+Subject can be set in POST with the value subject.
 
 ## Response
 ### From an HTML form

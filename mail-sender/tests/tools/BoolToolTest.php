@@ -13,14 +13,16 @@ class BoolToolTest extends TestCase
      * @param $provided
      * @param $expected
      */
-    public function testToBool($provided, $expected) {
+    public function testToBool($provided, $expected)
+    {
         $this->assertEquals($expected, BoolTool::toBool($provided));
     }
 
     /**
      * @return array
      */
-    public function getToBoolProvider() {
+    public function getToBoolProvider()
+    {
         return [
             [true, true],
             ['true', true],

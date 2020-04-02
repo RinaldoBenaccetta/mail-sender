@@ -50,7 +50,9 @@ class Server implements ServerInterface
             'host' => (string)$this->_environment['HOST'],
             'port' => (string)$this->_environment['PORT'],
             'encryption' => (string)$this->_environment['ENCRYPTION'],
-            'smtpAuthentication' => BoolTool::toBool($this->_environment['SMTP_AUTHENTICATION']),// transform to bool
+            'smtpAuthentication' => BoolTool::toBool(
+                $this->_environment['SMTP_AUTHENTICATION']
+            ),// transform to bool
             'mailLogin' => (string)$this->_environment['MAIL_LOGIN'],
             'mailPassword' => (string)$this->_environment['MAIL_PASSWORD'],
         ];

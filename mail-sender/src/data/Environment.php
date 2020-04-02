@@ -6,7 +6,6 @@ namespace MailSender\data;
 
 use Dotenv\Dotenv;
 use MailSender\Path;
-use MailSender\settings\GetSettings;
 
 /**
  * Class Environment

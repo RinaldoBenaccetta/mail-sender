@@ -18,7 +18,8 @@ class ServerTest extends PHPUnit\Framework\TestCase
         ];
     }
 
-    public function mockServer() {
+    public function mockServer()
+    {
         $environment = $this->createMock(Environment::class);
 
         $environment->method('getEnvironment')

@@ -25,7 +25,8 @@ class Redirect
     /**
      * @param $link
      */
-    public function redirect($link): void {
+    public function redirect($link): void
+    {
         $link = $this->getRedirectLink($link);
         header("Location: {$link}");
         //die();// we can put a status code in die.
@@ -35,7 +36,8 @@ class Redirect
      * @param $link
      * @return string
      */
-    protected function getRedirectLink($link): string {
+    protected function getRedirectLink($link): string
+    {
         return $this->getHTMLRootParent() . $link;
     }
 

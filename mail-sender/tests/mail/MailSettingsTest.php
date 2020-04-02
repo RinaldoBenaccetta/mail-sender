@@ -1,12 +1,11 @@
 <?php
 
+use MailSender\data\Post;
 use MailSender\data\Server;
 use MailSender\mail\DefaultContact;
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSettings;
 use PHPUnit\Framework\TestCase;
-use MailSender\settings\GetSettings;
-use MailSender\data\Post;
 
 class MailSettingsTest extends TestCase
 {

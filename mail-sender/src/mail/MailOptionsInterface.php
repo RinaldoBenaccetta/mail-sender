@@ -29,5 +29,5 @@ interface MailOptionsInterface
      *
      * @return object
      */
-    public function getPost(): object ;
+    public function getPost(): object;
 }

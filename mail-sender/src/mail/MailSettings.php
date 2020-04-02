@@ -52,9 +52,10 @@ class MailSettings
      * @param ServerInterface $server
      * @param MailOptionsInterface $mailOptions
      */
-    public function __construct(ServerInterface $server,
-        MailOptionsInterface $mailOptions)
-    {
+    public function __construct(
+        ServerInterface $server,
+        MailOptionsInterface $mailOptions
+    ) {
         $this->setSettings($mailOptions);
         $this->setPost($mailOptions);
         $this->setOptions($mailOptions);
@@ -82,7 +83,7 @@ class MailSettings
      */
     protected function setOptions(MailOptionsInterface $mailOptions): void
     {
-        $this->_options = (object) $mailOptions->getOptions();
+        $this->_options = (object)$mailOptions->getOptions();
     }
 
     /**
@@ -322,7 +323,6 @@ class MailSettings
         } catch (Exception $e) {
             throw new RenderException($e->getMessage());
         }
-
     }
 
     /**

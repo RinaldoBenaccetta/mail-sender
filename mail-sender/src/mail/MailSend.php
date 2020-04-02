@@ -4,8 +4,8 @@
 namespace MailSender\mail;
 
 use MailSender\exception\SendingException;
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class MailSend extends MailObject
 {
@@ -75,7 +75,6 @@ class MailSend extends MailObject
             $mail->AltBody = $this->getAltBody();
 
             $mail->send();
-
             //echo 'Message sent!';
         } catch (Exception $e) {
             throw new SendingException($mail->ErrorInfo);

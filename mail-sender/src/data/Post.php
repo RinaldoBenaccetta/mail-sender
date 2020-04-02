@@ -3,8 +3,6 @@
 
 namespace MailSender\data;
 
-use Exception;
-
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
@@ -77,7 +75,6 @@ class Post implements PostInterface
         } else {
             throw new ForgottenOptionException('POST error.', 5070);
         }
-
     }
 
     /**
@@ -89,7 +86,7 @@ class Post implements PostInterface
     public function getPost(): object
     {
         if (empty($this->_postOutput)) {
-            $this->_postOutput = (object) $this->loopThrough($this->_post);
+            $this->_postOutput = (object)$this->loopThrough($this->_post);
         }
         return $this->_postOutput;
     }
@@ -145,9 +142,7 @@ class Post implements PostInterface
                     $output[$key] = $this->validateMail($key, $value);
                     break;
                 default :
-//                    $output[$key] = $this->toString($value);
                     $output[$key] = StringTool::toSanitizedString($value);
-                    // todo : use stringtools to string instead.
             }
         }
         return $output;
@@ -162,7 +157,7 @@ class Post implements PostInterface
      */
     protected function isMailAddress(string $key)
     {
-        return in_array($key, (array) $this->_settings->validation->isMail);
+        return in_array($key, (array)$this->_settings->validation->isMail);
     }
 
     /**

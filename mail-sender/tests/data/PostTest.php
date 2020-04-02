@@ -4,8 +4,8 @@
 namespace tests\MailSender\data;
 
 use Exception;
-use PHPUnit\Framework\TestCase;
 use MailSender\data\Post;
+use PHPUnit\Framework\TestCase;
 
 
 class PostTest extends TestCase

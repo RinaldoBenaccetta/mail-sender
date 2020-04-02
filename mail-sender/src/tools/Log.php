@@ -4,9 +4,9 @@
 namespace MailSender\tools;
 
 use MailSender\Path;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class Log
 
@@ -24,8 +24,11 @@ class Log
         'emergency',
     ];
 
-    public function __construct($severity, $data, $channel = self::DEFAULT_CHANNEL)
-    {
+    public function __construct(
+        $severity,
+        $data,
+        $channel = self::DEFAULT_CHANNEL
+    ) {
         return $this->init($severity, $data, $channel);
     }
 
@@ -37,15 +40,20 @@ class Log
      * @param $channel
      * @return Logger
      */
-    private function init($severity, $data, $channel) {
+    private function init($severity, $data, $channel)
+    {
         // filter $severity.
         $severity = $this->filterSeverity($severity);
         // Create the logger
         $logger = new Logger($channel);
         // Now add some handlers
-        $logger->pushHandler(new StreamHandler(Path::ROOT_PATH .
-                                               self::LOG_DIRECTORY.'log.log',
-                                               Logger::INFO));
+        $logger->pushHandler(
+            new StreamHandler(
+                Path::ROOT_PATH .
+                self::LOG_DIRECTORY . 'log.log',
+                Logger::INFO
+            )
+        );
         $logger->pushHandler(new FirePHPHandler());
 
         // pass $severity as function name.
@@ -61,10 +69,13 @@ class Log
      * @param string $severity Severity can be in uppercase or lowercase.
      * @return string
      */
-    private function filterSeverity(string $severity): string {
-        if (!empty($severity) && in_array(strtolower ($severity),
-                                          self::SEVERITY_LIST)) {
-            return strtolower ($severity);
+    private function filterSeverity(string $severity): string
+    {
+        if (!empty($severity) && in_array(
+                strtolower($severity),
+                self::SEVERITY_LIST
+            )) {
+            return strtolower($severity);
         }
         return 'info';
     }

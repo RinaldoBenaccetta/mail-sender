@@ -53,23 +53,25 @@ class MailLog
     /**
      * Get environment variables.
      */
-    protected function setEnvironment() {
+    protected function setEnvironment()
+    {
         $environment = new Environment($this->_settings);
-        $this->_environment = (object) $environment->getEnvironment();
+        $this->_environment = (object)$environment->getEnvironment();
     }
 
     /**
      * @param $severity
      * @param $data
      */
-    protected function handleLog($severity, $data) {
+    protected function handleLog($severity, $data)
+    {
         if (!empty(BoolTool::toBool($this->_environment->MAIL_ALERT))) {
             $this->sendLogMail($severity, $data);
         }
     }
 
-    protected function sendLogMail($severity, $data): void {
-
+    protected function sendLogMail($severity, $data): void
+    {
         $mail = new PHPMailer(true);
         $logger = new Logger('logger');
 
@@ -78,12 +80,20 @@ class MailLog
         $mail->Host = $this->_environment->HOST;
         $mail->Port = $this->_environment->PORT;
         $mail->SMTPSecure = $this->_environment->ENCRYPTION;
-        $mail->SMTPAuth = BoolTool::toBool($this->_environment->SMTP_AUTHENTICATION);
+        $mail->SMTPAuth = BoolTool::toBool(
+            $this->_environment->SMTP_AUTHENTICATION
+        );
         $mail->Username = $this->_environment->MAIL_LOGIN;
         $mail->Password = $this->_environment->MAIL_PASSWORD;
 
-        $mail->setFrom($this->_environment->MAIL_ALERT_SENDERMAIL, $this->_environment->MAIL_ALERT_SENDERNAME);
-        $mail->addAddress($this->_environment->MAIL_ALERT_RECIPIENTMAIL, $this->_environment->MAIL_ALERT_RECIPIENTNAME);
+        $mail->setFrom(
+            $this->_environment->MAIL_ALERT_SENDERMAIL,
+            $this->_environment->MAIL_ALERT_SENDERNAME
+        );
+        $mail->addAddress(
+            $this->_environment->MAIL_ALERT_RECIPIENTMAIL,
+            $this->_environment->MAIL_ALERT_RECIPIENTNAME
+        );
 
         $mail->Subject = $severity;
 

@@ -78,8 +78,9 @@ class ReturnSuccess extends Response
      * if value redirect is set to true and there is an error page,
      * the page will be redirect. Otherwise an echo message will be sends.
      */
-    protected function returningWay() {
-        if($this->isRedirected() && !empty($this->_successPage)) {
+    protected function returningWay()
+    {
+        if ($this->isRedirected() && !empty($this->_successPage)) {
             $this->redirectPage($this->_successPage);
         } else {
             $this->returnSuccessMessage();

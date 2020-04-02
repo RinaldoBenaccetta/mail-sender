@@ -93,8 +93,9 @@ class MailOptions implements MailOptionsInterface
      * @param PostInterface $post
      * @throws Exception
      */
-    public function setPost(PostInterface $post): void {
-        $this->_post = (object) $post->getPost();
+    public function setPost(PostInterface $post): void
+    {
+        $this->_post = (object)$post->getPost();
     }
 
     /**
@@ -124,7 +125,7 @@ class MailOptions implements MailOptionsInterface
     {
         if (!empty($this->_post->template)) {
             $this->_template = $this->_post->template;
-        } elseif(!empty($this->_settings->defaultMailOptions->template)) {
+        } elseif (!empty($this->_settings->defaultMailOptions->template)) {
             $this->_template = $this->_settings->defaultMailOptions->template;
         } else {
             throw new ForgottenOptionException('Empty template.', 5060);
@@ -143,8 +144,7 @@ class MailOptions implements MailOptionsInterface
             $this->_senderMail = $this->_post->senderMail;
         } elseif (!empty($this->_settings->defaultMailOptions->senderMail)) {
             $this->_senderMail = $this->_settings->defaultMailOptions->senderMail;
-        }
-        else {
+        } else {
             throw new ForgottenOptionException('Empty sender mail.', 5020);
         }
     }
@@ -170,8 +170,7 @@ class MailOptions implements MailOptionsInterface
             // if there is no sender name in post and is not default template
             // use the default sender name
             $this->_senderName = $this->_settings->defaultMailOptions->senderName;
-        }
-        else {
+        } else {
             // if empty throw exception
             throw new ForgottenOptionException('Empty sender name.', 5010);
         }
@@ -187,7 +186,7 @@ class MailOptions implements MailOptionsInterface
     {
         if (!empty($this->_post->recipientMail)) {
             $this->_recipientMail = $this->_post->recipientMail;
-        } elseif(!empty($this->_settings->defaultMailOptions->recipientMail)) {
+        } elseif (!empty($this->_settings->defaultMailOptions->recipientMail)) {
             $this->_recipientMail = $this->_settings->defaultMailOptions->recipientMail;
         } else {
             throw new ForgottenOptionException('Empty recipient mail.', 5040);

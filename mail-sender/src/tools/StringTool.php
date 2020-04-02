@@ -51,7 +51,6 @@ class StringTool
             return addslashes(htmlspecialchars((string)$string));
         }
         return null;
-
     }
 
 }

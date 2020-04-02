@@ -1,9 +1,7 @@
 <?php
 
 use MailSender\data\Post;
-use MailSender\mail\DefaultContact;
 use MailSender\mail\MailOptions;
-use MailSender\settings\GetSettings;
 
 
 class MailOptionsTest extends PHPUnit\Framework\TestCase

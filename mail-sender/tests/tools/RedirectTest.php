@@ -17,7 +17,8 @@ class RedirectTest extends TestCase
         ];
     }
 
-    public function getLink() {
+    public function getLink()
+    {
         return 'redirect.html';
     }
 
@@ -26,10 +27,12 @@ class RedirectTest extends TestCase
      *
      * @runInSeparateProcess
      */
-    public function testRedirect() {
+    public function testRedirect()
+    {
         new Redirect($this->getSettings(), $this->getLink());
         $this->assertContains(
-            "Location: ../{$this->getLink()}", xdebug_get_headers()
+            "Location: ../{$this->getLink()}",
+            xdebug_get_headers()
         );
     }
 

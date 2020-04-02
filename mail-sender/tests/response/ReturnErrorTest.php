@@ -28,7 +28,9 @@ class ReturnErrorTest extends TestCase
         $_POST = [];
         new ReturnError($this->getSettings(), $this->getErrorPage());
 
-        $this->expectOutputString($this->getSettings()->response->error . ":9000");
+        $this->expectOutputString(
+            $this->getSettings()->response->error . ":9000"
+        );
     }
 
     public function
@@ -38,7 +40,9 @@ class ReturnErrorTest extends TestCase
         $_POST = [];
         new ReturnError($this->getSettings(), $this->getErrorPage(), 8012);
 
-        $this->expectOutputString($this->getSettings()->response->error . ":8012");
+        $this->expectOutputString(
+            $this->getSettings()->response->error . ":8012"
+        );
     }
 
     /**
@@ -70,15 +74,19 @@ class ReturnErrorTest extends TestCase
             'redirect' => false,
         ];
         new ReturnError($this->getSettings(), $this->getErrorPage());
-        $this->expectOutputString($this->getSettings()->response->error . ":9000");
+        $this->expectOutputString(
+            $this->getSettings()->response->error . ":9000"
+        );
     }
 
     public function testErrorWithoutFilledPostClientAndEmptyErrorPage()
     {
         // expect return a string with the error and code.
         $_POST = [];
-        new ReturnError($this->getSettings(), NULL);
-        $this->expectOutputString($this->getSettings()->response->error . ":9000");
+        new ReturnError($this->getSettings(), null);
+        $this->expectOutputString(
+            $this->getSettings()->response->error . ":9000"
+        );
     }
 
     public function getErrorPage()

@@ -86,7 +86,7 @@ class Response
             $client = null;
         }
 
-        if (!empty($client) || $client  != 'html') {
+        if (!empty($client) || $client != 'html') {
             return strtolower($client);
         }
         return null;

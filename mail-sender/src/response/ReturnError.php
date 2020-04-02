@@ -93,8 +93,9 @@ class ReturnError extends Response
      * if value redirect is set to true and there is an error page,
      * the page will be redirect. Otherwise an echo message will be sends.
      */
-    protected function returningWay() {
-        if($this->isRedirected() && !empty($this->_errorPage)) {
+    protected function returningWay()
+    {
+        if ($this->isRedirected() && !empty($this->_errorPage)) {
             $this->redirectPage($this->_errorPage);
         } else {
             $this->returnErrorMessage();

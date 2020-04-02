@@ -49,16 +49,16 @@ class Settings
         /**
          * Uncomment desired notice.
          */
-      'list' => [
-          //'debug',
-          //'info',
-          //'notice',
-          'warning',
-          'error',
-          'critical',
-          'alert',
-          'emergency',
-      ]
+        'list' => [
+            //'debug',
+            //'info',
+            //'notice',
+            'warning',
+            'error',
+            'critical',
+            'alert',
+            'emergency',
+        ]
     ];
 
     /**

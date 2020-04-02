@@ -23,13 +23,14 @@ class GetSettings
      */
     public function __construct($settings)
     {
-      $this->setSettings($settings);
+        $this->setSettings($settings);
     }
 
     /**
      * @param $settings
      */
-    protected function setSettings($settings): void {
+    protected function setSettings($settings): void
+    {
         $this->_settings = $this->takePublic($settings);
     }
 
@@ -48,7 +49,7 @@ class GetSettings
      */
     public function getSettings(): object
     {
-        return (object) $this->processArray($this->_settings);
+        return (object)$this->processArray($this->_settings);
     }
 
     /**
@@ -58,29 +59,32 @@ class GetSettings
      * @param $data
      * @return object
      */
-    protected function processArray($data) {
+    protected function processArray($data)
+    {
         $output = [];
         foreach ($data as $key => $value) {
             if (!is_array($value)) {
                 $output[$key] = $value;
             } else {
-                $output[$key] = (object) $this->processArray($value);
-
+                $output[$key] = (object)$this->processArray($value);
             }
         }
-        return (object) $output;
+        return (object)$output;
     }
 
     /**
      * @param $data
      * @return array
      */
-    protected function takePublic($data) : array {
+    protected function takePublic($data): array
+    {
         // https://stackoverflow.com/questions/2821927/detect-if-an-object-property-is-private-in-php
         // create a reflection object with only public properties.
         $reflection = new ReflectionObject((object)$data);
         $properties = $reflection->getProperties
-        (ReflectionProperty::IS_PUBLIC);
+        (
+            ReflectionProperty::IS_PUBLIC
+        );
         $isPublic = [];
         foreach ($properties as $property) {
             $isPublic[] = $property->getName();
@@ -89,13 +93,12 @@ class GetSettings
         // compare the $data array with the reflection object and return the
         // data array with only public properties.
         $output = [];
-        foreach ((array) $data as $key => $value) {
+        foreach ((array)$data as $key => $value) {
             if (in_array($key, $isPublic)) {
                 $output[$key] = $value;
             }
         }
-        return (array) $output;
-
+        return (array)$output;
     }
 
 }

@@ -65,7 +65,7 @@ class RenderTest extends PHPUnit\Framework\TestCase
                     'name' => $name
                 ],
                 $this->getSettings(),
-            )
+                )
         );
     }
 

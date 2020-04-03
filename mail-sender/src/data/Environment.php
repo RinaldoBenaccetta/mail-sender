@@ -6,6 +6,7 @@ namespace MailSender\data;
 
 use Dotenv\Dotenv;
 use MailSender\Path;
+use MailSender\tools\BoolTool;
 
 /**
  * Class Environment
@@ -18,13 +19,13 @@ class Environment implements EnvironmentInterface
     /**
      * @var object
      */
-    private object $_settings;
+    protected object $_settings;
 
     /**
      *
      * @var array
      */
-    private array $_environment;
+    protected array $_environment;
 
     /**
      * Environment constructor.
@@ -34,7 +35,7 @@ class Environment implements EnvironmentInterface
     public function __construct(object $_settings)
     {
         $this->setSettings($_settings);
-        $this->setServer();
+        $this->setEnvironment();
     }
 
     /**
@@ -48,7 +49,7 @@ class Environment implements EnvironmentInterface
     /**
      * Get the variables included in the .env file.
      */
-    protected function setServer(): void
+    protected function setEnvironment(): void
     {
         $dotEnv = Dotenv::createImmutable(
             Path::ROOT_PATH . $this->getRootParent()
@@ -77,6 +78,34 @@ class Environment implements EnvironmentInterface
     public function getEnvironment(): array
     {
         return $this->_environment;
+    }
+
+    /**
+     * Return an object with the values to access server
+     * provided in the .env file.
+     *
+     * Use like this :
+     *     $server->getServerSettings()->host
+     *
+     * @return object
+     */
+    public function getEnvironmentObject(): object
+    {
+        return (object)[
+            'host' => (string)$this->_environment['HOST'],
+            'port' => (string)$this->_environment['PORT'],
+            'encryption' => (string)$this->_environment['ENCRYPTION'],
+            'smtpAuthentication' => BoolTool::toBool(
+                $this->_environment['SMTP_AUTHENTICATION']
+            ),// transform to bool
+            'mailLogin' => (string)$this->_environment['MAIL_LOGIN'],
+            'mailPassword' => (string)$this->_environment['MAIL_PASSWORD'],
+            'mailAlert' => (string)$this->_environment['MAIL_ALERT'],
+            'mailAlertSenderMail' => (string)$this->_environment['MAIL_ALERT_SENDER_MAIL'],
+            'mailAlertSenderName' => (string)$this->_environment['MAIL_ALERT_SENDER_NAME'],
+            'mailAlertRecipientMail' => (string)$this->_environment['MAIL_ALERT_RECIPIENT_MAIL'],
+            'mailAlertRecipientName' => (string)$this->_environment['MAIL_ALERT_RECIPIENT_NAME'],
+        ];
     }
 
 }

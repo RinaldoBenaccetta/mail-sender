@@ -109,23 +109,24 @@ class Settings
          * the mailbox of the recipient.
          * This is not the mail of the server mail.
          */
-        'senderMail' => 'rinaldobenaccetta@hotmail.com',
+        'senderMail' => 'sarah@connor.com',
         /**
          * Default sender name.
          */
-        'senderName' => 'Rinaldo Benaccetta',
+        'senderName' => 'Sarah Connor',
         /**
          * Default recipient mail.
+         * Administrator in case of contact mail.
          */
-        'recipientMail' => 'rinaldobenaccetta@hotmail.com',
+        'recipientMail' => 'mail@example.com',
         /**
          * Default recipient name.
          */
-        'recipientName' => 'Rinaldo Benaccetta',
+        'recipientName' => 'T-800',
         /**
-         * Default subject.
+         * Default subject if the default contact template isn't used.
          */
-        'subject' => 'Le sujet!',
+        'subject' => 'I\'ll be back!',
     ];
 
     /**

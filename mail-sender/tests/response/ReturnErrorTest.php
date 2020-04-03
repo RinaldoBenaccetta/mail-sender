@@ -29,7 +29,7 @@ class ReturnErrorTest extends TestCase
         new ReturnError($this->getSettings(), $this->getErrorPage());
 
         $this->expectOutputString(
-            $this->getSettings()->response->error . ":9000"
+            $this->getSettings()->response->error . ":[9000]"
         );
     }
 
@@ -41,7 +41,7 @@ class ReturnErrorTest extends TestCase
         new ReturnError($this->getSettings(), $this->getErrorPage(), 8012);
 
         $this->expectOutputString(
-            $this->getSettings()->response->error . ":8012"
+            $this->getSettings()->response->error . ":[8012]"
         );
     }
 
@@ -75,7 +75,7 @@ class ReturnErrorTest extends TestCase
         ];
         new ReturnError($this->getSettings(), $this->getErrorPage());
         $this->expectOutputString(
-            $this->getSettings()->response->error . ":9000"
+            $this->getSettings()->response->error . ":[9000]"
         );
     }
 
@@ -85,7 +85,7 @@ class ReturnErrorTest extends TestCase
         $_POST = [];
         new ReturnError($this->getSettings(), null);
         $this->expectOutputString(
-            $this->getSettings()->response->error . ":9000"
+            $this->getSettings()->response->error . ":[9000]"
         );
     }
 
@@ -113,8 +113,8 @@ class ReturnErrorTest extends TestCase
     {
         // add code 9000 at the end.
         return [
-            ['js', $this->getSettings()->response->error . ":9000"],
-            ['something', $this->getSettings()->response->error . ":9000"],
+            ['js', $this->getSettings()->response->error . ":[9000]"],
+            ['something', $this->getSettings()->response->error . ":[9000]"],
         ];
     }
 }

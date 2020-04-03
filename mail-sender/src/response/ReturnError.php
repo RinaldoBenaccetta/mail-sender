@@ -121,7 +121,6 @@ class ReturnError extends Response
      */
     protected function returnErrorMessage(): void
     {
-        echo $this->getErrorFlag() . ':' . $this->_code;
+        echo "{$this->getErrorFlag()}:[{$this->_code}]";
     }
-
 }

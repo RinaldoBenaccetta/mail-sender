@@ -182,6 +182,8 @@ function handleVoid() {
  * @returns {*|string}
  */
 function getCode(response) {
-    console.log(response)
-    return response.split(':')[1]
+    let message = response.split(':')[1]
+    let openBracePosition = message.indexOf('[')
+    let closingBracePosition = message.indexOf(']')
+    return message.substr(openBracePosition + 1 , closingBracePosition - 1)
 }

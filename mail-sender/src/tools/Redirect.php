@@ -13,6 +13,7 @@ class Redirect
 
     /**
      * Redirect constructor.
+     * 
      * @param $settings
      * @param $link
      */
@@ -29,7 +30,6 @@ class Redirect
     {
         $link = $this->getRedirectLink($link);
         header("Location: {$link}");
-        //die();// we can put a status code in die.
     }
 
     /**

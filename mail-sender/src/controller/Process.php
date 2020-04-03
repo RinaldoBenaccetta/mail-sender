@@ -17,8 +17,6 @@ use MailSender\mail\MailSettings;
 use MailSender\response\ReturnSuccess;
 use MailSender\settings\GetSettings;
 use MailSender\settings\Settings;
-use MailSender\tools\Log;
-use MailSender\tools\Performance;
 use MailSender\tools\StringTool;
 
 class Process
@@ -44,14 +42,9 @@ class Process
      */
     public function __construct()
     {
-//        $this->logMemoryUsage();
         $this->setSettings();
         $this->setPost();
         $this->sendMail();
-//        $this->logMemoryUsage();
-        xdebug_stop_gcstats();
-        new Log('info', Performance::getAllocatedMemory("end allocated"));
-        new Log('info', Performance::getUsageMemory("end usage"));
     }
 
     /**
@@ -84,12 +77,8 @@ class Process
     protected function prepareMail(): array
     {
         $environment = new Environment($this->_settings);
-        //unset($environment); // change nothing
-        //gc_collect_cycles();
         $mailOptions = new MailOptions($this->_post, $this->_settings);
         $mailSettings = new MailSettings($environment, $mailOptions);
-        //unset($mailOptions); // change nothing
-        //gc_collect_cycles();
         return $mailSettings->getAll();
     }
 
@@ -138,9 +127,6 @@ class Process
             new ReturnSuccess($this->_settings, $this->getCustomSuccessPage());
         } catch (Exception $e) {
             new ExceptionHandler($this->_settings, $e, $this->getCustomErrorPage());
-        } finally {
-            // Add what would be executed even if an exception is throw
-            // close all here
         }
     }
 

@@ -22,10 +22,10 @@ class EnvironmentFixture extends Environment
             'MAIL_LOGIN' => 'sarah@connor.com',
             'MAIL_PASSWORD' => 'myPassword',
             'MAIL_ALERT' => TRUE,
-            'MAIL_ALERT_SENDER_MAIL' => 'benaccettarinaldo@gmail.com',
-            'MAIL_ALERT_SENDER_NAME' => 'mail sender server',
-            'MAIL_ALERT_RECIPIENT_MAIL' => 'rinaldobenaccetta@hotmail.com',
-            'MAIL_ALERT_RECIPIENT_NAME' => 'Rinaldo Benaccetta',
+            'MAIL_ALERT_SENDER_MAIL' => 'T-800@skynet.com',
+            'MAIL_ALERT_SENDER_NAME' => 'skynet sender server',
+            'MAIL_ALERT_RECIPIENT_MAIL' => 'T-800@skynet.com',
+            'MAIL_ALERT_RECIPIENT_NAME' => 'T-800',
         ];
     }
 

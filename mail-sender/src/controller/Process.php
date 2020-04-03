@@ -7,7 +7,6 @@ namespace MailSender\controller;
 use Exception;
 use MailSender\data\Environment;
 use MailSender\data\Post;
-use MailSender\data\Server;
 use MailSender\exception\EmailValidationException;
 use MailSender\exception\ExceptionHandler;
 use MailSender\exception\ForgottenOptionException;
@@ -50,20 +49,10 @@ class Process
         $this->setPost();
         $this->sendMail();
 //        $this->logMemoryUsage();
+        xdebug_stop_gcstats();
         new Log('info', Performance::getAllocatedMemory("end allocated"));
         new Log('info', Performance::getUsageMemory("end usage"));
     }
-
-//    protected function logMemoryUsage() {
-//        $memoryUsage = Units::formatBytes(memory_get_usage(true), 1);
-//        $memoryPeak = Units::formatBytes(memory_get_peak_usage(true), 1);
-////        $memoryUsage = Units::formatBytes(999999999999999, 1);
-////        $memoryPeak = Units::formatBytes(1000000, 1);
-////        $memoryUsage = memory_get_usage();
-////        $memoryPeak = memory_get_peak_usage();
-//        $memoryMessage = "Memory usage : {$memoryUsage} | Memory Peak : {$memoryPeak}";
-//        new Log('info', $memoryMessage);
-//    }
 
     /**
      * Set the settings.
@@ -95,13 +84,12 @@ class Process
     protected function prepareMail(): array
     {
         $environment = new Environment($this->_settings);
-        $server = new Server($environment);
         //unset($environment); // change nothing
-        gc_collect_cycles();
+        //gc_collect_cycles();
         $mailOptions = new MailOptions($this->_post, $this->_settings);
-        $mailSettings = new MailSettings($server, $mailOptions);
+        $mailSettings = new MailSettings($environment, $mailOptions);
         //unset($mailOptions); // change nothing
-        gc_collect_cycles();
+        //gc_collect_cycles();
         return $mailSettings->getAll();
     }
 

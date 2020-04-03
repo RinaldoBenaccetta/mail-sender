@@ -5,10 +5,25 @@ use MailSender\data\Server;
 use MailSender\mail\DefaultContact;
 use MailSender\mail\MailOptions;
 use MailSender\mail\MailSettings;
+use MailSenderTest\data\EnvironmentFixture;
 use PHPUnit\Framework\TestCase;
 
 class MailSettingsTest extends TestCase
 {
+
+    private EnvironmentFixture $_environment;
+
+    public function setUp(): void
+    {
+        // this function is executed before test.
+        $this->_environment = new EnvironmentFixture($this->getSettings());
+    }
+
+    public function tearDown(): void
+    {
+        // this function is executed after the test.
+        unset($this->_environment);
+    }
 
     public function testGetHost()
     {
@@ -34,14 +49,9 @@ class MailSettingsTest extends TestCase
         $post->method('getPost')
             ->willReturn((object)$array);
 
-        $server = $this->createMock(Server::class);
-
-        $server->method('getServerSettings')
-            ->willReturn($this->getServer());
-
         $mailOptions = new MailOptions($post, $this->getSettings());
 
-        return new MailSettings($server, $mailOptions);
+        return new MailSettings($this->_environment, $mailOptions);
     }
 
     public function getServer()

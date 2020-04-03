@@ -4,6 +4,7 @@
 namespace MailSender\mail;
 
 use Exception;
+use MailSender\data\EnvironmentInterface;
 use MailSender\data\ServerInterface;
 use MailSender\exception\RenderException;
 use MailSender\render\Render;
@@ -44,22 +45,23 @@ class MailSettings
      * The values for connecting to the server.
      * @var object
      */
-    private object $_server;
+    private object $_environment;
 
 
     /**
      * MailSettings constructor.
-     * @param ServerInterface $server
+     *
+     * @param EnvironmentInterface $environment
      * @param MailOptionsInterface $mailOptions
      */
     public function __construct(
-        ServerInterface $server,
+        EnvironmentInterface $environment,
         MailOptionsInterface $mailOptions
     ) {
         $this->setSettings($mailOptions);
         $this->setPost($mailOptions);
         $this->setOptions($mailOptions);
-        $this->setServer($server);
+        $this->setEnvironment($environment);
     }
 
     /**
@@ -87,11 +89,11 @@ class MailSettings
     }
 
     /**
-     * @param ServerInterface $server
+     * @param EnvironmentInterface $environment
      */
-    protected function setServer(ServerInterface $server): void
+    protected function setEnvironment(EnvironmentInterface $environment): void
     {
-        $this->_server = $server->getServerSettings();
+        $this->_environment = $environment->getEnvironmentObject();
     }
 
     /**
@@ -129,7 +131,7 @@ class MailSettings
      */
     public function getHost()
     {
-        return $this->_server->host;
+        return $this->_environment->host;
     }
 
     /**
@@ -139,7 +141,7 @@ class MailSettings
      */
     public function getPort()
     {
-        return $this->_server->port;
+        return $this->_environment->port;
     }
 
     /**
@@ -149,7 +151,7 @@ class MailSettings
      */
     public function getEncryption()
     {
-        return $this->_server->encryption;
+        return $this->_environment->encryption;
     }
 
     /**
@@ -159,7 +161,7 @@ class MailSettings
      */
     public function getSmtpAuthentication()
     {
-        return $this->_server->smtpAuthentication;
+        return $this->_environment->smtpAuthentication;
     }
 
     /**
@@ -169,7 +171,7 @@ class MailSettings
      */
     public function getMailLogin()
     {
-        return $this->_server->mailLogin;
+        return $this->_environment->mailLogin;
     }
 
     /**
@@ -179,7 +181,7 @@ class MailSettings
      */
     public function getMailPassword()
     {
-        return $this->_server->mailPassword;
+        return $this->_environment->mailPassword;
     }
 
     /**

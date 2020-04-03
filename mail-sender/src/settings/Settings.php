@@ -51,8 +51,8 @@ class Settings
          */
         'list' => [
             //'debug',
-            //'info',
-            //'notice',
+            'info',
+            'notice',
             'warning',
             'error',
             'critical',

@@ -16,6 +16,7 @@ class BoolTool
      * null become FALSE
      *
      * @param $value
+     *
      * @return bool
      */
     public static function toBool($value): bool

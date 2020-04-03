@@ -28,6 +28,7 @@ class Environment implements EnvironmentInterface
 
     /**
      * Environment constructor.
+     *
      * @param object $_settings
      */
     public function __construct(object $_settings)

@@ -101,8 +101,8 @@ class ReturnErrorTest extends TestCase
                 'htmlRootParent' => '1',
             ],
             'response' => (object)[
-                'error' => 'bad news'
-            ]
+                'error' => 'bad news',
+            ],
         ];
     }
 

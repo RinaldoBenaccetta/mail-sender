@@ -31,6 +31,7 @@ class MailLog
 
     /**
      * MailLog constructor.
+     *
      * @param $settings
      * @param $severity
      * @param $data

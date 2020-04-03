@@ -33,7 +33,7 @@ class BoolToolTest extends TestCase
             ['', false],
             ['false', false],
             ['FALSE', false],
-            [0, false]
+            [0, false],
         ];
     }
 

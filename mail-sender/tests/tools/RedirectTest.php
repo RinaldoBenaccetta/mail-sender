@@ -12,8 +12,8 @@ class RedirectTest extends TestCase
     {
         return (object)[
             'redirect' => (object)[
-                'htmlRootParent' => '1'
-            ]
+                'htmlRootParent' => '1',
+            ],
         ];
     }
 

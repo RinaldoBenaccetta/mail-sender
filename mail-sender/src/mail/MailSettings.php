@@ -42,6 +42,7 @@ class MailSettings
 
     /**
      * The values for connecting to the server.
+     *
      * @var object
      */
     private object $_server;
@@ -49,7 +50,8 @@ class MailSettings
 
     /**
      * MailSettings constructor.
-     * @param ServerInterface $server
+     *
+     * @param ServerInterface      $server
      * @param MailOptionsInterface $mailOptions
      */
     public function __construct(

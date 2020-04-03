@@ -49,7 +49,7 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
                 'isMail' => [
                     'senderMail',
                     'replyMail',
-                    'recipientMail'
+                    'recipientMail',
                 ],
                 'DNSMailValidation' => true,
                 'SpoofMailValidation' => true,
@@ -57,7 +57,7 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
             'defaultContactTemplate' => (object)[
                 'subjectPrefix' => "suffix",
                 'subjectSuffix' => "preffix",
-            ]
+            ],
         ];
     }
 
@@ -71,7 +71,7 @@ class MailOptionsTest extends PHPUnit\Framework\TestCase
             [
                 (array)$this->expectWithOnlySenderName(),
                 (array)
-                $this->provideOnlySenderName()
+                $this->provideOnlySenderName(),
             ],
             // provide datas with only sender name.
         ];

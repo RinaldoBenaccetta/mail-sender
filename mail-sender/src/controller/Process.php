@@ -50,8 +50,8 @@ class Process
         $this->setPost();
         $this->sendMail();
 //        $this->logMemoryUsage();
-        new Log('info', Performance::getAllocatedMemory("end allocated"));
-        new Log('info', Performance::getUsageMemory("end usage"));
+        new Log('info', Performance::getAllocatedMemory('end allocated'));
+        new Log('info', Performance::getUsageMemory('end usage'));
     }
 
 //    protected function logMemoryUsage() {
@@ -129,7 +129,7 @@ class Process
      */
     protected function getCustomErrorPage(): string
     {
-        if (isset($_POST['mailError'])) {
+        if (isset($_POST["mailError"])) {
             return StringTool::toSanitizedString($_POST['mailError']);
         } else {
             return null;
@@ -149,7 +149,11 @@ class Process
             // return the response
             new ReturnSuccess($this->_settings, $this->getCustomSuccessPage());
         } catch (Exception $e) {
-            new ExceptionHandler($this->_settings, $e, $this->getCustomErrorPage());
+            new ExceptionHandler(
+                $this->_settings,
+                $e,
+                $this->getCustomErrorPage()
+            );
         } finally {
             // Add what would be executed even if an exception is throw
             // close all here

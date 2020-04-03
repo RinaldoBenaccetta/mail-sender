@@ -79,7 +79,8 @@ class MailOptions implements MailOptionsInterface
      * MailOptions constructor.
      *
      * @param PostInterface $post
-     * @param object $settings
+     * @param object        $settings
+     *
      * @throws Exception
      */
     public function __construct(PostInterface $post, object $settings)
@@ -91,6 +92,7 @@ class MailOptions implements MailOptionsInterface
 
     /**
      * @param PostInterface $post
+     *
      * @throws Exception
      */
     public function setPost(PostInterface $post): void
@@ -119,6 +121,7 @@ class MailOptions implements MailOptionsInterface
      * Define the template.
      * If a template is provided, it will be used,
      * if not, the default template will be used.
+     *
      * @throws ForgottenOptionException
      */
     protected function setTemplate(): void
@@ -136,6 +139,7 @@ class MailOptions implements MailOptionsInterface
      * Define the sender E-mail.
      * If a sender E-mail is provided, it will be used,
      * if not, the default sender E-mail will be used.
+     *
      * @throws ForgottenOptionException
      */
     protected function setSenderMail(): void
@@ -153,6 +157,7 @@ class MailOptions implements MailOptionsInterface
      * Define the sender name.
      * If a sender name is provided, it will be used,
      * is not, the default sender name will be used.
+     *
      * @throws ForgottenOptionException
      */
     protected function setSenderName(): void
@@ -180,6 +185,7 @@ class MailOptions implements MailOptionsInterface
      * Define the recipient E-mail.
      * If a recipient E-mail is provided, it will be used,
      * is not, the default recipient E-mail will be used.
+     *
      * @throws ForgottenOptionException
      */
     protected function setRecipientMail(): void
@@ -197,6 +203,7 @@ class MailOptions implements MailOptionsInterface
      * Define the recipient name.
      * If a recipient name is provided, it will be used,
      * is not, the default recipient name will be used.
+     *
      * @throws ForgottenOptionException
      */
     protected function setRecipientName(): void
@@ -214,6 +221,7 @@ class MailOptions implements MailOptionsInterface
      * Define the subject.
      * If a subject is provided, it will be used,
      * is not, the default subject will be used.
+     *
      * @throws ForgottenOptionException
      */
     protected function setSubject(): void
@@ -231,7 +239,7 @@ class MailOptions implements MailOptionsInterface
             $this->_subject = DefaultContact::getSubject(
                 (object)[
                     'senderName' =>
-                        $this->_settings->defaultMailOptions->senderName
+                        $this->_settings->defaultMailOptions->senderName,
                 ],
                 $this->_settings
             );
@@ -261,6 +269,7 @@ class MailOptions implements MailOptionsInterface
      * It is not in reference of defaultMailOptions in class Settings.
      *
      * @param $template
+     *
      * @return bool
      */
     protected function isDefaultTemplate($template)

@@ -19,6 +19,7 @@ class Server implements ServerInterface
 
     /**
      * Server constructor.
+     *
      * @param EnvironmentInterface $environment
      */
     public function __construct(EnvironmentInterface $environment)

@@ -42,6 +42,7 @@ class Response
      * Redirect the page to the URL.
      *
      * @param $page
+     *
      * @return Redirect
      */
     protected function redirectPage(string $page): Redirect

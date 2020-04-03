@@ -45,7 +45,7 @@ class MailObjectTest extends PHPUnit\Framework\TestCase
             'htmlBody' => 'Hé bam',
             'altBody' => 'Ill be back',
             'debug' => SMTP::DEBUG_SERVER,
-            'encryptionMethod' => PHPMailer::ENCRYPTION_STARTTLS
+            'encryptionMethod' => PHPMailer::ENCRYPTION_STARTTLS,
         ];
 
         $mailObject = new MailObject($dataIn);

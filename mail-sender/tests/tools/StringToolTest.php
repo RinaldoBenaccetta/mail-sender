@@ -27,7 +27,7 @@ class StringToolTest extends PHPUnit\Framework\TestCase
             [true, 'Hello world!', 'world!'],
             [false, 'Hello world!', 'world'],
             [false, 'Hello world', 'Hello'],
-            [false, 'Hello world!', 'Sarah Connor']
+            [false, 'Hello world!', 'Sarah Connor'],
         ];
     }
 
@@ -52,7 +52,7 @@ class StringToolTest extends PHPUnit\Framework\TestCase
             [true, 'Hello world!', 'Hello'],
             [false, 'Hello world!', 'ello'],
             [false, 'Hello world', 'world!'],
-            [false, 'Hello world!', 'Sarah Connor']
+            [false, 'Hello world!', 'Sarah Connor'],
         ];
     }
 }

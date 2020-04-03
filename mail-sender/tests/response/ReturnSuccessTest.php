@@ -51,8 +51,8 @@ class ReturnSuccessTest extends TestCase
                 'htmlRootParent' => '1',
             ],
             'response' => (object)[
-                'success' => 'great'
-            ]
+                'success' => 'great',
+            ],
         ];
     }
 

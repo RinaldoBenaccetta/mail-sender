@@ -19,10 +19,11 @@ class Render
      * Return the rendered HTML with the provided template and data.
      * The .twig extension can be forget for $template argument.
      *
-     * @param $template
-     * @param $data
+     * @param        $template
+     * @param        $data
      *
      * @param object $settings
+     *
      * @return string
      * @throws LoaderError
      * @throws RuntimeError

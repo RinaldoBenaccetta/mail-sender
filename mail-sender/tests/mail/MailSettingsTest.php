@@ -26,7 +26,7 @@ class MailSettingsTest extends TestCase
 
     public function getCustomMailSettings(
         $array = [
-            'provideSomething' => 'something'
+            'provideSomething' => 'something',
         ]
     ) {
         $post = $this->createMock(Post::class);
@@ -75,7 +75,7 @@ class MailSettingsTest extends TestCase
                 'isMail' => [
                     'senderMail',
                     'replyMail',
-                    'recipientMail'
+                    'recipientMail',
                 ],
                 'DNSMailValidation' => true,
                 'SpoofMailValidation' => true,
@@ -83,7 +83,7 @@ class MailSettingsTest extends TestCase
             'defaultContactTemplate' => (object)[
                 'subjectPrefix' => "suffix",
                 'subjectSuffix' => "preffix",
-            ]
+            ],
         ];
     }
 
@@ -151,7 +151,7 @@ class MailSettingsTest extends TestCase
         $mailSettings = $this->getCustomMailSettings(
             [
                 'senderMail' =>
-                    $senderMail
+                    $senderMail,
             ]
         );
         $this->assertEquals($senderMail, $mailSettings->getSenderMail());
@@ -256,14 +256,14 @@ class MailSettingsTest extends TestCase
         $expected = DefaultContact::getSubject(
             (object)[
                 'senderName' => $this->getSettings(
-                )->defaultMailOptions->senderName
+                )->defaultMailOptions->senderName,
             ],
             $this->getSettings()
         );
         $mailSettings = $this->getCustomMailSettings(
             [
                 'template' => 'contact-default',
-                'subject' => $subject
+                'subject' => $subject,
             ]
         );
         $this->assertEquals($expected, $mailSettings->getSubject());
@@ -274,7 +274,7 @@ class MailSettingsTest extends TestCase
         $expected = DefaultContact::getSubject(
             (object)[
                 'senderName' => $this->getSettings(
-                )->defaultMailOptions->senderName
+                )->defaultMailOptions->senderName,
             ],
             $this->getSettings()
         );
@@ -292,7 +292,7 @@ class MailSettingsTest extends TestCase
         $mailSettings = $this->getCustomMailSettings(
             [
                 'template' => 'test-template',
-                'subject' => $subject
+                'subject' => $subject,
             ]
         );
         $this->assertEquals($subject, $mailSettings->getSubject());

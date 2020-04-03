@@ -19,9 +19,11 @@ class DefaultContact
     /**
      * Return the subject builded with the subject's prefix and suffix
      * and with the post's prefix and suffix.
+     *
      * @param $post
      *
      * @param $settings
+     *
      * @return string
      */
     public static function getSubject($post, $settings)

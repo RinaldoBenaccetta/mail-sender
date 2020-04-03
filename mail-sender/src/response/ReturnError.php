@@ -5,6 +5,7 @@ namespace MailSender\response;
 
 /**
  * Class ReturnError
+ *
  * @package MailSender\response
  */
 class ReturnError extends Response

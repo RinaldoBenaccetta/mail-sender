@@ -29,7 +29,7 @@ class RenderTest extends PHPUnit\Framework\TestCase
                 'isMail' => [
                     'senderMail',
                     'replyMail',
-                    'recipientMail'
+                    'recipientMail',
                 ],
                 'DNSMailValidation' => true,
                 'SpoofMailValidation' => true,
@@ -37,7 +37,7 @@ class RenderTest extends PHPUnit\Framework\TestCase
             'defaultContactTemplate' => (object)[
                 'subjectPrefix' => "suffix",
                 'subjectSuffix' => "preffix",
-            ]
+            ],
         ];
     }
 
@@ -62,7 +62,7 @@ class RenderTest extends PHPUnit\Framework\TestCase
                 $template,
                 [
                     'message' => $message,
-                    'name' => $name
+                    'name' => $name,
                 ],
                 $this->getSettings(),
                 )

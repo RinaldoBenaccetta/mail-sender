@@ -57,6 +57,7 @@ class GetSettings
      * Else, return tha provided key => value.
      *
      * @param $data
+     *
      * @return object
      */
     protected function processArray($data)
@@ -74,6 +75,7 @@ class GetSettings
 
     /**
      * @param $data
+     *
      * @return array
      */
     protected function takePublic($data): array

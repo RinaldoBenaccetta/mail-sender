@@ -45,7 +45,7 @@ class DefaultContactTest extends PHPUnit\Framework\TestCase
             DefaultContact::getSubject(
                 (object)[
                     'senderFirstName' => 'Sarah',
-                    'senderName' => 'Connor'
+                    'senderName' => 'Connor',
                 ],
                 $this->getSettings()
             )
@@ -71,7 +71,7 @@ class DefaultContactTest extends PHPUnit\Framework\TestCase
                 'isMail' => [
                     'senderMail',
                     'replyMail',
-                    'recipientMail'
+                    'recipientMail',
                 ],
                 'DNSMailValidation' => true,
                 'SpoofMailValidation' => true,
@@ -79,7 +79,7 @@ class DefaultContactTest extends PHPUnit\Framework\TestCase
             'defaultContactTemplate' => (object)[
                 'subjectPrefix' => "suffix",
                 'subjectSuffix' => "preffix",
-            ]
+            ],
         ];
     }
 }

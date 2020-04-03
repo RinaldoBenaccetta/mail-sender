@@ -38,6 +38,7 @@ class Log
      * @param $severity
      * @param $data
      * @param $channel
+     *
      * @return Logger
      */
     private function init($severity, $data, $channel)
@@ -67,6 +68,7 @@ class Log
      * Return info if not.
      *
      * @param string $severity Severity can be in uppercase or lowercase.
+     *
      * @return string
      */
     private function filterSeverity(string $severity): string

@@ -22,7 +22,7 @@ class ReturnSuccess extends Response
      * An ok page can be specified, it can be from custom settings or from
      * $post.
      *
-     * @param $settings
+     * @param             $settings
      * @param string|null $successPage
      */
     public function __construct($settings, string $successPage = null)

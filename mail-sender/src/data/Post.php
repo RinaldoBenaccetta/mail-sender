@@ -46,8 +46,9 @@ class Post implements PostInterface
     /**
      * Post constructor.
      *
-     * @param array $post
+     * @param array  $post
      * @param object $settings
+     *
      * @throws ForgottenOptionException
      */
     public function __construct(array $post, object $settings)
@@ -66,6 +67,7 @@ class Post implements PostInterface
 
     /**
      * @param array $post
+     *
      * @throws ForgottenOptionException
      */
     private function setPost(array $post): void
@@ -96,6 +98,7 @@ class Post implements PostInterface
      * If not, return NULL.
      *
      * @param $data
+     *
      * @return array|null
      * @throws EmailValidationException
      */

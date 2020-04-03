@@ -29,7 +29,7 @@ class PostTest extends TestCase
                 'isMail' => [
                     'senderMail',
                     'replyMail',
-                    'recipientMail'
+                    'recipientMail',
                 ],
                 'DNSMailValidation' => true,
                 'SpoofMailValidation' => true,
@@ -37,7 +37,7 @@ class PostTest extends TestCase
             'defaultContactTemplate' => (object)[
                 'subjectPrefix' => "suffix",
                 'subjectSuffix' => "preffix",
-            ]
+            ],
         ];
     }
 
@@ -68,9 +68,9 @@ class PostTest extends TestCase
                         "andAlsoAnotherArray" => [
                             "anOtherItem" => 12345,
                             "andAnother" => "andAnotherItem",
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ],
             "boolean" => [
                 "true" => true,
@@ -92,7 +92,7 @@ class PostTest extends TestCase
             "null" => null,
             "test" => "<?php echo 'test'",
             "escape" => "O'Reilly?\/",
-            "otherEscape" => 'Hello "You" !'
+            "otherEscape" => 'Hello "You" !',
         ];
     }
 
@@ -113,9 +113,9 @@ class PostTest extends TestCase
                         "andAlsoAnotherArray" => [
                             "anOtherItem" => "12345",
                             "andAnother" => "andAnotherItem",
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ]
             ,
             "boolean" => [
@@ -138,7 +138,7 @@ class PostTest extends TestCase
             "null" => null,
             "test" => "&lt;?php echo \'test\'",
             'escape' => "O\'Reilly?\\\/",
-            "otherEscape" => 'Hello &quot;You&quot; !'
+            "otherEscape" => 'Hello &quot;You&quot; !',
         ];
     }
 
@@ -168,7 +168,7 @@ class PostTest extends TestCase
             [["replyMail" => "@skynet.com"]],
             [["recipientMail" => "badMail.com"]],
             [["recipientMail" => "sarahConnor@skynet"]],
-            [["recipientMail" => "@skynet.com"]]
+            [["recipientMail" => "@skynet.com"]],
         ];
     }
 

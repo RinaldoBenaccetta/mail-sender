@@ -60,7 +60,7 @@ class ServerTest extends PHPUnit\Framework\TestCase
             'encryption',
             'smtpAuthentication',
             'mailLogin',
-            'mailPassword'
+            'mailPassword',
         ];
         foreach ($keys as $key => $value) {
             if (!property_exists($settings, $value)) {

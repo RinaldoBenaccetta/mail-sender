@@ -31,7 +31,7 @@ class ExceptionHandler
      * at start of the app. And the $post process can trow exception itself.
      *
      * @param object $settings
-     * @param $exception
+     * @param        $exception
      * @param string $errorPage An error page can be passed as argument.
      */
     public function __construct(
@@ -93,6 +93,7 @@ class ExceptionHandler
      * Check if error log must sends by mail.
      *
      * @param string $severity
+     *
      * @return bool
      */
     protected function shouldSendMail(string $severity): bool
@@ -134,6 +135,7 @@ class ExceptionHandler
      * https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#leveraging-channels
      *
      * @param $code
+     *
      * @return string
      */
     protected function getSeverity($code): string

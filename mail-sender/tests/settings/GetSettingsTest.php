@@ -39,7 +39,7 @@ class GetSettingsTest extends TestCase
                 "oneThree" => (object)[
                     "oneThreeOne" => "1.3.1",
                     "oneThreeTwo" => "1.3.2",
-                ]
+                ],
             ],
             "two" => (object)[
                 "twoOne" => "2.1",
@@ -47,11 +47,11 @@ class GetSettingsTest extends TestCase
                 "twoThree" => (object)[
                     "twoThreeOne" => "2.3.1",
                     "twoThreeTwo" => "2.3.2",
-                ]
+                ],
             ],
             "three" => (object)[
                 "threeOne" => "3.1",
-                "threeTwo" => "3.2"
+                "threeTwo" => "3.2",
             ],
             "four" => "a string"
             // five, six are not here : it is protected or private.

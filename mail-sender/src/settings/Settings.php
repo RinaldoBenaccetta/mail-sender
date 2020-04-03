@@ -20,8 +20,8 @@ class Settings
      * @var array
      */
     public array $global = [
-        'environment' => 'prod', // 'dev' | 'prod'
-        'rootParent' => '1',
+        "environment" => "prod", // "dev" | "prod"
+        "rootParent" => "1",
     ];
 
     /**
@@ -33,11 +33,11 @@ class Settings
         /**
          * The message sended back by Ajax when mail is sended without error.
          */
-        'success' => 'ok',
+        "success" => "ok",
         /**
          * The message sended back when an error occur.
          */
-        'error' => 'error',
+        "error" => "error",
     ];
 
     /**
@@ -49,15 +49,15 @@ class Settings
         /**
          * Uncomment desired notice.
          */
-        'list' => [
-            //'debug',
-            //'info',
-            //'notice',
-            'warning',
-            'error',
-            'critical',
-            'alert',
-            'emergency',
+        "list" => [
+            //"debug",
+            //"info",
+            //"notice",
+            "warning",
+            "error",
+            "critical",
+            "alert",
+            "emergency",
         ]
     ];
 
@@ -69,7 +69,7 @@ class Settings
      * The links are from mail-sender/src folder + htmlRootParent.
      *
      * Redirect class will use the page value
-     * and prefix it with '../' multiplied by htmlRootParent.
+     * and prefix it with ""../"" multiplied by htmlRootParent.
      *
      * @var array
      */
@@ -77,16 +77,16 @@ class Settings
         /**
          * The default page for redirect when there are an error.
          */
-        'defaultMailErrorPage' => 'mail-error.html',
+        "defaultMailErrorPage" => "mail-error.html",
         /**
          * The default page for redirect when the mail is sends.
          */
-        'defaultMailOkPage' => 'thank-you.html',
+        "defaultMailOkPage" => "thank-you.html",
         /**
          * Here is the number of parents from the root of
          * mail-sender to find the root of html.
          */
-        'htmlRootParent' => '1',
+        "htmlRootParent" => "1",
     ];
 
     /**
@@ -103,29 +103,29 @@ class Settings
         /**
          * Default template. Without the .twig suffix.
          */
-        'template' => 'contact-default',
+        "template" => "contact-default",
         /*
          * Default sender mail. This will be displayed as the sender mail in
          * the mailbox of the recipient.
          * This is not the mail of the server mail.
          */
-        'senderMail' => 'rinaldobenaccetta@hotmail.com',
+        "senderMail" => "rinaldobenaccetta@hotmail.com",
         /**
          * Default sender name.
          */
-        'senderName' => 'Rinaldo Benaccetta',
+        "senderName" => "Rinaldo Benaccetta",
         /**
          * Default recipient mail.
          */
-        'recipientMail' => 'rinaldobenaccetta@hotmail.com',
+        "recipientMail" => "rinaldobenaccetta@hotmail.com",
         /**
          * Default recipient name.
          */
-        'recipientName' => 'Rinaldo Benaccetta',
+        "recipientName" => "Rinaldo Benaccetta",
         /**
          * Default subject.
          */
-        'subject' => 'Le sujet!',
+        "subject" => "Le sujet!",
     ];
 
     /**
@@ -135,24 +135,24 @@ class Settings
      */
     public array $validation = [
         /**
-         * Theses $POST's values will be validated for correct mail address.
+         * Theses $POST""s values will be validated for correct mail address.
          * If a value must be validated as an e-mail address,
          * it must be here.
          *
          */
-        'isMail' => [
-            'senderMail',
-            'replyMail',
-            'recipientMail'
+        "isMail" => [
+            "senderMail",
+            "replyMail",
+            "recipientMail"
         ],
         /**
          * enable or disable DNS validation for mail addresses.
          */
-        'DNSMailValidation' => true,
+        "DNSMailValidation" => true,
         /**
          * enable or disable spoof validation for mail addresses.
          */
-        'SpoofMailValidation' => true,
+        "SpoofMailValidation" => true,
     ];
 
     /**
@@ -166,13 +166,13 @@ class Settings
          * The sender name provided in the $POST values will
          * be after the prefix.
          */
-        'subjectPrefix' => "Demande d'information de la part de ",
+        "subjectPrefix" => "Demande d'information de la part de ",
         /**
          * The suffix for the subject in the default template.
          * The sender name provided in the $POST values will
          * be before the suffix.
          */
-        'subjectSuffix' => ".",
+        "subjectSuffix" => ".",
     ];
 
 }

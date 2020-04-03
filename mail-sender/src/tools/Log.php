@@ -11,8 +11,19 @@ use Monolog\Logger;
 class Log
 
 {
+    /**
+     * Directory of log file.
+     */
     private const LOG_DIRECTORY = "/../log/";
+
+    /**
+     * Channel for log.
+     */
     private const DEFAULT_CHANNEL = "mail-sender";
+
+    /**
+     * The list of severity of exceptions.
+     */
     private const SEVERITY_LIST = [
         'debug',
         'info',
@@ -24,6 +35,13 @@ class Log
         'emergency',
     ];
 
+    /**
+     * Log constructor.
+     *
+     * @param        $severity
+     * @param        $data
+     * @param string $channel
+     */
     public function __construct(
         $severity,
         $data,

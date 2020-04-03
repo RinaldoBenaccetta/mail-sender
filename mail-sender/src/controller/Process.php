@@ -18,6 +18,8 @@ use MailSender\mail\MailSettings;
 use MailSender\response\ReturnSuccess;
 use MailSender\settings\GetSettings;
 use MailSender\settings\Settings;
+use MailSender\tools\Log;
+use MailSender\tools\Performance;
 use MailSender\tools\StringTool;
 
 class Process
@@ -43,15 +45,31 @@ class Process
      */
     public function __construct()
     {
+//        $this->logMemoryUsage();
         $this->setSettings();
         $this->setPost();
         $this->sendMail();
+//        $this->logMemoryUsage();
+        new Log('info', Performance::getAllocatedMemory("end allocated"));
+        new Log('info', Performance::getUsageMemory("end usage"));
     }
+
+//    protected function logMemoryUsage() {
+//        $memoryUsage = Units::formatBytes(memory_get_usage(true), 1);
+//        $memoryPeak = Units::formatBytes(memory_get_peak_usage(true), 1);
+////        $memoryUsage = Units::formatBytes(999999999999999, 1);
+////        $memoryPeak = Units::formatBytes(1000000, 1);
+////        $memoryUsage = memory_get_usage();
+////        $memoryPeak = memory_get_peak_usage();
+//        $memoryMessage = "Memory usage : {$memoryUsage} | Memory Peak : {$memoryPeak}";
+//        new Log('info', $memoryMessage);
+//    }
 
     /**
      * Set the settings.
      */
     protected function setSettings(): void
+
     {
         $settingsClass = new Settings();
         $this->_settings = (new GetSettings($settingsClass))->getSettings();
@@ -78,8 +96,12 @@ class Process
     {
         $environment = new Environment($this->_settings);
         $server = new Server($environment);
+        //unset($environment); // change nothing
+        gc_collect_cycles();
         $mailOptions = new MailOptions($this->_post, $this->_settings);
         $mailSettings = new MailSettings($server, $mailOptions);
+        //unset($mailOptions); // change nothing
+        gc_collect_cycles();
         return $mailSettings->getAll();
     }
 

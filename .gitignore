@@ -2,5 +2,5 @@
 /vendor
 *.cache
 *.env
-
-log/
+*.log
+!/mail-sender/log/

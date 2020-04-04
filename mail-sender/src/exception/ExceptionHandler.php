@@ -112,7 +112,7 @@ class ExceptionHandler
     protected function logException(object $exception): void
     {
         $severity = $this->getSeverity($exception->getCode());
-        new Log($severity, $exception->getMessage());
+        new Log($severity, $this->formatError($exception));
     }
 
     /**
@@ -125,8 +125,13 @@ class ExceptionHandler
     {
         $severity = $this->getSeverity($exception->getCode());
         if ($this->shouldSendMail($severity)) {
-            new MailLog($this->_settings, $severity, $exception->getMessage());
+            new MailLog($this->_settings, $severity, $this->formatError($exception));
         }
+    }
+
+    protected function formatError(object $exception): string
+    {
+        return "Message:[{$exception->getMessage()}] File:[{$exception->getFile()}] Line:[{$exception->getLine()}]";
     }
 
     /**

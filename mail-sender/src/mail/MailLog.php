@@ -77,7 +77,7 @@ class MailLog
         $logger = new Logger('logger');
 
         $mail->isSMTP();
-        $mail->SMTPDebug = SMTP::DEBUG_CLIENT;
+        $mail->SMTPDebug = SMTP::DEBUG_OFF;
         $mail->Host = $this->_environment->host;
         $mail->Port = $this->_environment->port;
         $mail->SMTPSecure = $this->_environment->encryption;

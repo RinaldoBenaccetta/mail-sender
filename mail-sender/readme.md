@@ -6,6 +6,16 @@ settings are in src/cass/settings/Settings.php
 
 There is an htaccess file at the root that deny access to all but index.php. That seems to not affect parent directories.
 
+## Settings
+
+### .env
+
+Copy *.env.example* in a folder out of root of the server. Remove *.example* suffix, and fill the file with the server infos.
+
+### Settings.php
+
+Copy *Setings.php.example* in the same folder. Remove *.example* suffix, and fill the file with your settings.
+
 ## templating
 
 Templates are in Twig ( https://twig.symfony.com/ ) and should be put in */src/templates/* folder.

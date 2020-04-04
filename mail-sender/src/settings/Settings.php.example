@@ -7,7 +7,8 @@ namespace MailSender\settings;
  * Class Settings
  *
  * List of settings of all mail-sender application.
- * Modify the settings on this file.
+ * Copy this file with the name 'Settings.php' and modify it
+ * with own settings.
  *
  * @package MailSender\settings
  */
@@ -118,7 +119,7 @@ class Settings
          * Default recipient mail.
          * Administrator in case of contact mail.
          */
-        'recipientMail' => 'mail@example.com',
+        'recipientMail' => 'myMail@example.com',
         /**
          * Default recipient name.
          */

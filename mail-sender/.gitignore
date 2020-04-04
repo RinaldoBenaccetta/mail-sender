@@ -1,4 +1,7 @@
+/.idea
 /vendor
 *.cache
+*.env
 *.log
 !/log/
+/src/settings/Settings.php

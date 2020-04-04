@@ -5,7 +5,6 @@ namespace MailSender\mail;
 
 use Exception;
 use MailSender\data\EnvironmentInterface;
-use MailSender\data\ServerInterface;
 use MailSender\exception\RenderException;
 use MailSender\render\Render;
 

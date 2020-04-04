@@ -43,7 +43,7 @@ class Render
                            $settings->global->environment
                        ),
                        'cache' => false,
-                       // no need of cache for mails : they are all differents.
+                       // no need of cache for mails : they are all different.
                    ]
         );
 
